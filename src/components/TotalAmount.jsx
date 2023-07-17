@@ -1,7 +1,7 @@
 export default function TotalAmount({ state, convertedBtcPrice }) {
   const totalAmount = state.reduce(
     (sum, account) =>
-      account.type === "crypto"
+      account.type === "Bitcoin"
         ? sum + account.amount * convertedBtcPrice
         : sum + account.amount,
     0
