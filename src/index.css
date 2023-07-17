@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #212529;
+  height: 100vh;
+  color: #495057;
+  padding: 2.4rem 1.2rem;
+  margin: 0 auto;
+  max-width: 72rem;
+}
+
+.info {
+  font-size: 2rem;
+  text-align: center;
+  color: #ced4da;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5.2rem;
+  color: #f8f9fa;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  gap: 8rem;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 1.2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.6rem;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.back svg {
+  width: 25px;
+  height: 25px;
+  color: #f8f9fa;
+}
+
+.btn {
+  background-color: transparent;
+  color: #f8f9fa;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid #f8f9fa;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+}
+
+.total-amount {
+  display: flex;
+  justify-content: center;
+  color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  border-radius: 30px;
+  padding: 1.2rem 1.6rem;
+}
+
+.amount {
+  font-size: 4.4rem;
+  font-weight: 600;
+}
+
+.account-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 1rem;
+  height: 15rem;
+  background-color: #fdb600;
+  color: #495057;
+  border-radius: 2rem;
+}
+
+.account .close-button {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  width: 20px;
+  height: 20px;
+}
+
+.account--Bitcoin {
+  background-color: #fdb600;
+}
+
+.account--Cash {
+  background-color: #23c246;
+}
+
+.account--Bank {
+  background-color: #f8fd00;
+}
+
+.account svg {
+  width: 3.7rem;
+  height: 3.7rem;
+}
+
+.account-amount {
+  font-size: 2.4rem;
+}
+
+.no-content {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #adb5bd;
+  grid-column: 1 / -1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #212529;
+  height: 100vh;
+}
+
+.form svg {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem 3.2rem;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  gap: 1.2rem;
+}
+
+form label {
+  color: #f8f9fa;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+form select,
+form input {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.5rem;
+  padding: 0.7rem;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.transaction-type {
+  display: flex;
+  flex-direction: row;
+  color: #f8f9fa;
+}
+
+.transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.6rem 2.4rem;
+  height: 12rem;
+  overflow-y: scroll;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  color: #f8f9fa;
+  border-bottom: 1px solid #f8f9fa;
+  font-size: 1.6rem;
+}
+
+.transaction svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.price--red {
+  color: red;
+}
+
+.price--green {
+  color: green;
+}
+
+.description {
+  justify-self: center;
+}
+
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  height: 100vh;
+  font-size: 3.6rem;
+  color: #f8f9fa;
+}
+
+/*
+ FONT SIZES (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 
+*/
