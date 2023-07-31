@@ -8,6 +8,7 @@ App for tracking financial transactions of three different accounts.
 - add three different accounts (cash,bank,bitcoin)
 - remove account
 - add transactions for each account
+- update transaction
 - remove transaction
 - pwa
 - bitcoin balance converted to fiat (only CZK for now)

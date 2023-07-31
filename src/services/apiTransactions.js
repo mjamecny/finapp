@@ -37,6 +37,20 @@ export async function createTransaction({ newTransaction }) {
   return data
 }
 
+export async function updateTransaction(newTransaction, id) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .update({ ...newTransaction })
+    .eq("id", id)
+
+  if (error) {
+    console.error(error)
+    throw new Error("Cabin could not be updated")
+  }
+
+  return data
+}
+
 export async function deleteTransaction(id) {
   const { data, error } = await supabase
     .from("transactions")

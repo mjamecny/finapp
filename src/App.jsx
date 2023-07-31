@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Toaster } from "react-hot-toast"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
@@ -14,6 +14,7 @@ import ProtectedRoute from "./ui/ProtectedRoute"
 import Dashboard from "./pages/Dashboard"
 import Welcome from "./pages/Welcome"
 import Transactions from "./pages/Transactions"
+import UpdateTransaction from "./features/transactions/UpdateTransaction"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +42,10 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="transactions" element={<Transactions />} />
               <Route path="transaction/add" element={<AddTransaction />} />
+              <Route
+                path="transaction/:transactionId/edit"
+                element={<UpdateTransaction />}
+              />
               <Route path="account/add" element={<AddAccount />} />
             </Route>
 

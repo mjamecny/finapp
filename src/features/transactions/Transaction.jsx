@@ -1,11 +1,14 @@
 import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
 import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
+import { FaPen } from "react-icons/fa"
 import styled, { css } from "styled-components"
+
 import { useDeleteTransaction } from "./useDeleteTransaction"
 import { convertToDDMMYYYY } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
+import { useNavigate } from "react-router-dom"
 
 const StyledTransaction = styled.div`
   display: flex;
@@ -77,6 +80,8 @@ export function Transaction({ transaction, userId }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
   const { type, description, amount, id, created_at } = transaction
 
+  const navigate = useNavigate()
+
   return (
     <StyledTransaction>
       <TransactionRowHorizontal>
@@ -118,7 +123,10 @@ export function Transaction({ transaction, userId }) {
         {isDeleting ? (
           <SpinnerMini />
         ) : (
-          <AiOutlineClose onClick={() => deleteTransaction(id)} />
+          <>
+            <AiOutlineClose onClick={() => deleteTransaction(id)} />
+            <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
+          </>
         )}
       </TransactionRowHorizontal>
     </StyledTransaction>
