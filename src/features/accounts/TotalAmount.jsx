@@ -1,6 +1,6 @@
 import { useAccounts } from "./useAccounts"
+import { useTransactions } from "../transactions/useTransactions"
 import styled from "styled-components"
-import SpinnerMini from "../../ui/SpinnerMini"
 
 const StyledTotalAmount = styled.div`
   display: flex;
@@ -15,8 +15,9 @@ const StyledTotalAmount = styled.div`
 
 export default function TotalAmount({ userId, convertedBtcPrice }) {
   const { accounts } = useAccounts(userId)
+  const { transactions } = useTransactions(userId)
 
-  const totalAmount = accounts?.reduce(
+  const balancesSum = accounts?.reduce(
     (sum, account) =>
       account.type === "Bitcoin"
         ? sum + account.balance * convertedBtcPrice
@@ -24,31 +25,19 @@ export default function TotalAmount({ userId, convertedBtcPrice }) {
     0
   )
 
+  const transactionsSum = transactions.reduce(
+    (sum, transaction) =>
+      transaction.type === "Bitcoin"
+        ? sum + transaction.amount * convertedBtcPrice
+        : sum + transaction.amount,
+    0
+  )
+
+  const totalAmount = balancesSum + transactionsSum
+
   return (
     <StyledTotalAmount>
-      {/* {!totalAmount ? (
-        <SpinnerMini />
-      ) : (
-        <p className="amount">
-          {!totalAmount
-            ? "Loading..."
-            : `${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`
-        </p>
-      )} */}
-      {/* {isLoading ? (
-        <SpinnerMini />
-      ) : (
-        `${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`
-      )} */}
-      {`${Math.round(
-        accounts?.reduce(
-          (sum, account) =>
-            account.type === "Bitcoin"
-              ? sum + account.balance * convertedBtcPrice
-              : sum + account.balance,
-          0
-        )
-      ).toLocaleString("cs-CZ")} CZK`}
+      {`${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`}
     </StyledTotalAmount>
   )
 }

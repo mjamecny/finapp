@@ -34,33 +34,19 @@ export async function createTransaction({ newTransaction }) {
     throw new Error("Transaction could not be created")
   }
 
-  await supabase
-    .from("accounts")
-    .update({
-      balance: newTransaction.newBalance,
-    })
-    .eq("id", newTransaction.accountId)
-
   return data
 }
 
-export async function deleteTransaction({ deletedTransaction }) {
+export async function deleteTransaction(id) {
   const { data, error } = await supabase
     .from("transactions")
     .delete()
-    .eq("id", deletedTransaction.id)
+    .eq("id", id)
 
   if (error) {
     console.error(error)
     throw new Error("Transaction could not be deleted")
   }
-
-  await supabase
-    .from("accounts")
-    .update({
-      balance: deletedTransaction.balance,
-    })
-    .eq("id", deletedTransaction.accountId)
 
   return data
 }

@@ -3,7 +3,6 @@ import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
 import styled, { css } from "styled-components"
 import { useDeleteTransaction } from "./useDeleteTransaction"
-import { useAccounts } from "../accounts/useAccounts"
 import { convertToDDMMYYYY } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
@@ -76,22 +75,7 @@ const TransactionRowVertical = styled.div`
 
 export function Transaction({ transaction, userId }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
-  const { accounts } = useAccounts(userId)
-
-  const { type, description, amount, id, accountId, created_at } = transaction
-
-  function handleRemoveTransaction() {
-    const updatedAccount = accounts.find((account) => account.id === accountId)
-    const balance = updatedAccount.balance - amount
-
-    const deletedTransaction = {
-      id,
-      accountId,
-      balance,
-    }
-
-    deleteTransaction({ deletedTransaction })
-  }
+  const { type, description, amount, id, created_at } = transaction
 
   return (
     <StyledTransaction>
@@ -134,7 +118,7 @@ export function Transaction({ transaction, userId }) {
         {isDeleting ? (
           <SpinnerMini />
         ) : (
-          <AiOutlineClose onClick={handleRemoveTransaction} />
+          <AiOutlineClose onClick={() => deleteTransaction(id)} />
         )}
       </TransactionRowHorizontal>
     </StyledTransaction>

@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 import HeaderMenu from "./HeaderMenu"
-import LogoMini from "./LogoMini"
+import Logo from "./Logo"
 
 const StyledHeader = styled.header`
   padding: 1.2rem 1.6rem;
@@ -17,7 +17,7 @@ const StyledHeader = styled.header`
 export default function Header() {
   return (
     <StyledHeader>
-      <LogoMini />
+      <Logo type="small" />
       <HeaderMenu />
     </StyledHeader>
   )

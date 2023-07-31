@@ -30,7 +30,7 @@ export default function Welcome() {
 
   return (
     <StyledWelcome>
-      <Logo />
+      <Logo type="medium" />
       <Info>
         Track your financial transactions for three different accounts.
       </Info>

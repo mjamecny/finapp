@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { FaHome } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 
-const StyledButtonBack = styled.div`
+const StyledButtonHome = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -18,8 +18,8 @@ export default function ButtonHome() {
   const navigate = useNavigate()
 
   return (
-    <StyledButtonBack>
+    <StyledButtonHome>
       <FaHome onClick={() => navigate("/")} />
-    </StyledButtonBack>
+    </StyledButtonHome>
   )
 }

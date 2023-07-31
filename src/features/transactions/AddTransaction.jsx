@@ -4,13 +4,13 @@ import styled from "styled-components"
 
 import { useCreateTransaction } from "./useCreateTransaction"
 import { useAccounts } from "../accounts/useAccounts"
+import { useUser } from "../authentication/useUser"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
 import Button from "../../ui/Button"
 import SelectAlternative from "../../ui/SelectAlternative"
-import { useUser } from "../authentication/useUser"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
 
@@ -27,20 +27,18 @@ export default function AddTransaction() {
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("withdraw")
   const [description, setDescription] = useState("")
-  const [balance, setBalance] = useState(null)
-
-  const navigate = useNavigate()
 
   const { user } = useUser()
   const userId = user?.id
   const { isCreating, createTransaction } = useCreateTransaction()
   const { accounts, isLoading } = useAccounts(userId)
 
+  const navigate = useNavigate()
+
   if (isLoading) return null
 
   useEffect(() => {
     setAccountId(accounts?.at(0).id)
-    setBalance(accounts?.at(0).balance)
   }, [accounts])
 
   function handleSubmit(e) {
@@ -58,14 +56,8 @@ export default function AddTransaction() {
 
     const updatedAccount = accounts.find((account) => account.id === accountId)
 
-    const balance =
-      transactionType === "withdraw"
-        ? updatedAccount.balance - amount
-        : updatedAccount.balance + amount
-
     const newTransaction = {
       userId,
-      newBalance: balance,
       accountId,
       type: updatedAccount.type,
       amount: transactionType === "withdraw" ? -amount : amount,

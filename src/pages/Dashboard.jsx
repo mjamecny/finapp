@@ -20,6 +20,7 @@ export default function Dashboard() {
   const userId = user?.id
   const { isLoading, transactions } = useTransactions(userId)
   const { accounts } = useAccounts(userId)
+
   const navigate = useNavigate()
 
   const slicedTransactions = transactions?.slice(0, 4)
@@ -31,7 +32,6 @@ export default function Dashboard() {
       )
       const data = await res.json()
       const czkRate = Number(data.data.rateUsd)
-
       const res2 = await fetch("https://api.coincap.io/v2/rates/bitcoin")
       const data2 = await res2.json()
       const btcPrice = Number(data2.data.rateUsd)
