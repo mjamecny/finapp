@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard"
 import Welcome from "./pages/Welcome"
 import Transactions from "./pages/Transactions"
 import UpdateTransaction from "./features/transactions/UpdateTransaction"
+import { DarkModeProvider } from "./context/DarkModeContext"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,49 +28,51 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <GlobalStyles />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Dashboard />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="transactions" element={<Transactions />} />
-              <Route path="transaction/add" element={<AddTransaction />} />
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <GlobalStyles />
+          <BrowserRouter>
+            <Routes>
               <Route
-                path="transaction/:transactionId/edit"
-                element={<UpdateTransaction />}
-              />
-              <Route path="account/add" element={<AddAccount />} />
-            </Route>
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="transactions" element={<Transactions />} />
+                <Route path="transaction/add" element={<AddTransaction />} />
+                <Route
+                  path="transaction/:transactionId/edit"
+                  element={<UpdateTransaction />}
+                />
+                <Route path="account/add" element={<AddAccount />} />
+              </Route>
 
-            <Route index element={<Welcome />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 5000,
-            },
-            style: {
-              fontSize: "16px",
-            },
-          }}
-        />
-      </QueryClientProvider>
+              <Route index element={<Welcome />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 5000,
+              },
+              style: {
+                fontSize: "16px",
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </DarkModeProvider>
     </>
   )
 }

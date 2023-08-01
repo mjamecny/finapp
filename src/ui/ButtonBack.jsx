@@ -10,7 +10,7 @@ const StyledButtonBack = styled.div`
   & svg {
     width: 25px;
     height: 25px;
-    color: #f8f9fa;
+    color: var(--color-grey-font-900);
   }
 `
 

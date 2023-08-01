@@ -7,7 +7,7 @@ const Form = styled.form`
   border-radius: 2rem;
   font-size: 1.4rem;
   gap: 1.2rem;
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
 `
 
 export default Form

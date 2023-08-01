@@ -11,8 +11,8 @@ const StyledAccountStatsBar = styled.div`
   bottom: -7px;
   width: 124px;
   height: 20px;
-  background-color: #212529;
-  color: #f8f9fa;
+  background-color: var(--color-grey-back-900);
+  color: var(--color-grey-font-900);
 `
 
 const AccountStat = styled.p`

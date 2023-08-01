@@ -17,7 +17,6 @@ const StyledAddTransaction = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #212529;
   height: 100vh;
 `
 

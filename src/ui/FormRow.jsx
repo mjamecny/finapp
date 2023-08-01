@@ -18,7 +18,7 @@ const StyledFormRow = styled.div`
 `
 
 const Label = styled.label`
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
   text-transform: uppercase;
   font-weight: 500;
 `

@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 const StyledButton = styled.button`
   background-color: transparent;
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
   padding: 0.8rem 1.2rem;
-  border: 1px solid #f8f9fa;
+  border: 1px solid var(--color-grey-font-900);
   border-radius: 7px;
   font-weight: bold;
   cursor: pointer;

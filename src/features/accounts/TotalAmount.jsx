@@ -6,8 +6,8 @@ import { useTransactions } from "../transactions/useTransactions"
 const StyledTotalAmount = styled.div`
   display: flex;
   justify-content: center;
-  color: #f8f9fa;
-  border: 1px solid #f8f9fa;
+  color: var(--color-grey-font-900);
+  border: 1px solid var(--color-grey-font-900);
   border-radius: 7px;
   padding: 1.2rem 1.6rem;
   font-size: 3.6rem;

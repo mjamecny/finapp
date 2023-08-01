@@ -1,6 +1,8 @@
 import { styled } from "styled-components"
+
 import Logout from "../features/authentication/Logout"
-import { useNavigate } from "react-router-dom"
+import DarkModeToggle from "./DarkModeToggle"
+
 import { useUser } from "../features/authentication/useUser"
 
 const StyledHeaderMenu = styled.ul`
@@ -11,17 +13,19 @@ const StyledHeaderMenu = styled.ul`
 `
 
 const Username = styled.p`
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
 `
 
 export default function HeaderMenu() {
-  const navigate = useNavigate()
-
   const { user } = useUser()
+
   return (
     <StyledHeaderMenu>
       <li>
         <Username>{user.user_metadata.username}</Username>
+      </li>
+      <li>
+        <DarkModeToggle />
       </li>
       <li>
         <Logout />

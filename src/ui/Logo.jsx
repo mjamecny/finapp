@@ -4,7 +4,7 @@ import styled, { css } from "styled-components"
 const StyledLogo = styled.div`
   display: flex;
   align-items: center;
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
 
   ${(props) =>
     props.type === "medium" &&

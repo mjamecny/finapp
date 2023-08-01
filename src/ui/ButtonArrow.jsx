@@ -7,11 +7,11 @@ const StyledButton = styled.div`
   justify-content: center;
   gap: 0.4rem;
   font-size: 1.4rem;
-  color: white;
+  color: var(--color-grey-font-900);
 
   a {
     text-decoration: none;
-    color: white;
+    color: var(--color-grey-font-900);
     cursor: pointer;
   }
 `

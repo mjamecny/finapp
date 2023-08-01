@@ -13,8 +13,8 @@ import SpinnerMini from "../../ui/SpinnerMini"
 const StyledTransaction = styled.div`
   display: flex;
   justify-content: space-between;
-  color: #f8f9fa;
-  border: 1px solid #f8f9fa;
+  color: var(--color-grey-font-900);
+  border: 1px solid var(--color-grey-font-900);
   font-size: 1.6rem;
   padding: 1.2rem;
   border-radius: 7px;
