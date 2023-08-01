@@ -47,31 +47,31 @@ export default function AccountStatsBar({ account, transactions }) {
   if (account.type === "Bank") {
     withdrawalsSum = transactions
       .filter((transaction) => transaction.type === "Bank")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
 
     depositsSum = transactions
       .filter((transaction) => transaction.type === "Bank")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
   }
 
   if (account.type === "Cash") {
     withdrawalsSum = transactions
       .filter((transaction) => transaction.type === "Cash")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
 
     depositsSum = transactions
       .filter((transaction) => transaction.type === "Cash")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
   }
 
   if (account.type === "Bitcoin") {
     withdrawalsSum = transactions
       .filter((transaction) => transaction.type === "Bitcoin")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
 
     depositsSum = transactions
       .filter((transaction) => transaction.type === "Bitcoin")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : 0), 0)
+      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
   }
 
   return (
