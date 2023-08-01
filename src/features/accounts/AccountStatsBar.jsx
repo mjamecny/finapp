@@ -13,17 +13,20 @@ const StyledAccountStatsBar = styled.div`
   height: 20px;
   background-color: #212529;
   color: #f8f9fa;
-  font-size: 1rem;
-  font-weight: 600;
 `
 
 const AccountStat = styled.p`
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  font-size: 1rem;
+  font-weight: 600;
 `
 
-const StatIcon = styled.div`
+const StatIcon = styled.span`
+  width: 1rem;
+  height: 1rem;
+
   ${(props) =>
     props.type === "withdrawals" &&
     css`
@@ -35,11 +38,6 @@ const StatIcon = styled.div`
     css`
       color: #23c246;
     `}
-    
-  & svg {
-    width: 1rem;
-    height: 1rem;
-  }
 `
 
 export default function AccountStatsBar({ account, transactions }) {

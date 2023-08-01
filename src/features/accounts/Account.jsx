@@ -22,11 +22,6 @@ const StyledAccount = styled.div`
   border-radius: 2rem;
   position: relative;
 
-  & svg {
-    width: 3.7rem;
-    height: 3.7rem;
-  }
-
   ${(props) =>
     props.type === "Bitcoin" &&
     css`
@@ -52,6 +47,13 @@ const StyledAccount = styled.div`
     width: 20px;
     height: 20px;
     cursor: pointer;
+  }
+`
+
+const AccountIcon = styled.span`
+  & svg {
+    width: 3.7rem;
+    height: 3.7rem;
   }
 `
 
@@ -104,10 +106,11 @@ export default function Account({ account, convertedBtcPrice }) {
           <AiOutlineClose onClick={() => deleteAccount(account.id)} />
         )}
       </CloseButton>
-
-      {account.type === "Bitcoin" && <FaBitcoin />}
-      {account.type === "Cash" && <FaMoneyBillWaveAlt />}
-      {account.type === "Bank" && <BsBank2 />}
+      <AccountIcon>
+        {account.type === "Bitcoin" && <FaBitcoin />}
+        {account.type === "Cash" && <FaMoneyBillWaveAlt />}
+        {account.type === "Bank" && <BsBank2 />}
+      </AccountIcon>
 
       <Amount>
         {account.type === "Bitcoin"
