@@ -17,5 +17,5 @@ App for tracking financial transactions of three different accounts.
 
 ## Screenshot
 
-![dashboard](https://i.imgur.com/liqFmZM.png)
+![dashboard](https://i.imgur.com/sVoXIp4.png)
 ![transactions](https://i.imgur.com/DM8eBLO.png)

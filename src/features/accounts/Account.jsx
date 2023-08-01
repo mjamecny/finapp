@@ -3,10 +3,11 @@ import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
 import styled, { css } from "styled-components"
 
-import SpinnerMini from "../../ui/SpinnerMini"
-
 import { useDeleteAccount } from "./useDeleteAccount"
 import { useTransactions } from "../transactions/useTransactions"
+
+import SpinnerMini from "../../ui/SpinnerMini"
+import AccountStatsBar from "./AccountStatsBar"
 
 const StyledAccount = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const StyledAccount = styled.div`
   background-color: #fdb600;
   color: #495057;
   border-radius: 2rem;
+  position: relative;
 
   & svg {
     width: 3.7rem;
@@ -80,11 +82,13 @@ export default function Account({ account, convertedBtcPrice }) {
       .filter((transaction) => transaction.type === "Bank")
       .reduce((acc, cur) => acc + cur.amount, 0)
   }
+
   if (account.type === "Cash") {
     transactionsSum = transactions
       .filter((transaction) => transaction.type === "Cash")
       .reduce((acc, cur) => acc + cur.amount, 0)
   }
+
   if (account.type === "Bitcoin") {
     transactionsSum = transactions
       .filter((transaction) => transaction.type === "Bitcoin")
@@ -104,6 +108,7 @@ export default function Account({ account, convertedBtcPrice }) {
       {account.type === "Bitcoin" && <FaBitcoin />}
       {account.type === "Cash" && <FaMoneyBillWaveAlt />}
       {account.type === "Bank" && <BsBank2 />}
+
       <Amount>
         {account.type === "Bitcoin"
           ? `${Math.round(
@@ -113,7 +118,10 @@ export default function Account({ account, convertedBtcPrice }) {
               "cs-CZ"
             )} CZK`}
       </Amount>
+
       {account.type === "Bitcoin" && <p>{account.balance + transactionsSum}</p>}
+
+      <AccountStatsBar account={account} transactions={transactions} />
     </StyledAccount>
   )
 }
