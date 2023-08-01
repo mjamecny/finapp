@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom"
-import { useUser } from "../features/authentication/useUser"
 import { useEffect } from "react"
 import styled from "styled-components"
+
+import { useUser } from "../features/authentication/useUser"
 
 import Button from "../ui/Button"
 import Logo from "../ui/Logo"

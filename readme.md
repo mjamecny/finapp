@@ -8,6 +8,8 @@ App for tracking financial transactions of three different accounts.
 - add three different accounts (cash,bank,bitcoin)
 - remove account
 - add transactions for each account
+- filter transactions by description and transaction type
+- sort transactions by date
 - update transaction
 - remove transaction
 - pwa
@@ -15,4 +17,5 @@ App for tracking financial transactions of three different accounts.
 
 ## Screenshot
 
-![screenshot](https://i.imgur.com/Uqe4HIg.png)
+![dashboard](https://i.imgur.com/liqFmZM.png)
+![transactions](https://i.imgur.com/DM8eBLO.png)

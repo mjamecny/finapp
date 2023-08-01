@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
 import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
@@ -8,7 +9,6 @@ import { useDeleteTransaction } from "./useDeleteTransaction"
 import { convertToDDMMYYYY } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
-import { useNavigate } from "react-router-dom"
 
 const StyledTransaction = styled.div`
   display: flex;

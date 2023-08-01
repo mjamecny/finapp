@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { FaArrowRight } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
@@ -6,7 +6,7 @@ const StyledButton = styled.div`
   display: flex;
   justify-content: center;
   gap: 0.4rem;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: white;
 
   a {

@@ -15,7 +15,7 @@ html {
 body {
   background-color: #212529;
   height: 100vh;
-  color: #495057;
+  color: #f8f9fa;
   padding: 2.4rem 1.2rem;
   margin: 0 auto;
   max-width: 72rem;

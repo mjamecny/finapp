@@ -8,6 +8,7 @@ import TransactionList from "../features/transactions/TransactionList"
 import Row from "../ui/Row"
 import FlexHorizontalCenter from "../ui/FlexHorizontalCenter"
 import ButtonArrow from "../ui/ButtonArrow"
+import Heading from "../ui/Heading"
 
 import { useUser } from "../features/authentication/useUser"
 import { useTransactions } from "../features/transactions/useTransactions"
@@ -67,7 +68,8 @@ export default function Dashboard() {
           </FlexHorizontalCenter>
 
           {userId && (
-            <>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Heading as="h2">Last transactions</Heading>
               <TransactionList
                 userId={userId}
                 transactions={slicedTransactions}
@@ -75,7 +77,7 @@ export default function Dashboard() {
               {transactions.length && (
                 <ButtonArrow to="/transactions">All transactions</ButtonArrow>
               )}
-            </>
+            </div>
           )}
         </Row>
       ) : (

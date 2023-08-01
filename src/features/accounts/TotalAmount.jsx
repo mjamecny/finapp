@@ -1,15 +1,16 @@
+import styled from "styled-components"
+
 import { useAccounts } from "./useAccounts"
 import { useTransactions } from "../transactions/useTransactions"
-import styled from "styled-components"
 
 const StyledTotalAmount = styled.div`
   display: flex;
   justify-content: center;
   color: #f8f9fa;
   border: 1px solid #f8f9fa;
-  border-radius: 30px;
+  border-radius: 7px;
   padding: 1.2rem 1.6rem;
-  font-size: 4.4rem;
+  font-size: 3.6rem;
   font-weight: 600;
 `
 

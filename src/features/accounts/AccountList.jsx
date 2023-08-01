@@ -1,5 +1,6 @@
-import { useAccounts } from "./useAccounts"
 import styled from "styled-components"
+
+import { useAccounts } from "./useAccounts"
 
 import Account from "./Account"
 import Empty from "../../ui/Empty"

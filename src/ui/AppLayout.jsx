@@ -9,6 +9,7 @@ const StyledAppLayout = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr min-content;
   height: 100vh;
+  gap: 1.8rem;
 `
 
 export default function AppLayout() {

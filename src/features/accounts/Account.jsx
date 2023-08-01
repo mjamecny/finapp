@@ -15,7 +15,7 @@ const StyledAccount = styled.div`
   align-items: center;
   position: relative;
   gap: 1rem;
-  height: 15rem;
+  height: 12rem;
   background-color: #fdb600;
   color: #495057;
   border-radius: 2rem;
@@ -66,7 +66,7 @@ const CloseButton = styled.div`
 `
 
 const Amount = styled.p`
-  font-size: 2.4rem;
+  font-size: 2rem;
 `
 
 export default function Account({ account, convertedBtcPrice }) {
