@@ -12,6 +12,7 @@ import Input from "../../ui/Input"
 import Button from "../../ui/Button"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
+import Select from "../../ui/Select"
 
 const StyledAddTransaction = styled.div`
   display: flex;
@@ -19,6 +20,18 @@ const StyledAddTransaction = styled.div`
   justify-content: center;
   height: 100vh;
 `
+const options = [
+  { value: "home", label: "Home" },
+  { value: "salary", label: "Salary" },
+  { value: "food", label: "Food" },
+  { value: "pets", label: "Pets" },
+  { value: "car", label: "Car" },
+  { value: "health", label: "Health" },
+  { value: "transport", label: "Transport" },
+  { value: "gift", label: "Gift" },
+  { value: "study", label: "Study" },
+  { value: "other", label: "Other" },
+]
 
 export default function UpdateTransaction() {
   const { transactionId } = useParams()
@@ -32,6 +45,8 @@ export default function UpdateTransaction() {
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("")
   const [description, setDescription] = useState("")
+  const [to, setTo] = useState("")
+  const [category, setCategory] = useState("")
 
   const navigate = useNavigate()
 
@@ -44,6 +59,8 @@ export default function UpdateTransaction() {
       : setTransactionType("deposit")
     setAmount(Math.abs(filteredTransaction?.amount))
     setDescription(filteredTransaction?.description)
+    setTo(filteredTransaction?.to)
+    setCategory(filteredTransaction?.category)
   }, [])
 
   function handleSubmit(e) {
@@ -62,6 +79,7 @@ export default function UpdateTransaction() {
     const newTransaction = {
       amount: transactionType === "withdraw" ? -amount : amount,
       description,
+      category,
     }
 
     updateTransaction({ newTransaction, id })
@@ -71,6 +89,14 @@ export default function UpdateTransaction() {
   return (
     <StyledAddTransaction>
       <Form onSubmit={handleSubmit}>
+        <FormRow label="Category">
+          <Select
+            options={options}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            disabled={isUpdating}
+          />
+        </FormRow>
         <FormRow label="Amount">
           <Input
             type="number"
@@ -106,6 +132,15 @@ export default function UpdateTransaction() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
+            disabled={isUpdating}
+          />
+        </FormRow>
+        <FormRow label="To">
+          <Input
+            type="text"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
             required
             disabled={isUpdating}
           />

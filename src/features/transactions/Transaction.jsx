@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
 import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
@@ -44,9 +44,7 @@ const AccountIcon = styled.div`
       color: #f8fd00;
     `}
 `
-const Description = styled.p`
-  font-weight: 600;
-`
+
 const Price = styled.p`
   font-weight: 600;
 
@@ -76,6 +74,12 @@ const TransactionRowVertical = styled.div`
   gap: 0.4rem;
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--color-grey-font-900);
+`
+
 export function Transaction({ transaction, userId }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
   const { type, description, amount, id, created_at } = transaction
@@ -100,7 +104,7 @@ export function Transaction({ transaction, userId }) {
             <BsBank2 />
           </AccountIcon>
         )}
-        <Description>{description}</Description>
+        <StyledLink to={`/transaction/${id}`}>{description}</StyledLink>
       </TransactionRowHorizontal>
 
       <TransactionRowHorizontal>

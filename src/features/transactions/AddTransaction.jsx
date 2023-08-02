@@ -13,6 +13,7 @@ import Button from "../../ui/Button"
 import SelectAlternative from "../../ui/SelectAlternative"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
+import Select from "../../ui/Select"
 
 const StyledAddTransaction = styled.div`
   display: flex;
@@ -21,11 +22,26 @@ const StyledAddTransaction = styled.div`
   height: 100vh;
 `
 
+const options = [
+  { value: "home", label: "Home" },
+  { value: "salary", label: "Salary" },
+  { value: "food", label: "Food" },
+  { value: "pets", label: "Pets" },
+  { value: "car", label: "Car" },
+  { value: "health", label: "Health" },
+  { value: "transport", label: "Transport" },
+  { value: "gift", label: "Gift" },
+  { value: "study", label: "Study" },
+  { value: "other", label: "Other" },
+]
+
 export default function AddTransaction() {
   const [accountId, setAccountId] = useState("")
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("withdraw")
   const [description, setDescription] = useState("")
+  const [to, setTo] = useState("")
+  const [category, setCategory] = useState("home")
 
   const { user } = useUser()
   const userId = user?.id
@@ -61,6 +77,8 @@ export default function AddTransaction() {
       type: updatedAccount.type,
       amount: transactionType === "withdraw" ? -amount : amount,
       description,
+      to,
+      category,
     }
 
     createTransaction({ newTransaction })
@@ -75,6 +93,14 @@ export default function AddTransaction() {
             accounts={accounts}
             value={accountId}
             onChange={(e) => setAccountId(Number(e.target.value))}
+            disabled={isCreating}
+          />
+        </FormRow>
+        <FormRow label="Category">
+          <Select
+            options={options}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             disabled={isCreating}
           />
         </FormRow>
@@ -113,6 +139,15 @@ export default function AddTransaction() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
+            disabled={isCreating}
+          />
+        </FormRow>
+        <FormRow label="To">
+          <Input
+            type="text"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
             required
             disabled={isCreating}
           />

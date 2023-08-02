@@ -14,7 +14,9 @@ import ProtectedRoute from "./ui/ProtectedRoute"
 import Dashboard from "./pages/Dashboard"
 import Welcome from "./pages/Welcome"
 import Transactions from "./pages/Transactions"
+import TransactionDetail from "./pages/TransactionDetail"
 import UpdateTransaction from "./features/transactions/UpdateTransaction"
+
 import { DarkModeProvider } from "./context/DarkModeContext"
 
 const queryClient = new QueryClient({
@@ -49,6 +51,11 @@ function App() {
                   path="transaction/:transactionId/edit"
                   element={<UpdateTransaction />}
                 />
+                <Route
+                  path="transaction/:transactionId"
+                  element={<TransactionDetail />}
+                />
+
                 <Route path="account/add" element={<AddAccount />} />
               </Route>
 

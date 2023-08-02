@@ -68,13 +68,15 @@ export default function Dashboard() {
           </FlexHorizontalCenter>
 
           {userId && (
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{ display: "flex", flexDirection: "column", flex: "1" }}
+            >
               <Heading as="h2">Last transactions</Heading>
               <TransactionList
                 userId={userId}
                 transactions={slicedTransactions}
               />
-              {transactions.length && (
+              {transactions.length > 0 && (
                 <ButtonArrow to="/transactions">All transactions</ButtonArrow>
               )}
             </div>

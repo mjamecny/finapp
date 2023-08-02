@@ -103,6 +103,7 @@ export default function Transactions() {
           { value: "deposits", label: "Deposits" },
         ]}
       />
+
       <TransactionList
         userId={userId}
         transactions={sortedTransactions}

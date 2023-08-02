@@ -25,6 +25,8 @@ export async function createTransaction({ newTransaction }) {
         description: newTransaction.description,
         accountId: newTransaction.accountId,
         type: newTransaction.type,
+        to: newTransaction.to,
+        category: newTransaction.category,
       },
     ])
     .select()
