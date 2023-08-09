@@ -6,13 +6,13 @@ const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  color: #f8f9fa;
+  color: var(--color-grey-font-900);
   font-size: 1.2rem;
 
   & svg {
     width: 1.4rem;
     height: 1.4rem;
-    color: #f8f9fa;
+    color: var(--color-grey-font-900);
   }
 `
 
