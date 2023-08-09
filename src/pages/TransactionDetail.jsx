@@ -4,6 +4,8 @@ import {
   FaBitcoin,
   FaMoneyBillWaveAlt,
   FaPen,
+  FaRedo,
+  FaTheaterMasks,
   FaHome,
   FaFish,
   FaMedkit,
@@ -14,6 +16,7 @@ import {
   FaBus,
   FaBook,
   FaQuestion,
+  FaHotjar,
 } from "react-icons/fa"
 import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
@@ -25,11 +28,13 @@ import { useDeleteTransaction } from "../features/transactions/useDeleteTransact
 
 import Heading from "../ui/Heading"
 import SpinnerMini from "../ui/SpinnerMini"
+import ButtonBack from "../ui/ButtonBack"
 
 const StyledTransactionDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1.6rem;
 `
 
 const DetailsBox = styled.div`
@@ -40,7 +45,6 @@ const DetailsBox = styled.div`
   height: 300px;
   border-radius: 7px;
   padding: 1.2rem 1.6rem;
-  margin-top: 1.6rem;
 `
 
 const DetailsItems = styled.div`
@@ -76,6 +80,7 @@ const AccountIcon = styled.div`
 const options = [
   { value: "home", label: "Home", icon: <FaHome /> },
   { value: "food", label: "Food", icon: <FaFish /> },
+  { value: "entertainment", label: "Entertainment", icon: <FaTheaterMasks /> },
   { value: "health", label: "Health", icon: <FaMedkit /> },
   { value: "salary", label: "Salary", icon: <FaMoneyBill /> },
   { value: "gift", label: "Gift", icon: <FaGift /> },
@@ -83,6 +88,8 @@ const options = [
   { value: "car", label: "Car", icon: <FaCar /> },
   { value: "transport", label: "Transport", icon: <FaBus /> },
   { value: "study", label: "Study", icon: <FaBook /> },
+  { value: "subscription", label: "Subscription", icon: <FaRedo /> },
+  { value: "utilities", label: "Utilities", icon: <FaHotjar /> },
   { value: "other", label: "Other", icon: <FaQuestion /> },
 ]
 
@@ -241,6 +248,8 @@ export default function TransactionDetail() {
           </DetailsItems>
         </DetailsBox>
       )}
+
+      <ButtonBack />
     </StyledTransactionDetail>
   )
 }

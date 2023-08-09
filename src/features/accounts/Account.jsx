@@ -8,6 +8,7 @@ import { useTransactions } from "../transactions/useTransactions"
 
 import SpinnerMini from "../../ui/SpinnerMini"
 import AccountStatsBar from "./AccountStatsBar"
+import Spinner from "../../ui/Spinner"
 
 const StyledAccount = styled.div`
   display: flex;
@@ -75,7 +76,9 @@ const Amount = styled.p`
 
 export default function Account({ account, convertedBtcPrice }) {
   const { isDeleting, deleteAccount } = useDeleteAccount()
-  const { transactions } = useTransactions(account?.userId)
+  const { isLoading, transactions } = useTransactions(account?.userId)
+
+  if (isLoading) return <Spinner />
 
   let transactionsSum
 
@@ -122,7 +125,9 @@ export default function Account({ account, convertedBtcPrice }) {
             )} CZK`}
       </Amount>
 
-      {account.type === "Bitcoin" && <p>{account.balance + transactionsSum}</p>}
+      {account.type === "Bitcoin" && (
+        <p>{(account.balance + transactionsSum).toFixed(5)}</p>
+      )}
 
       <AccountStatsBar account={account} transactions={transactions} />
     </StyledAccount>

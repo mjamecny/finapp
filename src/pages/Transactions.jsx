@@ -73,20 +73,13 @@ export default function Transactions() {
 
   return (
     <StyledTransactions>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1.2rem",
-        }}
-      >
-        <Input
-          type="text"
-          value={query}
-          placeholder="Search by description"
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </div>
+      <Input
+        type="text"
+        value={query}
+        placeholder="Search by description"
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
       <SortBy
         options={[
           { value: "description-asc", label: "Sort by description (A-Z)" },

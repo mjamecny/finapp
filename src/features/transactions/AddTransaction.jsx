@@ -26,12 +26,15 @@ const options = [
   { value: "home", label: "Home" },
   { value: "salary", label: "Salary" },
   { value: "food", label: "Food" },
+  { value: "entertainment", label: "Entertainment" },
   { value: "pets", label: "Pets" },
   { value: "car", label: "Car" },
   { value: "health", label: "Health" },
   { value: "transport", label: "Transport" },
   { value: "gift", label: "Gift" },
   { value: "study", label: "Study" },
+  { value: "subscription", label: "Subscription" },
+  { value: "utilities", label: "Utilities" },
   { value: "other", label: "Other" },
 ]
 

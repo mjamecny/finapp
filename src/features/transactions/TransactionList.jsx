@@ -1,13 +1,18 @@
 import styled, { css } from "styled-components"
+import { useNavigate } from "react-router-dom"
 
-import { Transaction } from "./Transaction"
+import Transaction from "./Transaction"
 import Empty from "../../ui/Empty"
+import Button from "../../ui/Button"
+import Heading from "../../ui/Heading"
+import ButtonArrow from "../../ui/ButtonArrow"
 
 const StyledTransactions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   padding: 1.6rem 1.6rem;
+  flex: 1;
 
   ${(props) =>
     props.type === "page" &&
@@ -18,19 +23,33 @@ const StyledTransactions = styled.div`
 `
 
 export default function TransactionList({ userId, transactions, type }) {
-  if (!transactions.length) return <Empty resourceName="transactions" />
+  const navigate = useNavigate()
+
+  if (!transactions?.length)
+    return (
+      <Empty
+        resourceName="transactions"
+        buttonLabel="Add transaction"
+        path="/transaction/add"
+      />
+    )
 
   return (
-    <>
-      <StyledTransactions type={type}>
-        {transactions?.map((transaction) => (
-          <Transaction
-            key={transaction.id}
-            transaction={transaction}
-            userId={userId}
-          />
-        ))}
-      </StyledTransactions>
-    </>
+    <StyledTransactions type={type}>
+      {type !== "page" && <Heading as="h2">Last transactions</Heading>}
+      {transactions?.map((transaction) => (
+        <Transaction
+          key={transaction.id}
+          transaction={transaction}
+          userId={userId}
+        />
+      ))}
+      <Button onClick={() => navigate("/transaction/add")}>
+        Add transaction
+      </Button>
+      {type !== "page" && (
+        <ButtonArrow to="/transactions">All transactions</ButtonArrow>
+      )}
+    </StyledTransactions>
   )
 }

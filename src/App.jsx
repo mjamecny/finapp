@@ -32,7 +32,7 @@ function App() {
     <>
       <DarkModeProvider>
         <QueryClientProvider client={queryClient}>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
           <GlobalStyles />
           <BrowserRouter>
             <Routes>
@@ -43,7 +43,6 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="transactions" element={<Transactions />} />
                 <Route path="transaction/add" element={<AddTransaction />} />

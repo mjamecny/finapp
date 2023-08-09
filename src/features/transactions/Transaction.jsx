@@ -80,7 +80,7 @@ const StyledLink = styled(Link)`
   color: var(--color-grey-font-900);
 `
 
-export function Transaction({ transaction, userId }) {
+export default function Transaction({ transaction, userId }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
   const { type, description, amount, id, created_at } = transaction
 

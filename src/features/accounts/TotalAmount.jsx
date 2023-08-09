@@ -1,5 +1,8 @@
 import styled from "styled-components"
 
+import SpinnerMini from "../../ui/SpinnerMini"
+import Spinner from "../../ui/Spinner"
+
 import { useAccounts } from "./useAccounts"
 import { useTransactions } from "../transactions/useTransactions"
 
@@ -15,8 +18,11 @@ const StyledTotalAmount = styled.div`
 `
 
 export default function TotalAmount({ userId, convertedBtcPrice }) {
-  const { accounts } = useAccounts(userId)
-  const { transactions } = useTransactions(userId)
+  const { isLoading, accounts } = useAccounts(userId)
+  const { isLoading: isLoadingTransactions, transactions } =
+    useTransactions(userId)
+
+  if (isLoading || isLoadingTransactions) return <Spinner />
 
   const balancesSum = accounts?.reduce(
     (sum, account) =>
@@ -38,7 +44,11 @@ export default function TotalAmount({ userId, convertedBtcPrice }) {
 
   return (
     <StyledTotalAmount>
-      {`${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`}
+      {convertedBtcPrice === null ? (
+        <SpinnerMini />
+      ) : (
+        `${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`
+      )}
     </StyledTotalAmount>
   )
 }
