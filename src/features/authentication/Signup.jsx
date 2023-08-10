@@ -10,6 +10,7 @@ import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
+import Select from "../../ui/Select"
 
 const StyledSignup = styled.div`
   display: flex;
@@ -19,10 +20,17 @@ const StyledSignup = styled.div`
   height: 100vh;
 `
 
+const currencyOptions = [
+  { value: "czech-republic-koruna", label: "CZK" },
+  { value: "euro", label: "EUR" },
+  { value: "usd", label: "USD" },
+]
+
 export default function Signup() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [username, setUsername] = useState("")
+  const [currency, setCurrency] = useState("usd")
   const { signup, isLoading } = useSignup()
   const navigate = useNavigate()
 
@@ -30,7 +38,7 @@ export default function Signup() {
     e.preventDefault()
 
     if (!email || !password || !username) return
-    signup({ username, email, password })
+    signup({ username, email, password, currency })
   }
 
   return (
@@ -46,6 +54,7 @@ export default function Signup() {
             disabled={isLoading}
           />
         </FormRow>
+
         <FormRow label="Email">
           <Input
             id="email"
@@ -63,6 +72,14 @@ export default function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={isLoading}
+          />
+        </FormRow>
+        <FormRow label="Currency">
+          <Select
+            options={currencyOptions}
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
             disabled={isLoading}
           />
         </FormRow>

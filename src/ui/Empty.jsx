@@ -13,12 +13,14 @@ const StyledEmpty = styled.p`
   flex: 1;
 `
 
-export default function Empty({ resourceName, buttonLabel, path }) {
+export default function Empty({ type, resourceName, buttonLabel, path }) {
   const navigate = useNavigate()
   return (
     <StyledEmpty>
       No {resourceName} could be found.
-      <Button onClick={() => navigate(path)}>{buttonLabel}</Button>
+      {type !== "page" && (
+        <Button onClick={() => navigate(path)}>{buttonLabel}</Button>
+      )}
     </StyledEmpty>
   )
 }

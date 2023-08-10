@@ -5,8 +5,9 @@ import { useAccounts } from "./useAccounts"
 
 import Account from "./Account"
 import Empty from "../../ui/Empty"
-import Spinner from "../../ui/Spinner"
+// import Spinner from "../../ui/Spinner"
 import Button from "../../ui/Button"
+import SpinnerMini from "../../ui/SpinnerMini"
 
 const StyledAccounts = styled.div`
   display: flex;
@@ -20,11 +21,11 @@ const AccountsContainer = styled.div`
   gap: 1.2rem;
 `
 
-export default function AccountList({ userId, convertedBtcPrice }) {
+export default function AccountList({ userId, btcConverted, userCurrency }) {
   const { isLoading, accounts } = useAccounts(userId)
   const navigate = useNavigate()
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <SpinnerMini />
 
   if (!accounts.length)
     return (
@@ -42,7 +43,9 @@ export default function AccountList({ userId, convertedBtcPrice }) {
           <Account
             key={account.id}
             account={account}
-            convertedBtcPrice={convertedBtcPrice}
+            // btcPrice={btcPrice}
+            btcConverted={btcConverted}
+            userCurrency={userCurrency}
           />
         ))}
       </AccountsContainer>

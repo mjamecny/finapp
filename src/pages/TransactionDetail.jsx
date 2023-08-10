@@ -125,6 +125,8 @@ export default function TransactionDetail() {
 
   const { user } = useUser()
   const userId = user?.id
+  const userCurrency = user?.user_metadata?.currency
+
   const { transactions } = useTransactions(userId)
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
 
@@ -158,13 +160,21 @@ export default function TransactionDetail() {
             <Amount type="withdraw">
               {filteredTransaction.type === "Bitcoin"
                 ? Math.abs(filteredTransaction.amount)
-                : `${Math.abs(filteredTransaction.amount)} CZK`}
+                : `${Math.abs(filteredTransaction.amount)} ${
+                    (userCurrency === "usd" && "USD") ||
+                    (userCurrency === "czech-republic-koruna" && "CZK") ||
+                    (userCurrency === "eur" && "EUR")
+                  }`}
             </Amount>
           ) : (
             <Amount type="deposit">
               {filteredTransaction.type === "Bitcoin"
                 ? filteredTransaction.amount
-                : `${filteredTransaction.amount} CZK`}
+                : `${filteredTransaction.amount} ${
+                    (userCurrency === "usd" && "USD") ||
+                    (userCurrency === "czech-republic-koruna" && "CZK") ||
+                    (userCurrency === "eur" && "EUR")
+                  }`}
             </Amount>
           )}
 
@@ -192,13 +202,13 @@ export default function TransactionDetail() {
             >
               <p>Category</p>
               <p style={{ display: "flex", gap: "0.4rem" }}>
-                {options.map((option) => {
+                {options.map((option, i) => {
                   if (option.value === filteredTransaction.category) {
                     return option.icon
                   }
                 })}
                 <span>
-                  {options.map((option) => {
+                  {options.map((option, i) => {
                     if (option.value === filteredTransaction.category) {
                       return option.label
                     }

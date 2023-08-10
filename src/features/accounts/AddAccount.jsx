@@ -78,7 +78,6 @@ export default function AddAccount() {
             disabled={isCreating}
           />
         </FormRow>
-
         <FormRow label="Initial balance">
           <Input
             id="initialBalance"

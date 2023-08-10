@@ -2,24 +2,24 @@ import AccountList from "../features/accounts/AccountList"
 import TotalAmount from "../features/accounts/TotalAmount"
 import TransactionList from "../features/transactions/TransactionList"
 import Row from "../ui/Row"
-import Spinner from "../ui/Spinner"
+import SpinnerMini from "../ui/SpinnerMini"
 import Empty from "../ui/Empty"
 
 import { useUser } from "../features/authentication/useUser"
 import { useTransactions } from "../features/transactions/useTransactions"
 import { useAccounts } from "../features/accounts/useAccounts"
-import useBtcToCzkConversion from "../hooks/useBtcToCzkConversion"
 
 export default function Dashboard() {
   const { user } = useUser()
   const userId = user?.id
+  const userCurrency = user?.user_metadata?.currency
+
   const { transactions } = useTransactions(userId)
   const { isLoading, accounts } = useAccounts(userId)
-  const convertedBtcPrice = useBtcToCzkConversion()
 
   const slicedTransactions = transactions?.slice(0, 4)
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <SpinnerMini />
 
   return (
     <>
@@ -31,18 +31,15 @@ export default function Dashboard() {
         />
       ) : (
         <Row type="vertical">
-          {userId && (
-            <TotalAmount
-              userId={userId}
-              convertedBtcPrice={convertedBtcPrice}
-            />
+          {userId && userCurrency && (
+            <TotalAmount userId={userId} userCurrency={userCurrency} />
           )}
-          <AccountList convertedBtcPrice={convertedBtcPrice} />
+          {userCurrency && <AccountList userCurrency={userCurrency} />}
 
-          {userId && (
+          {userCurrency && (
             <TransactionList
-              userId={userId}
               transactions={slicedTransactions}
+              userCurrency={userCurrency}
             />
           )}
         </Row>

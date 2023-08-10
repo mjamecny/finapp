@@ -80,7 +80,7 @@ const StyledLink = styled(Link)`
   color: var(--color-grey-font-900);
 `
 
-export default function Transaction({ transaction, userId }) {
+export default function Transaction({ transaction, userCurrency }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
   const { type, description, amount, id, created_at } = transaction
 
@@ -111,11 +111,23 @@ export default function Transaction({ transaction, userId }) {
         <TransactionRowVertical>
           {amount < 0 ? (
             <Price type="withdraw">
-              {type === "Bitcoin" ? amount : `${amount} CZK`}
+              {type === "Bitcoin"
+                ? amount
+                : `${amount} ${
+                    (userCurrency === "usd" && "USD") ||
+                    (userCurrency === "czech-republic-koruna" && "CZK") ||
+                    (userCurrency === "eur" && "EUR")
+                  }`}
             </Price>
           ) : (
             <Price type="deposit">
-              {type === "Bitcoin" ? amount : `${amount} CZK`}
+              {type === "Bitcoin"
+                ? amount
+                : `${amount} ${
+                    (userCurrency === "usd" && "USD") ||
+                    (userCurrency === "czech-republic-koruna" && "CZK") ||
+                    (userCurrency === "eur" && "EUR")
+                  }`}
             </Price>
           )}
           <p>

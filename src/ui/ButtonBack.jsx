@@ -19,7 +19,7 @@ export default function ButtonBack() {
 
   return (
     <StyledButtonBack>
-      <AiOutlineArrowLeft onClick={() => navigate("/")} />
+      <AiOutlineArrowLeft onClick={() => navigate(-1)} />
     </StyledButtonBack>
   )
 }

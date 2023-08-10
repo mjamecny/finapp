@@ -22,12 +22,13 @@ const StyledTransactions = styled.div`
     `}
 `
 
-export default function TransactionList({ userId, transactions, type }) {
+export default function TransactionList({ transactions, type, userCurrency }) {
   const navigate = useNavigate()
 
   if (!transactions?.length)
     return (
       <Empty
+        type={type}
         resourceName="transactions"
         buttonLabel="Add transaction"
         path="/transaction/add"
@@ -41,7 +42,7 @@ export default function TransactionList({ userId, transactions, type }) {
         <Transaction
           key={transaction.id}
           transaction={transaction}
-          userId={userId}
+          userCurrency={userCurrency}
         />
       ))}
       <Button onClick={() => navigate("/transaction/add")}>

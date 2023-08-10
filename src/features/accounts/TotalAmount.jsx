@@ -1,10 +1,11 @@
 import styled from "styled-components"
 
 import SpinnerMini from "../../ui/SpinnerMini"
-import Spinner from "../../ui/Spinner"
 
 import { useAccounts } from "./useAccounts"
 import { useTransactions } from "../transactions/useTransactions"
+import useFetchRate from "../../hooks/useFetchRate"
+import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
 
 const StyledTotalAmount = styled.div`
   display: flex;
@@ -17,17 +18,21 @@ const StyledTotalAmount = styled.div`
   font-weight: 600;
 `
 
-export default function TotalAmount({ userId, convertedBtcPrice }) {
+export default function TotalAmount({ userId, userCurrency }) {
   const { isLoading, accounts } = useAccounts(userId)
   const { isLoading: isLoadingTransactions, transactions } =
     useTransactions(userId)
+  const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
+  const { rate, isLoading: isLoadingRate } = useFetchRate(userCurrency)
 
-  if (isLoading || isLoadingTransactions) return <Spinner />
+  if (isLoading || isLoadingTransactions) return <SpinnerMini />
+
+  const btcConverted = btcPrice / rate
 
   const balancesSum = accounts?.reduce(
     (sum, account) =>
       account.type === "Bitcoin"
-        ? sum + account.balance * convertedBtcPrice
+        ? sum + account.balance * btcConverted
         : sum + account.balance,
     0
   )
@@ -35,7 +40,7 @@ export default function TotalAmount({ userId, convertedBtcPrice }) {
   const transactionsSum = transactions.reduce(
     (sum, transaction) =>
       transaction.type === "Bitcoin"
-        ? sum + transaction.amount * convertedBtcPrice
+        ? sum + transaction.amount * btcConverted
         : sum + transaction.amount,
     0
   )
@@ -44,10 +49,14 @@ export default function TotalAmount({ userId, convertedBtcPrice }) {
 
   return (
     <StyledTotalAmount>
-      {convertedBtcPrice === null ? (
+      {isLoadingRate || isLoadingPrice ? (
         <SpinnerMini />
       ) : (
-        `${Math.round(totalAmount).toLocaleString("cs-CZ")} CZK`
+        `${Math.round(totalAmount).toLocaleString("cs-CZ")} ${
+          (userCurrency === "usd" && "USD") ||
+          (userCurrency === "czech-republic-koruna" && "CZK") ||
+          (userCurrency === "eur" && "EUR")
+        }`
       )}
     </StyledTotalAmount>
   )

@@ -23,6 +23,8 @@ export default function Transactions() {
 
   const { user } = useUser()
   const userId = user?.id
+  const userCurrency = user?.user_metadata?.currency
+
   const { isLoading, transactions } = useTransactions(userId)
 
   if (isLoading) return null
@@ -98,7 +100,7 @@ export default function Transactions() {
       />
 
       <TransactionList
-        userId={userId}
+        userCurrency={userCurrency}
         transactions={sortedTransactions}
         type="page"
       />

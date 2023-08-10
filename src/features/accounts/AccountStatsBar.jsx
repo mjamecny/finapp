@@ -40,7 +40,11 @@ const StatIcon = styled.span`
     `}
 `
 
-export default function AccountStatsBar({ account, transactions }) {
+export default function AccountStatsBar({
+  account,
+  transactions,
+  userCurrency,
+}) {
   let withdrawalsSum
   let depositsSum
 
@@ -82,7 +86,13 @@ export default function AccountStatsBar({ account, transactions }) {
         </StatIcon>
 
         <span>
-          {account.type === "Bitcoin" ? depositsSum : `${depositsSum} CZK`}
+          {account.type === "Bitcoin"
+            ? depositsSum
+            : `${depositsSum} ${
+                (userCurrency === "usd" && "USD") ||
+                (userCurrency === "czech-republic-koruna" && "CZK") ||
+                (userCurrency === "eur" && "EUR")
+              }`}
         </span>
       </AccountStat>
       <AccountStat>
@@ -93,7 +103,11 @@ export default function AccountStatsBar({ account, transactions }) {
         <span>
           {account.type === "Bitcoin"
             ? Math.abs(withdrawalsSum)
-            : `${Math.abs(withdrawalsSum)} CZK`}
+            : `${Math.abs(withdrawalsSum)} ${
+                (userCurrency === "usd" && "USD") ||
+                (userCurrency === "czech-republic-koruna" && "CZK") ||
+                (userCurrency === "eur" && "EUR")
+              }`}
         </span>
       </AccountStat>
     </StyledAccountStatsBar>

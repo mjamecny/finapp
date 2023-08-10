@@ -5,10 +5,11 @@ import styled, { css } from "styled-components"
 
 import { useDeleteAccount } from "./useDeleteAccount"
 import { useTransactions } from "../transactions/useTransactions"
+import useFetchRate from "../../hooks/useFetchRate"
+import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
 
 import SpinnerMini from "../../ui/SpinnerMini"
 import AccountStatsBar from "./AccountStatsBar"
-import Spinner from "../../ui/Spinner"
 
 const StyledAccount = styled.div`
   display: flex;
@@ -74,11 +75,15 @@ const Amount = styled.p`
   font-size: 2rem;
 `
 
-export default function Account({ account, convertedBtcPrice }) {
+export default function Account({ account, userCurrency }) {
   const { isDeleting, deleteAccount } = useDeleteAccount()
   const { isLoading, transactions } = useTransactions(account?.userId)
+  const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
+  const { rate, isLoading: isLoadingRate } = useFetchRate(userCurrency)
 
-  if (isLoading) return <Spinner />
+  const btcConverted = btcPrice / rate
+
+  if (isLoading) return <SpinnerMini />
 
   let transactionsSum
 
@@ -115,21 +120,37 @@ export default function Account({ account, convertedBtcPrice }) {
         {account.type === "Bank" && <BsBank2 />}
       </AccountIcon>
 
-      <Amount>
-        {account.type === "Bitcoin"
-          ? `${Math.round(
-              (account.balance + transactionsSum) * convertedBtcPrice
-            ).toLocaleString("cs-CZ")} CZK`
-          : `${Math.round(account.balance + transactionsSum).toLocaleString(
-              "cs-CZ"
-            )} CZK`}
-      </Amount>
+      {isLoadingPrice || isLoadingRate ? (
+        <SpinnerMini />
+      ) : (
+        <Amount>
+          {account.type === "Bitcoin"
+            ? `${Math.round(
+                (account.balance + transactionsSum) * btcConverted
+              ).toLocaleString("cs-CZ")} ${
+                (userCurrency === "usd" && "USD") ||
+                (userCurrency === "czech-republic-koruna" && "CZK") ||
+                (userCurrency === "eur" && "EUR")
+              }`
+            : `${Math.round(account.balance + transactionsSum).toLocaleString(
+                "cs-CZ"
+              )} ${
+                (userCurrency === "usd" && "USD") ||
+                (userCurrency === "czech-republic-koruna" && "CZK") ||
+                (userCurrency === "eur" && "EUR")
+              }`}
+        </Amount>
+      )}
 
       {account.type === "Bitcoin" && (
         <p>{(account.balance + transactionsSum).toFixed(5)}</p>
       )}
 
-      <AccountStatsBar account={account} transactions={transactions} />
+      <AccountStatsBar
+        account={account}
+        transactions={transactions}
+        userCurrency={userCurrency}
+      />
     </StyledAccount>
   )
 }
