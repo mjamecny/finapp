@@ -88,7 +88,7 @@ export default function AccountStatsBar({
         <span>
           {account.type === "Bitcoin"
             ? depositsSum
-            : `${depositsSum} ${
+            : `${Math.round(depositsSum)} ${
                 (userCurrency === "usd" && "USD") ||
                 (userCurrency === "czech-republic-koruna" && "CZK") ||
                 (userCurrency === "eur" && "EUR")
@@ -103,7 +103,7 @@ export default function AccountStatsBar({
         <span>
           {account.type === "Bitcoin"
             ? Math.abs(withdrawalsSum)
-            : `${Math.abs(withdrawalsSum)} ${
+            : `${Math.abs(Math.round(withdrawalsSum))} ${
                 (userCurrency === "usd" && "USD") ||
                 (userCurrency === "czech-republic-koruna" && "CZK") ||
                 (userCurrency === "eur" && "EUR")

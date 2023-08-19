@@ -18,7 +18,7 @@ const StyledTransactions = styled.div`
 `
 
 export default function Transactions() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const [query, setQuery] = useState("")
 
   const { user } = useUser()

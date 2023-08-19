@@ -31,9 +31,9 @@ html {
 
 body {
   background-color: var(--color-grey-back-900);
-  height: 100vh;
   color: var(--color-grey-font-900);
-  padding: 2.4rem 1.2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
   margin: 0 auto;
   max-width: 72rem;
   transition: color 0.3s, background-color 0.3s;

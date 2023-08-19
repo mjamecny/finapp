@@ -6,8 +6,7 @@ import Footer from "./Footer"
 
 const StyledAppLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: auto 1fr auto;
   height: 100vh;
   gap: 1.8rem;
 `

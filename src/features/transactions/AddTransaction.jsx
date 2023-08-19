@@ -14,12 +14,13 @@ import SelectAlternative from "../../ui/SelectAlternative"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
 import Select from "../../ui/Select"
+import { toast } from "react-hot-toast"
 
 const StyledAddTransaction = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  gap: 2.4rem;
 `
 
 const options = [
@@ -53,11 +54,11 @@ export default function AddTransaction() {
 
   const navigate = useNavigate()
 
-  if (isLoading) return null
-
   useEffect(() => {
     setAccountId(accounts?.at(0).id)
   }, [accounts])
+
+  if (isLoading) return null
 
   function handleSubmit(e) {
     e.preventDefault()

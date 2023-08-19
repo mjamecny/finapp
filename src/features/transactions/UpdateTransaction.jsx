@@ -13,12 +13,13 @@ import Button from "../../ui/Button"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
 import Select from "../../ui/Select"
+import { toast } from "react-hot-toast"
 
 const StyledAddTransaction = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  gap: 2.4rem;
 `
 const options = [
   { value: "home", label: "Home" },
