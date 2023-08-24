@@ -2,8 +2,8 @@ import AccountList from "../features/accounts/AccountList"
 import TotalAmount from "../features/accounts/TotalAmount"
 import TransactionList from "../features/transactions/TransactionList"
 import Row from "../ui/Row"
-import SpinnerMini from "../ui/SpinnerMini"
 import Empty from "../ui/Empty"
+import Spinner from "../ui/Spinner"
 
 import { useUser } from "../features/authentication/useUser"
 import { useTransactions } from "../features/transactions/useTransactions"
@@ -19,7 +19,7 @@ export default function Dashboard() {
 
   const slicedTransactions = transactions?.slice(0, 4)
 
-  if (isLoading) return <SpinnerMini />
+  if (isLoading) return <Spinner />
 
   return (
     <>

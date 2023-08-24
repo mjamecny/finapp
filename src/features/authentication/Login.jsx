@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 import { useLogin } from "./useLogin"
@@ -15,7 +14,8 @@ const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #212529;
+  gap: 2.4rem;
+  background-color: var(--color-grey-back-900);
   height: 100vh;
 `
 
@@ -24,8 +24,6 @@ export default function Login() {
   const [password, setPassword] = useState("")
 
   const { login, isLoading } = useLogin()
-
-  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()

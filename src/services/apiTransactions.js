@@ -15,6 +15,21 @@ export async function getTransactions(userId) {
   return data
 }
 
+export async function getTransaction(id) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .eq("id", id)
+    .single()
+
+  if (error) {
+    console.error(error)
+    throw new Error("Transaction not found")
+  }
+
+  return data
+}
+
 export async function createTransaction({ newTransaction }) {
   const { data, error } = await supabase
     .from("transactions")
@@ -47,7 +62,7 @@ export async function updateTransaction(newTransaction, id) {
 
   if (error) {
     console.error(error)
-    throw new Error("Cabin could not be updated")
+    throw new Error("Transaction could not be updated")
   }
 
   return data

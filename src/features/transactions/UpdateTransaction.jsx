@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-hot-toast"
 import styled from "styled-components"
 
-import { useTransactions } from "./useTransactions"
-import { useUser } from "../authentication/useUser"
 import { useUpdateTransaction } from "./useUpdateTransaction"
+import { useTransaction } from "./useTransaction"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
@@ -13,7 +13,7 @@ import Button from "../../ui/Button"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
 import Select from "../../ui/Select"
-import { toast } from "react-hot-toast"
+import Spinner from "../../ui/Spinner"
 
 const StyledAddTransaction = styled.div`
   display: flex;
@@ -21,27 +21,35 @@ const StyledAddTransaction = styled.div`
   justify-content: center;
   gap: 2.4rem;
 `
+
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
 const options = [
   { value: "home", label: "Home" },
   { value: "salary", label: "Salary" },
   { value: "food", label: "Food" },
+  { value: "entertainment", label: "Entertainment" },
   { value: "pets", label: "Pets" },
   { value: "car", label: "Car" },
   { value: "health", label: "Health" },
   { value: "transport", label: "Transport" },
   { value: "gift", label: "Gift" },
   { value: "study", label: "Study" },
+  { value: "subscription", label: "Subscription" },
+  { value: "utilities", label: "Utilities" },
   { value: "other", label: "Other" },
 ]
 
 export default function UpdateTransaction() {
-  const { transactionId } = useParams()
-  const id = Number(transactionId)
-
-  const { user } = useUser()
-  const userId = user?.id
-  const { transactions } = useTransactions(userId)
+  const { isLoading, transaction } = useTransaction()
+  const transactionId = transaction?.id
   const { isUpdating, updateTransaction } = useUpdateTransaction()
+  const navigate = useNavigate()
 
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("")
@@ -49,20 +57,27 @@ export default function UpdateTransaction() {
   const [to, setTo] = useState("")
   const [category, setCategory] = useState("")
 
-  const navigate = useNavigate()
-
   useEffect(() => {
-    const filteredTransaction = transactions.find(
-      (transaction) => transaction.id === id
-    )
-    filteredTransaction.amount < 0
+    transaction?.amount < 0
       ? setTransactionType("withdraw")
       : setTransactionType("deposit")
-    setAmount(Math.abs(filteredTransaction?.amount))
-    setDescription(filteredTransaction?.description)
-    setTo(filteredTransaction?.to)
-    setCategory(filteredTransaction?.category)
-  }, [])
+    setAmount(Math.abs(transaction?.amount))
+    setDescription(transaction?.description)
+    setTo(transaction?.to)
+    setCategory(transaction?.category)
+  }, [
+    transaction?.amount,
+    transaction?.description,
+    transaction?.to,
+    transaction?.category,
+  ])
+
+  if (isLoading)
+    return (
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
+    )
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -83,7 +98,7 @@ export default function UpdateTransaction() {
       category,
     }
 
-    updateTransaction({ newTransaction, id })
+    updateTransaction({ newTransaction, transactionId })
     navigate("/dashboard")
   }
 
@@ -101,6 +116,7 @@ export default function UpdateTransaction() {
         <FormRow label="Amount">
           <Input
             type="number"
+            defaultValue={amount}
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
             required

@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components"
+import { BiLoaderAlt } from "react-icons/bi"
 
 const rotate = keyframes`
   to {
@@ -6,17 +7,23 @@ const rotate = keyframes`
   }
 `
 
-const Spinner = styled.div`
-  margin: 4.8rem auto;
-
-  width: 6.4rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(farthest-side, var(--color-brand-600) 94%, #0000)
-      top/10px 10px no-repeat,
-    conic-gradient(#0000 30%, var(--color-brand-600));
-  mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+const StyledSpinner = styled(BiLoaderAlt)`
+  width: 5.2rem;
+  height: 5.2rem;
   animation: ${rotate} 1.5s infinite linear;
 `
 
-export default Spinner
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
+export default function Spinner() {
+  return (
+    <SpinnerContainer>
+      <StyledSpinner />
+    </SpinnerContainer>
+  )
+}

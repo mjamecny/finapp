@@ -15,7 +15,7 @@ const StyledTransaction = styled.div`
   justify-content: space-between;
   color: var(--color-grey-font-900);
   border: 1px solid var(--color-grey-font-900);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   padding: 1.2rem;
   border-radius: 7px;
 `

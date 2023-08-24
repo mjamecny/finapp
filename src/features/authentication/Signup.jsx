@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 import { useSignup } from "./useSignup"
@@ -16,7 +15,8 @@ const StyledSignup = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #212529;
+  gap: 2.4rem;
+  background-color: var(--color-grey-back-900);
   height: 100vh;
 `
 
@@ -31,8 +31,8 @@ export default function Signup() {
   const [password, setPassword] = useState("")
   const [username, setUsername] = useState("")
   const [currency, setCurrency] = useState("usd")
+
   const { signup, isLoading } = useSignup()
-  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()
