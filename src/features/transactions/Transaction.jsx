@@ -18,12 +18,13 @@ const StyledTransaction = styled.div`
   font-size: 1.4rem;
   padding: 1.2rem;
   border-radius: 7px;
+  position: relative;
 `
 
 const AccountIcon = styled.div`
   & svg {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   ${(props) =>
@@ -78,6 +79,25 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 600;
   color: var(--color-grey-font-900);
+`
+
+const ActionButtonContainer = styled.div`
+  position: absolute;
+  top: -1.2rem;
+  right: -1.3rem;
+  display: flex;
+  gap: 0.2rem;
+`
+
+const ActionButton = styled.span`
+  padding: 0.4rem;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-grey-font-900);
+  color: var(--color-grey-back-900);
+  cursor: pointer;
 `
 
 export default function Transaction({ transaction, userCurrency }) {
@@ -139,10 +159,15 @@ export default function Transaction({ transaction, userCurrency }) {
         {isDeleting ? (
           <SpinnerMini />
         ) : (
-          <>
-            <AiOutlineClose onClick={() => deleteTransaction(id)} />
-            <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
-          </>
+          <ActionButtonContainer>
+            <ActionButton>
+              <AiOutlineClose onClick={() => deleteTransaction(id)} />
+            </ActionButton>
+
+            <ActionButton>
+              <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
+            </ActionButton>
+          </ActionButtonContainer>
         )}
       </TransactionRowHorizontal>
     </StyledTransaction>

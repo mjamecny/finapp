@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
@@ -25,6 +26,12 @@ export default function Welcome() {
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useUser()
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard")
+    }
+  }, [isAuthenticated])
+
   if (isLoading) return <Spinner />
 
   return (
@@ -34,9 +41,7 @@ export default function Welcome() {
         Track your financial transactions for three different accounts.
       </Info>
       <FlexHorizontalCenter>
-        {isAuthenticated ? (
-          <Button onClick={() => navigate("/dashboard")}>Go to app</Button>
-        ) : (
+        {isAuthenticated ? null : ( // <Button onClick={() => navigate("/dashboard")}>Go to app</Button>
           <>
             <Button onClick={() => navigate("/login")}>Login</Button>
             <Button onClick={() => navigate("/signup")}>Sign up</Button>

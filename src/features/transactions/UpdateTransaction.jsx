@@ -116,7 +116,6 @@ export default function UpdateTransaction() {
         <FormRow label="Amount">
           <Input
             type="number"
-            defaultValue={amount}
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
             required
