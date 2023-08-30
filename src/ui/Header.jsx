@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 
 import HeaderMenu from "./HeaderMenu"
 import Logo from "./Logo"
+import Locale from "./Locale"
 
 const StyledHeader = styled.header`
   padding: 1.2rem 1.6rem;
@@ -26,6 +27,7 @@ export default function Header() {
         <Logo type="small" />
       </StyledLink>
       <HeaderMenu />
+      <Locale />
     </StyledHeader>
   )
 }

@@ -6,6 +6,7 @@ import { useLogin } from "./useLogin"
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
+import { useTranslation } from "react-i18next"
 import Button from "../../ui/Button"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
@@ -20,6 +21,7 @@ const StyledLogin = styled.div`
 `
 
 export default function Login() {
+  const { t, i18n } = useTranslation()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -52,7 +54,7 @@ export default function Login() {
             required
           />
         </FormRow>
-        <FormRow label="Password">
+        <FormRow label={t("login.label_password")}>
           <Input
             id="password"
             type="password"
@@ -62,7 +64,10 @@ export default function Login() {
           />
         </FormRow>
 
-        <Button> {isLoading ? <SpinnerMini /> : "Login"}</Button>
+        <Button>
+          {" "}
+          {isLoading ? <SpinnerMini /> : t("login.login_button")}
+        </Button>
       </Form>
       <ButtonHome />
     </StyledLogin>

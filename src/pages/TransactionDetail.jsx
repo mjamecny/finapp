@@ -29,6 +29,8 @@ import { useDeleteTransaction } from "../features/transactions/useDeleteTransact
 import Heading from "../ui/Heading"
 import SpinnerMini from "../ui/SpinnerMini"
 import ButtonBack from "../ui/ButtonBack"
+import { useTranslation } from "react-i18next"
+import useCategories from "../hooks/useCategories"
 
 const StyledTransactionDetail = styled.div`
   display: flex;
@@ -77,21 +79,21 @@ const AccountIcon = styled.div`
     `}
 `
 
-const options = [
-  { value: "home", label: "Home", icon: <FaHome /> },
-  { value: "food", label: "Food", icon: <FaFish /> },
-  { value: "entertainment", label: "Entertainment", icon: <FaTheaterMasks /> },
-  { value: "health", label: "Health", icon: <FaMedkit /> },
-  { value: "salary", label: "Salary", icon: <FaMoneyBill /> },
-  { value: "gift", label: "Gift", icon: <FaGift /> },
-  { value: "pets", label: "Pets", icon: <FaCat /> },
-  { value: "car", label: "Car", icon: <FaCar /> },
-  { value: "transport", label: "Transport", icon: <FaBus /> },
-  { value: "study", label: "Study", icon: <FaBook /> },
-  { value: "subscription", label: "Subscription", icon: <FaRedo /> },
-  { value: "utilities", label: "Utilities", icon: <FaHotjar /> },
-  { value: "other", label: "Other", icon: <FaQuestion /> },
-]
+// const options = [
+//   { value: "home", label: "Home", icon: <FaHome /> },
+//   { value: "food", label: "Food", icon: <FaFish /> },
+//   { value: "entertainment", label: "Entertainment", icon: <FaTheaterMasks /> },
+//   { value: "health", label: "Health", icon: <FaMedkit /> },
+//   { value: "salary", label: "Salary", icon: <FaMoneyBill /> },
+//   { value: "gift", label: "Gift", icon: <FaGift /> },
+//   { value: "pets", label: "Pets", icon: <FaCat /> },
+//   { value: "car", label: "Car", icon: <FaCar /> },
+//   { value: "transport", label: "Transport", icon: <FaBus /> },
+//   { value: "study", label: "Study", icon: <FaBook /> },
+//   { value: "subscription", label: "Subscription", icon: <FaRedo /> },
+//   { value: "utilities", label: "Utilities", icon: <FaHotjar /> },
+//   { value: "other", label: "Other", icon: <FaQuestion /> },
+// ]
 
 const Amount = styled.p`
   font-size: 2.4rem;
@@ -120,6 +122,35 @@ const ButtonIcon = styled.span`
 `
 
 export default function TransactionDetail() {
+  // const categories = useCategories()
+  const { t } = useTranslation()
+  const categories = [
+    { value: "home", label: t("category.home"), icon: <FaHome /> },
+    {
+      value: "food",
+      label: t("category.food"),
+      icon: <FaFish />,
+    },
+    {
+      value: "entertainment",
+      label: t("category.entertainment"),
+      icon: <FaTheaterMasks />,
+    },
+    { value: "health", label: t("category.health"), icon: <FaMedkit /> },
+    { value: "salary", label: t("category.salary"), icon: <FaMoneyBill /> },
+    { value: "gift", label: t("category.gift"), icon: <FaGift /> },
+    { value: "pets", label: t("category.pets"), icon: <FaCat /> },
+    { value: "car", label: t("category.car"), icon: <FaCar /> },
+    { value: "transport", label: t("category.transport"), icon: <FaBus /> },
+    { value: "study", label: t("category.study"), icon: <FaBook /> },
+    {
+      value: "subscription",
+      label: t("category.subscription"),
+      icon: <FaRedo />,
+    },
+    { value: "utilities", label: t("category.utilities"), icon: <FaHotjar /> },
+    { value: "other", label: t("category.other"), icon: <FaQuestion /> },
+  ]
   const { transactionId } = useParams()
   const id = Number(transactionId)
 
@@ -138,7 +169,7 @@ export default function TransactionDetail() {
 
   return (
     <StyledTransactionDetail>
-      <Heading as="h2">Transaction details</Heading>
+      <Heading as="h2">{t("transaction_details.header")}</Heading>
       {filteredTransaction && (
         <DetailsBox>
           {filteredTransaction.type === "Bitcoin" && (
@@ -189,7 +220,7 @@ export default function TransactionDetail() {
                 padding: "0.6rem 0.4rem",
               }}
             >
-              <p>Created</p>
+              <p>{t("transaction_details.created_label")}</p>
               <p>{convertToDDMonthTime(filteredTransaction.created_at)}</p>
             </div>
             <div
@@ -200,17 +231,17 @@ export default function TransactionDetail() {
                 padding: "0.6rem 0.4rem",
               }}
             >
-              <p>Category</p>
+              <p>{t("transaction_details.category_label")}</p>
               <p style={{ display: "flex", gap: "0.4rem" }}>
-                {options.map((option, i) => {
-                  if (option.value === filteredTransaction.category) {
-                    return option.icon
+                {categories.map((category, i) => {
+                  if (category.value === filteredTransaction.category) {
+                    return category.icon
                   }
                 })}
                 <span>
-                  {options.map((option, i) => {
-                    if (option.value === filteredTransaction.category) {
-                      return option.label
+                  {categories.map((category, i) => {
+                    if (category.value === filteredTransaction.category) {
+                      return category.label
                     }
                   })}
                 </span>
@@ -224,7 +255,7 @@ export default function TransactionDetail() {
                 padding: "0.6rem 0.4rem",
               }}
             >
-              <p>To</p>
+              <p>{t("transaction_details.to_label")}</p>
               <p>{filteredTransaction.to}</p>
             </div>
             <div

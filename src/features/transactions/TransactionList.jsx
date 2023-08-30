@@ -6,6 +6,7 @@ import Empty from "../../ui/Empty"
 import Button from "../../ui/Button"
 import Heading from "../../ui/Heading"
 import ButtonArrow from "../../ui/ButtonArrow"
+import { useTranslation } from "react-i18next"
 
 const StyledTransactions = styled.div`
   display: flex;
@@ -24,20 +25,23 @@ const StyledTransactions = styled.div`
 
 export default function TransactionList({ transactions, type, userCurrency }) {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   if (!transactions?.length)
     return (
       <Empty
         type={type}
-        resourceName="transactions"
-        buttonLabel="Add transaction"
+        resourceName={t("empty.resource_label")}
+        buttonLabel={t("empty.button_label")}
         path="/transaction/add"
       />
     )
 
   return (
     <StyledTransactions type={type}>
-      {type !== "page" && <Heading as="h2">Last transactions</Heading>}
+      {type !== "page" && (
+        <Heading as="h2">{t("transaction_list.header_transactions")}</Heading>
+      )}
       {transactions?.map((transaction) => (
         <Transaction
           key={transaction.id}
@@ -46,10 +50,12 @@ export default function TransactionList({ transactions, type, userCurrency }) {
         />
       ))}
       <Button onClick={() => navigate("/transaction/add")}>
-        Add transaction
+        {t("transaction_list.add_button")}
       </Button>
       {type !== "page" && (
-        <ButtonArrow to="/transactions">All transactions</ButtonArrow>
+        <ButtonArrow to="/transactions">
+          {t("transaction_list.all_transactions_button")}
+        </ButtonArrow>
       )}
     </StyledTransactions>
   )

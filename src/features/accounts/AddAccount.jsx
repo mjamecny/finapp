@@ -13,6 +13,7 @@ import { useCreateAccount } from "./useCreateAccount"
 import { useAccounts } from "./useAccounts"
 import { useUser } from "../authentication/useUser"
 import ButtonBack from "../../ui/ButtonBack"
+import { useTranslation } from "react-i18next"
 
 const StyledAddAccount = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ export default function AddAccount() {
   const { isCreating, createAccount } = useCreateAccount()
 
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -70,7 +72,7 @@ export default function AddAccount() {
   return (
     <StyledAddAccount>
       <Form onSubmit={handleSubmit}>
-        <FormRow label="Account">
+        <FormRow label={t("add_account.account_label")}>
           <Select
             options={options}
             value={accountType}
@@ -78,7 +80,7 @@ export default function AddAccount() {
             disabled={isCreating}
           />
         </FormRow>
-        <FormRow label="Initial balance">
+        <FormRow label={t("add_account.initial_label")}>
           <Input
             id="initialBalance"
             type="number"
@@ -89,7 +91,7 @@ export default function AddAccount() {
           />
         </FormRow>
 
-        <Button disabled={isCreating}>Add account</Button>
+        <Button disabled={isCreating}>{t("add_account.add_button")}</Button>
       </Form>
       <ButtonBack />
     </StyledAddAccount>

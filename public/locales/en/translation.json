@@ -1,0 +1,84 @@
+{
+  "welcome": {
+    "info": "Track your financial transactions for three different accounts.",
+    "login_button": "Login",
+    "sign_up_button": "Sign up"
+  },
+  "login": {
+    "login_button": "Login",
+    "label_password": "Password"
+  },
+  "signup": {
+    "label_username": "Username",
+    "label_password": "Password",
+    "label_currency": "Currency",
+    "sign_up_button": "Sign up"
+  },
+  "transaction_list": {
+    "add_button": "Add transaction",
+    "header_transactions": "Last transactions",
+    "all_transactions_button": "All transactions"
+  },
+  "filter": {
+    "search_placeholder": "Search by description",
+    "all_label": "All",
+    "withdrawals_label": "Withdrawals",
+    "deposits_label": "Deposits"
+  },
+  "sort": {
+    "sort_option_description_asc": "Search by description (A-Z)",
+    "sort_option_description_dsc": "Search by description (Z-A)",
+    "sort_option_date_asc": "Search by date (oldest first)",
+    "sort_option_date_dsc": "Search by date (newest first)"
+  },
+  "transaction_details": {
+    "header": "Transaction details",
+    "created_label": "Created",
+    "category_label": "Category",
+    "to_label": "To"
+  },
+  "category": {
+    "home": "Home",
+    "food": "Food",
+    "entertainment": "Entertainment",
+    "health": "Health",
+    "salary": "Salary",
+    "gift": "Gift",
+    "pets": "Pets",
+    "car": "Car",
+    "transport": "Transport",
+    "study": "Study",
+    "subscription": "Subscription",
+    "utilities": "Utilities",
+    "other": "Other"
+  },
+  "add_account": {
+    "account_label": "Account",
+    "initial_label": "Initial balance",
+    "add_button": "Add account",
+    "add_toast": "New account successfully created"
+  },
+  "delete_account": {
+    "delete_toast": "Account successfully deleted"
+  },
+  "add_transaction": {
+    "account_label": "Account",
+    "category_label": "Category",
+    "amount_label": "Amount",
+    "description_label": "Description",
+    "to_label": "To",
+    "add_button": "Add transaction",
+    "add_toast": "New transaction successfully created"
+  },
+  "delete_transaction": {
+    "delete_toast": "Transaction successfully deleted"
+  },
+  "update_transaction": {
+    "category_label": "Category",
+    "amount_label": "Amount",
+    "description_label": "Description",
+    "to_label": "To",
+    "update_button": "Update",
+    "update_toast": "Transaction successfully updated"
+  }
+}

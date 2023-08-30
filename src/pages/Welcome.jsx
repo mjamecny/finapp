@@ -8,6 +8,8 @@ import Button from "../ui/Button"
 import Logo from "../ui/Logo"
 import FlexHorizontalCenter from "../ui/FlexHorizontalCenter"
 import Spinner from "../ui/Spinner"
+import { useTranslation } from "react-i18next"
+import Locale from "../ui/Locale"
 
 const StyledWelcome = styled.div`
   display: flex;
@@ -23,6 +25,7 @@ const Info = styled.p`
 `
 
 export default function Welcome() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { isAuthenticated, isLoading } = useUser()
 
@@ -37,16 +40,22 @@ export default function Welcome() {
   return (
     <StyledWelcome>
       <Logo type="medium" />
-      <Info>
-        Track your financial transactions for three different accounts.
-      </Info>
+      <Info>{t("welcome.info")}</Info>
+
       <FlexHorizontalCenter>
-        {isAuthenticated ? null : ( // <Button onClick={() => navigate("/dashboard")}>Go to app</Button>
+        {isAuthenticated ? null : (
           <>
-            <Button onClick={() => navigate("/login")}>Login</Button>
-            <Button onClick={() => navigate("/signup")}>Sign up</Button>
+            <Button onClick={() => navigate("/login")}>
+              {t("welcome.login_button")}
+            </Button>
+            <Button onClick={() => navigate("/signup")}>
+              {t("welcome.sign_up_button")}
+            </Button>
           </>
         )}
+      </FlexHorizontalCenter>
+      <FlexHorizontalCenter>
+        <Locale />
       </FlexHorizontalCenter>
     </StyledWelcome>
   )

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-hot-toast"
+import { useTranslation } from "react-i18next"
 import styled from "styled-components"
 
 import { useUpdateTransaction } from "./useUpdateTransaction"
 import { useTransaction } from "./useTransaction"
+import useCategories from "../../hooks/useCategories"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
@@ -29,23 +31,8 @@ const SpinnerContainer = styled.div`
   height: 100vh;
 `
 
-const options = [
-  { value: "home", label: "Home" },
-  { value: "salary", label: "Salary" },
-  { value: "food", label: "Food" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "pets", label: "Pets" },
-  { value: "car", label: "Car" },
-  { value: "health", label: "Health" },
-  { value: "transport", label: "Transport" },
-  { value: "gift", label: "Gift" },
-  { value: "study", label: "Study" },
-  { value: "subscription", label: "Subscription" },
-  { value: "utilities", label: "Utilities" },
-  { value: "other", label: "Other" },
-]
-
 export default function UpdateTransaction() {
+  const categories = useCategories()
   const { isLoading, transaction } = useTransaction()
   const transactionId = transaction?.id
   const { isUpdating, updateTransaction } = useUpdateTransaction()
@@ -56,6 +43,8 @@ export default function UpdateTransaction() {
   const [description, setDescription] = useState("")
   const [to, setTo] = useState("")
   const [category, setCategory] = useState("")
+
+  const { t } = useTranslation()
 
   useEffect(() => {
     transaction?.amount < 0
@@ -105,15 +94,15 @@ export default function UpdateTransaction() {
   return (
     <StyledAddTransaction>
       <Form onSubmit={handleSubmit}>
-        <FormRow label="Category">
+        <FormRow label={t("update_transaction.category_label")}>
           <Select
-            options={options}
+            options={categories}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             disabled={isUpdating}
           />
         </FormRow>
-        <FormRow label="Amount">
+        <FormRow label={t("update_transaction.amount_label")}>
           <Input
             type="number"
             value={amount}
@@ -143,7 +132,7 @@ export default function UpdateTransaction() {
           />
           +
         </FormRow>
-        <FormRow label="Description">
+        <FormRow label={t("update_transaction.description_label")}>
           <Input
             type="text"
             value={description}
@@ -152,7 +141,7 @@ export default function UpdateTransaction() {
             disabled={isUpdating}
           />
         </FormRow>
-        <FormRow label="To">
+        <FormRow label={t("update_transaction.to_label")}>
           <Input
             type="text"
             value={to}
@@ -161,7 +150,9 @@ export default function UpdateTransaction() {
             disabled={isUpdating}
           />
         </FormRow>
-        <Button>{isUpdating ? <SpinnerMini /> : "Update"}</Button>
+        <Button>
+          {isUpdating ? <SpinnerMini /> : t("update_transaction.update_button")}
+        </Button>
       </Form>
       <ButtonBack />
     </StyledAddTransaction>

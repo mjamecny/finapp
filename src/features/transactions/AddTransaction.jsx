@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { toast } from "react-hot-toast"
 import styled from "styled-components"
 
 import { useCreateTransaction } from "./useCreateTransaction"
 import { useAccounts } from "../accounts/useAccounts"
 import { useUser } from "../authentication/useUser"
+import useCategories from "../../hooks/useCategories"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
@@ -14,7 +17,6 @@ import SelectAlternative from "../../ui/SelectAlternative"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
 import Select from "../../ui/Select"
-import { toast } from "react-hot-toast"
 
 const StyledAddTransaction = styled.div`
   display: flex;
@@ -23,23 +25,9 @@ const StyledAddTransaction = styled.div`
   gap: 2.4rem;
 `
 
-const options = [
-  { value: "home", label: "Home" },
-  { value: "salary", label: "Salary" },
-  { value: "food", label: "Food" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "pets", label: "Pets" },
-  { value: "car", label: "Car" },
-  { value: "health", label: "Health" },
-  { value: "transport", label: "Transport" },
-  { value: "gift", label: "Gift" },
-  { value: "study", label: "Study" },
-  { value: "subscription", label: "Subscription" },
-  { value: "utilities", label: "Utilities" },
-  { value: "other", label: "Other" },
-]
-
 export default function AddTransaction() {
+  const { t } = useTranslation()
+  const categories = useCategories()
   const [accountId, setAccountId] = useState("")
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("withdraw")
@@ -92,7 +80,7 @@ export default function AddTransaction() {
   return (
     <StyledAddTransaction>
       <Form onSubmit={handleSubmit}>
-        <FormRow type="vertical" label="Account">
+        <FormRow type="vertical" label={t("add_transaction.account_label")}>
           <SelectAlternative
             accounts={accounts}
             value={accountId}
@@ -100,15 +88,15 @@ export default function AddTransaction() {
             disabled={isCreating}
           />
         </FormRow>
-        <FormRow label="Category">
+        <FormRow label={t("add_transaction.category_label")}>
           <Select
-            options={options}
+            options={categories}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             disabled={isCreating}
           />
         </FormRow>
-        <FormRow label="Amount">
+        <FormRow label={t("add_transaction.amount_label")}>
           <Input
             type="number"
             value={amount}
@@ -138,7 +126,7 @@ export default function AddTransaction() {
           />
           +
         </FormRow>
-        <FormRow label="Description">
+        <FormRow label={t("add_transaction.description_label")}>
           <Input
             type="text"
             value={description}
@@ -147,7 +135,7 @@ export default function AddTransaction() {
             disabled={isCreating}
           />
         </FormRow>
-        <FormRow label="To">
+        <FormRow label={t("add_transaction.to_label")}>
           <Input
             type="text"
             value={to}
@@ -156,7 +144,9 @@ export default function AddTransaction() {
             disabled={isCreating}
           />
         </FormRow>
-        <Button>{isCreating ? <SpinnerMini /> : "Add"}</Button>
+        <Button>
+          {isCreating ? <SpinnerMini /> : t("add_transaction.add_button")}
+        </Button>
       </Form>
       <ButtonBack />
     </StyledAddTransaction>

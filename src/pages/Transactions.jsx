@@ -10,6 +10,7 @@ import ButtonBack from "../ui/ButtonBack"
 import Input from "../ui/Input"
 import SortBy from "../ui/SortBy"
 import Filter from "../ui/Filter"
+import { useTranslation } from "react-i18next"
 
 const StyledTransactions = styled.div`
   display: flex;
@@ -26,6 +27,8 @@ export default function Transactions() {
   const userCurrency = user?.user_metadata?.currency
 
   const { isLoading, transactions } = useTransactions(userId)
+
+  const { t } = useTranslation()
 
   if (isLoading) return null
 
@@ -78,24 +81,30 @@ export default function Transactions() {
       <Input
         type="text"
         value={query}
-        placeholder="Search by description"
+        placeholder={t("filter.search_placeholder")}
         onChange={(e) => setQuery(e.target.value)}
       />
 
       <SortBy
         options={[
-          { value: "description-asc", label: "Sort by description (A-Z)" },
-          { value: "description-dsc", label: "Sort by description (Z-A)" },
-          { value: "created_at-asc", label: "Sort by date (oldest first)" },
-          { value: "created_at-dsc", label: "Sort by date (newest first)" },
+          {
+            value: "description-asc",
+            label: t("sort.sort_option_description_asc"),
+          },
+          {
+            value: "description-dsc",
+            label: t("sort.sort_option_description_dsc"),
+          },
+          { value: "created_at-asc", label: t("sort.sort_option_date_asc") },
+          { value: "created_at-dsc", label: t("sort.sort_option_date_dsc") },
         ]}
       />
       <Filter
         filterField="type"
         options={[
-          { value: "all", label: "All" },
-          { value: "withdrawals", label: "Withdrawals" },
-          { value: "deposits", label: "Deposits" },
+          { value: "all", label: t("filter.all_label") },
+          { value: "withdrawals", label: t("filter.withdrawals_label") },
+          { value: "deposits", label: t("filter.deposits_label") },
         ]}
       />
 

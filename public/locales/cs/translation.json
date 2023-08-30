@@ -1,0 +1,88 @@
+{
+  "welcome": {
+    "info": "Sledujte své finanční transakce pro tři různé účty.",
+    "login_button": "Přihlásit",
+    "sign_up_button": "Registrovat"
+  },
+  "login": {
+    "login_button": "Přihlásit",
+    "label_password": "Heslo"
+  },
+  "signup": {
+    "label_username": "Přezdívka",
+    "label_password": "Heslo",
+    "label_currency": "Měna",
+    "sign_up_button": "Registrovat"
+  },
+  "transaction_list": {
+    "add_button": "Přidat transakci",
+    "header_transactions": "Poslední transakce",
+    "all_transactions_button": "Všechny transakce"
+  },
+  "filter": {
+    "search_placeholder": "Hledat podle popisu",
+    "all_label": "Všechny",
+    "withdrawals_label": "Výběry",
+    "deposits_label": "Vklady"
+  },
+  "sort": {
+    "sort_option_description_asc": "Seřadit podle popisu (A-Z)",
+    "sort_option_description_dsc": "Seřadit podle popisu (Z-A)",
+    "sort_option_date_asc": "Seřadit podle data (nejstarší první)",
+    "sort_option_date_dsc": "Seřadit podle data (nejnovější první)"
+  },
+  "transaction_details": {
+    "header": "Detaily transakce",
+    "created_label": "Datum transakce",
+    "category_label": "Kategorie",
+    "to_label": "Příjemce"
+  },
+  "category": {
+    "home": "Domov",
+    "food": "Jídlo",
+    "entertainment": "Zábava",
+    "health": "Zdraví",
+    "salary": "Mzda",
+    "gift": "Dárky",
+    "pets": "Zvířata",
+    "car": "Auto",
+    "transport": "Doprava",
+    "study": "Vzdělávání",
+    "subscription": "Předplatné",
+    "utilities": "Účty",
+    "other": "Jiné"
+  },
+  "add_account": {
+    "account_label": "Účet",
+    "initial_label": "Počáteční stav účtu",
+    "add_button": "Přidat účet",
+    "add_toast": "Účet byl přidán"
+  },
+  "delete_account": {
+    "delete_toast": "Účet byl smazán"
+  },
+  "add_transaction": {
+    "account_label": "Účet",
+    "category_label": "Kategorie",
+    "amount_label": "Částka",
+    "description_label": "Popis transakce",
+    "to_label": "Příjemce",
+    "add_button": "Přidat transakci",
+    "add_toast": "Transakce byla přidána"
+  },
+  "delete_transaction": {
+    "delete_toast": "Transakce byla smazána"
+  },
+  "update_transaction": {
+    "category_label": "Kategorie",
+    "amount_label": "Částka",
+    "description_label": "Popis transakce",
+    "to_label": "Příjemce",
+    "update_button": "Uložit",
+    "update_toast": "Transakce uložena"
+  },
+  "empty": {
+    "resource_label": "transakce",
+    "button_label": "Přidat transakci"
+  }
+}

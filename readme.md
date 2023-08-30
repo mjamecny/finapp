@@ -15,7 +15,8 @@ App for tracking financial transactions of three different accounts.
 - remove transaction
 - dark mode
 - pwa
-- bitcoin balance converted to fiat (only CZK for now)
+- bitcoin balance converted to fiat
+- switch between EN or CZ language
 
 ## Demo
 

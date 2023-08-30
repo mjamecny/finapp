@@ -1,9 +1,9 @@
+import styled, { css } from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
 import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
 import { FaPen } from "react-icons/fa"
-import styled, { css } from "styled-components"
 
 import { useDeleteTransaction } from "./useDeleteTransaction"
 import { convertToDDMMYYYY } from "../../utils/helpers"
@@ -156,19 +156,21 @@ export default function Transaction({ transaction, userCurrency }) {
               : convertToDDMMYYYY(created_at)}
           </p>
         </TransactionRowVertical>
-        {isDeleting ? (
-          <SpinnerMini />
-        ) : (
-          <ActionButtonContainer>
-            <ActionButton>
-              <AiOutlineClose onClick={() => deleteTransaction(id)} />
-            </ActionButton>
+        <ActionButtonContainer>
+          {isDeleting ? (
+            <SpinnerMini />
+          ) : (
+            <>
+              <ActionButton>
+                <AiOutlineClose onClick={() => deleteTransaction(id)} />
+              </ActionButton>
 
-            <ActionButton>
-              <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
-            </ActionButton>
-          </ActionButtonContainer>
-        )}
+              <ActionButton>
+                <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
+              </ActionButton>
+            </>
+          )}
+        </ActionButtonContainer>
       </TransactionRowHorizontal>
     </StyledTransaction>
   )

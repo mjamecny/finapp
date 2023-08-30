@@ -10,6 +10,7 @@ import Input from "../../ui/Input"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
 import Select from "../../ui/Select"
+import { useTranslation } from "react-i18next"
 
 const StyledSignup = styled.div`
   display: flex;
@@ -34,6 +35,8 @@ export default function Signup() {
 
   const { signup, isLoading } = useSignup()
 
+  const { t } = useTranslation()
+
   function handleSubmit(e) {
     e.preventDefault()
 
@@ -44,7 +47,7 @@ export default function Signup() {
   return (
     <StyledSignup>
       <Form onSubmit={handleSubmit}>
-        <FormRow label="Username">
+        <FormRow label={t("signup.label_username")}>
           <Input
             id="username"
             type="text"
@@ -65,7 +68,7 @@ export default function Signup() {
             disabled={isLoading}
           />
         </FormRow>
-        <FormRow label="Password">
+        <FormRow label={t("signup.label_password")}>
           <Input
             id="password"
             type="password"
@@ -75,7 +78,7 @@ export default function Signup() {
             disabled={isLoading}
           />
         </FormRow>
-        <FormRow label="Currency">
+        <FormRow label={t("signup.label_currency")}>
           <Select
             options={currencyOptions}
             value={currency}
@@ -84,7 +87,9 @@ export default function Signup() {
           />
         </FormRow>
 
-        <Button>{isLoading ? <SpinnerMini /> : "Sign up"}</Button>
+        <Button>
+          {isLoading ? <SpinnerMini /> : t("signup.sign_up_button")}
+        </Button>
       </Form>
       <ButtonHome />
     </StyledSignup>
