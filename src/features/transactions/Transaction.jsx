@@ -90,7 +90,7 @@ const ActionButton = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: var(--color-grey-font-900);
   color: var(--color-grey-back-900);
   cursor: pointer;
 `

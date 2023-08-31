@@ -55,7 +55,7 @@ export default function Welcome() {
         )}
       </FlexHorizontalCenter>
       <FlexHorizontalCenter>
-        <Locale />
+        <Locale type="welcome" />
       </FlexHorizontalCenter>
     </StyledWelcome>
   )

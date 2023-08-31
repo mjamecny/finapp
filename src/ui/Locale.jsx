@@ -5,6 +5,14 @@ const StyledLocale = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
+  ${(props) =>
+    props.type === "welcome" &&
+    css`
+      flex-direction: row;
+      font-size: 2rem;
+      gap: 1rem;
+    `}
 `
 
 const LocaleItem = styled.p`
@@ -22,10 +30,10 @@ const locales = {
   cs: { title: "CZ" },
 }
 
-export default function Locale() {
+export default function Locale({ type }) {
   const { i18n } = useTranslation()
   return (
-    <StyledLocale>
+    <StyledLocale type={type}>
       {Object.keys(locales).map((locale) => (
         <div key={locale}>
           <LocaleItem
