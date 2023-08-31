@@ -6,7 +6,7 @@ import Logo from "./Logo"
 import Locale from "./Locale"
 
 const StyledHeader = styled.header`
-  padding: 1.2rem 1.6rem;
+  padding: 1.2rem 0.8rem;
   font-size: 1.6rem;
   height: min-content;
 

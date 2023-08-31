@@ -6,24 +6,22 @@ import { useAccounts } from "./useAccounts"
 import { useTransactions } from "../transactions/useTransactions"
 import useFetchRate from "../../hooks/useFetchRate"
 import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
+import { useUser } from "../authentication/useUser"
 
-const StyledTotalAmount = styled.div`
-  display: flex;
-  justify-content: center;
-  color: var(--color-grey-font-900);
-  border: 1px solid var(--color-grey-font-900);
-  border-radius: 7px;
-  padding: 1.2rem 1.6rem;
+const StyledTotalAmount = styled.p`
   font-size: 3.6rem;
   font-weight: 600;
+  color: var(--color-grey-font-900);
+  text-align: center;
 `
 
-export default function TotalAmount({ userId, userCurrency }) {
-  const { isLoading, accounts } = useAccounts(userId)
-  const { isLoading: isLoadingTransactions, transactions } =
-    useTransactions(userId)
+export default function TotalAmount() {
+  const { user } = useUser()
+  const userCurrency = user?.user_metadata?.currency
+  const { isLoading, accounts } = useAccounts()
+  const { isLoading: isLoadingTransactions, transactions } = useTransactions()
   const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
-  const { rate, isLoading: isLoadingRate } = useFetchRate(userCurrency)
+  const { rate, isLoading: isLoadingRate } = useFetchRate()
 
   if (isLoading || isLoadingTransactions) return <SpinnerMini />
 

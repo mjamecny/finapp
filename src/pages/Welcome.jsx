@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import styled from "styled-components"
 
 import { useUser } from "../features/authentication/useUser"
@@ -8,7 +9,6 @@ import Button from "../ui/Button"
 import Logo from "../ui/Logo"
 import FlexHorizontalCenter from "../ui/FlexHorizontalCenter"
 import Spinner from "../ui/Spinner"
-import { useTranslation } from "react-i18next"
 import Locale from "../ui/Locale"
 
 const StyledWelcome = styled.div`

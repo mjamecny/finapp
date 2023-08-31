@@ -19,6 +19,9 @@
     "header_transactions": "Poslední transakce",
     "all_transactions_button": "Všechny transakce"
   },
+  "account_list": {
+    "header": "Účty"
+  },
   "filter": {
     "search_placeholder": "Hledat podle popisu",
     "all_label": "Všechny",
@@ -82,7 +85,12 @@
     "update_toast": "Transakce uložena"
   },
   "empty": {
-    "resource_label": "transakce",
-    "button_label": "Přidat transakci"
+    "transactions": "Žádné transakce nenalezeny",
+    "accounts": "Žádné účty nenalezeny",
+    "add_account": "Přidat účet",
+    "add_transaction": "Přidat transakci"
+  },
+  "notfound": {
+    "message": "Stránka nenalezena"
   }
 }

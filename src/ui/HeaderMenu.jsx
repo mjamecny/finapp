@@ -4,7 +4,6 @@ import Logout from "../features/authentication/Logout"
 import DarkModeToggle from "./DarkModeToggle"
 
 import { useUser } from "../features/authentication/useUser"
-import Locale from "./Locale"
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -31,7 +30,6 @@ export default function HeaderMenu() {
       <li>
         <Logout />
       </li>
-      {/* <Locale /> */}
     </StyledHeaderMenu>
   )
 }

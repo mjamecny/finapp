@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
+import { useUser } from "../features/authentication/useUser"
 
-const useFetchRate = (currency) => {
+const useFetchRate = () => {
+  const { user } = useUser()
+  const currency = user?.user_metadata?.currency
+
   const [rate, setRate] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 

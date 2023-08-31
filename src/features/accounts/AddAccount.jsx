@@ -34,8 +34,7 @@ export default function AddAccount() {
   const [initialBalance, setInitialBalance] = useState("")
 
   const { user } = useUser()
-  const userId = user?.id
-  const { accounts } = useAccounts(userId)
+  const { accounts } = useAccounts()
   const { isCreating, createAccount } = useCreateAccount()
 
   const navigate = useNavigate()

@@ -9,16 +9,14 @@ import { useDeleteTransaction } from "./useDeleteTransaction"
 import { convertToDDMMYYYY } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
+import { useUser } from "../authentication/useUser"
 
 const StyledTransaction = styled.div`
-  display: flex;
-  justify-content: space-between;
   color: var(--color-grey-font-900);
   border: 1px solid var(--color-grey-font-900);
   font-size: 1.4rem;
-  padding: 1.2rem;
+  padding: 0.8rem 0.6rem;
   border-radius: 7px;
-  position: relative;
 `
 
 const AccountIcon = styled.div`
@@ -47,6 +45,7 @@ const AccountIcon = styled.div`
 `
 
 const Price = styled.p`
+  font-size: 1.2rem;
   font-weight: 600;
 
   ${(props) =>
@@ -70,7 +69,6 @@ const TransactionRowHorizontal = styled.div`
 const TransactionRowVertical = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-size: 1.2rem;
   gap: 0.4rem;
 `
@@ -82,11 +80,8 @@ const StyledLink = styled(Link)`
 `
 
 const ActionButtonContainer = styled.div`
-  position: absolute;
-  top: -1.2rem;
-  right: -1.3rem;
   display: flex;
-  gap: 0.2rem;
+  gap: 0.4rem;
 `
 
 const ActionButton = styled.span`
@@ -95,13 +90,22 @@ const ActionButton = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-grey-font-900);
+  background-color: #d9d9d9;
   color: var(--color-grey-back-900);
   cursor: pointer;
 `
 
-export default function Transaction({ transaction, userCurrency }) {
+const CreatedAt = styled.p`
+  font-size: 1rem;
+  color: #868e96;
+`
+
+export default function Transaction({ transaction }) {
+  const { user } = useUser()
+  const userCurrency = user?.user_metadata?.currency
+
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
+
   const { type, description, amount, id, created_at } = transaction
 
   const navigate = useNavigate()
@@ -109,26 +113,40 @@ export default function Transaction({ transaction, userCurrency }) {
   return (
     <StyledTransaction>
       <TransactionRowHorizontal>
-        {type === "Bitcoin" && (
-          <AccountIcon type="Bitcoin">
-            <FaBitcoin />
-          </AccountIcon>
-        )}
-        {type === "Cash" && (
-          <AccountIcon type="Cash">
-            <FaMoneyBillWaveAlt />
-          </AccountIcon>
-        )}
-        {type === "Bank" && (
-          <AccountIcon type="Bank">
-            <BsBank2 />
-          </AccountIcon>
-        )}
-        <StyledLink to={`/transaction/${id}`}>{description}</StyledLink>
-      </TransactionRowHorizontal>
+        <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
+          {type === "Bitcoin" && (
+            <AccountIcon type="Bitcoin">
+              <FaBitcoin />
+            </AccountIcon>
+          )}
+          {type === "Cash" && (
+            <AccountIcon type="Cash">
+              <FaMoneyBillWaveAlt />
+            </AccountIcon>
+          )}
+          {type === "Bank" && (
+            <AccountIcon type="Bank">
+              <BsBank2 />
+            </AccountIcon>
+          )}
+          <TransactionRowVertical>
+            <StyledLink to={`/transaction/${id}`}>{description}</StyledLink>
+            <CreatedAt>
+              {created_at === new Date()
+                ? "Today"
+                : convertToDDMMYYYY(created_at)}
+            </CreatedAt>
+          </TransactionRowVertical>
+        </div>
 
-      <TransactionRowHorizontal>
-        <TransactionRowVertical>
+        <div
+          style={{
+            display: "flex",
+            gap: "0.8rem",
+            marginLeft: "auto",
+            alignItems: "center",
+          }}
+        >
           {amount < 0 ? (
             <Price type="withdraw">
               {type === "Bitcoin"
@@ -150,27 +168,23 @@ export default function Transaction({ transaction, userCurrency }) {
                   }`}
             </Price>
           )}
-          <p>
-            {created_at === new Date()
-              ? "Today"
-              : convertToDDMMYYYY(created_at)}
-          </p>
-        </TransactionRowVertical>
-        <ActionButtonContainer>
-          {isDeleting ? (
-            <SpinnerMini />
-          ) : (
-            <>
-              <ActionButton>
-                <AiOutlineClose onClick={() => deleteTransaction(id)} />
-              </ActionButton>
 
-              <ActionButton>
-                <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
-              </ActionButton>
-            </>
-          )}
-        </ActionButtonContainer>
+          <ActionButtonContainer>
+            {isDeleting ? (
+              <SpinnerMini />
+            ) : (
+              <>
+                <ActionButton>
+                  <AiOutlineClose onClick={() => deleteTransaction(id)} />
+                </ActionButton>
+
+                <ActionButton>
+                  <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
+                </ActionButton>
+              </>
+            )}
+          </ActionButtonContainer>
+        </div>
       </TransactionRowHorizontal>
     </StyledTransaction>
   )

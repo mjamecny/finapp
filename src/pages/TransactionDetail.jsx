@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
 import { useNavigate, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import {
   FaBitcoin,
   FaMoneyBillWaveAlt,
@@ -29,8 +30,6 @@ import { useDeleteTransaction } from "../features/transactions/useDeleteTransact
 import Heading from "../ui/Heading"
 import SpinnerMini from "../ui/SpinnerMini"
 import ButtonBack from "../ui/ButtonBack"
-import { useTranslation } from "react-i18next"
-import useCategories from "../hooks/useCategories"
 
 const StyledTransactionDetail = styled.div`
   display: flex;
@@ -79,22 +78,6 @@ const AccountIcon = styled.div`
     `}
 `
 
-// const options = [
-//   { value: "home", label: "Home", icon: <FaHome /> },
-//   { value: "food", label: "Food", icon: <FaFish /> },
-//   { value: "entertainment", label: "Entertainment", icon: <FaTheaterMasks /> },
-//   { value: "health", label: "Health", icon: <FaMedkit /> },
-//   { value: "salary", label: "Salary", icon: <FaMoneyBill /> },
-//   { value: "gift", label: "Gift", icon: <FaGift /> },
-//   { value: "pets", label: "Pets", icon: <FaCat /> },
-//   { value: "car", label: "Car", icon: <FaCar /> },
-//   { value: "transport", label: "Transport", icon: <FaBus /> },
-//   { value: "study", label: "Study", icon: <FaBook /> },
-//   { value: "subscription", label: "Subscription", icon: <FaRedo /> },
-//   { value: "utilities", label: "Utilities", icon: <FaHotjar /> },
-//   { value: "other", label: "Other", icon: <FaQuestion /> },
-// ]
-
 const Amount = styled.p`
   font-size: 2.4rem;
   margin-top: 0.8rem;
@@ -122,7 +105,6 @@ const ButtonIcon = styled.span`
 `
 
 export default function TransactionDetail() {
-  // const categories = useCategories()
   const { t } = useTranslation()
   const categories = [
     { value: "home", label: t("category.home"), icon: <FaHome /> },
@@ -155,10 +137,9 @@ export default function TransactionDetail() {
   const id = Number(transactionId)
 
   const { user } = useUser()
-  const userId = user?.id
   const userCurrency = user?.user_metadata?.currency
 
-  const { transactions } = useTransactions(userId)
+  const { transactions } = useTransactions()
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
 
   const filteredTransaction = transactions?.find(

@@ -5,17 +5,14 @@ import Row from "../ui/Row"
 import Empty from "../ui/Empty"
 import Spinner from "../ui/Spinner"
 
-import { useUser } from "../features/authentication/useUser"
 import { useTransactions } from "../features/transactions/useTransactions"
 import { useAccounts } from "../features/accounts/useAccounts"
+import { useTranslation } from "react-i18next"
 
 export default function Dashboard() {
-  const { user } = useUser()
-  const userId = user?.id
-  const userCurrency = user?.user_metadata?.currency
-
-  const { transactions } = useTransactions(userId)
-  const { isLoading, accounts } = useAccounts(userId)
+  const { transactions } = useTransactions()
+  const { isLoading, accounts } = useAccounts()
+  const { t } = useTranslation()
 
   const slicedTransactions = transactions?.slice(0, 4)
 
@@ -25,23 +22,15 @@ export default function Dashboard() {
     <>
       {!accounts.length ? (
         <Empty
-          resourceName="accounts"
-          buttonLabel="Add account"
+          message={t("empty.accounts")}
+          buttonLabel={t("empty.add_account")}
           path="/account/add"
         />
       ) : (
         <Row type="vertical">
-          {userId && userCurrency && (
-            <TotalAmount userId={userId} userCurrency={userCurrency} />
-          )}
-          {userCurrency && <AccountList userCurrency={userCurrency} />}
-
-          {userCurrency && (
-            <TransactionList
-              transactions={slicedTransactions}
-              userCurrency={userCurrency}
-            />
-          )}
+          <TotalAmount />
+          <AccountList />
+          <TransactionList transactions={slicedTransactions} />
         </Row>
       )}
     </>

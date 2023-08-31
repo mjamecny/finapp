@@ -1,5 +1,4 @@
-import { AiOutlineArrowLeft } from "react-icons/ai"
-import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import styled from "styled-components"
 
 import ButtonBack from "../ui/ButtonBack"
@@ -16,11 +15,11 @@ const StyledPageNotFound = styled.div`
 `
 
 export default function PageNotFound() {
-  const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <StyledPageNotFound>
-      <p>Page not found</p>
+      <p>{t("notfound.message")}</p>
       <ButtonBack />
     </StyledPageNotFound>
   )

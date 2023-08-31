@@ -37,6 +37,7 @@ export default function UpdateTransaction() {
   const transactionId = transaction?.id
   const { isUpdating, updateTransaction } = useUpdateTransaction()
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [amount, setAmount] = useState("")
   const [transactionType, setTransactionType] = useState("")
@@ -44,7 +45,6 @@ export default function UpdateTransaction() {
   const [to, setTo] = useState("")
   const [category, setCategory] = useState("")
 
-  const { t } = useTranslation()
 
   useEffect(() => {
     transaction?.amount < 0

@@ -2,7 +2,6 @@ import { useSearchParams } from "react-router-dom"
 import { useState } from "react"
 import styled from "styled-components"
 
-import { useUser } from "../features/authentication/useUser"
 import { useTransactions } from "../features/transactions/useTransactions"
 
 import TransactionList from "../features/transactions/TransactionList"
@@ -21,13 +20,7 @@ const StyledTransactions = styled.div`
 export default function Transactions() {
   const [searchParams] = useSearchParams()
   const [query, setQuery] = useState("")
-
-  const { user } = useUser()
-  const userId = user?.id
-  const userCurrency = user?.user_metadata?.currency
-
-  const { isLoading, transactions } = useTransactions(userId)
-
+  const { isLoading, transactions } = useTransactions()
   const { t } = useTranslation()
 
   if (isLoading) return null
@@ -108,11 +101,7 @@ export default function Transactions() {
         ]}
       />
 
-      <TransactionList
-        userCurrency={userCurrency}
-        transactions={sortedTransactions}
-        type="page"
-      />
+      <TransactionList transactions={sortedTransactions} type="page" />
       <ButtonBack />
     </StyledTransactions>
   )

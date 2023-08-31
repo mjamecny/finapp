@@ -5,6 +5,7 @@ import styled, { css } from "styled-components"
 
 import { useDeleteAccount } from "./useDeleteAccount"
 import { useTransactions } from "../transactions/useTransactions"
+import { useUser } from "../authentication/useUser"
 import useFetchRate from "../../hooks/useFetchRate"
 import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
 
@@ -75,11 +76,13 @@ const Amount = styled.p`
   font-size: 2rem;
 `
 
-export default function Account({ account, userCurrency }) {
+export default function Account({ account }) {
+  const { user } = useUser()
+  const userCurrency = user?.user_metadata?.currency
   const { isDeleting, deleteAccount } = useDeleteAccount()
-  const { isLoading, transactions } = useTransactions(account?.userId)
+  const { isLoading, transactions } = useTransactions()
   const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
-  const { rate, isLoading: isLoadingRate } = useFetchRate(userCurrency)
+  const { rate, isLoading: isLoadingRate } = useFetchRate()
 
   const btcConverted = btcPrice / rate
 

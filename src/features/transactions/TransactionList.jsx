@@ -1,18 +1,16 @@
 import styled, { css } from "styled-components"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import { FaArrowRight, FaPlus } from "react-icons/fa6"
 
 import Transaction from "./Transaction"
 import Empty from "../../ui/Empty"
-import Button from "../../ui/Button"
 import Heading from "../../ui/Heading"
-import ButtonArrow from "../../ui/ButtonArrow"
-import { useTranslation } from "react-i18next"
 
 const StyledTransactions = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  padding: 1.6rem 1.6rem;
   flex: 1;
 
   ${(props) =>
@@ -23,16 +21,34 @@ const StyledTransactions = styled.div`
     `}
 `
 
-export default function TransactionList({ transactions, type, userCurrency }) {
-  const navigate = useNavigate()
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ActionButtonsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  & svg {
+    width: 2rem;
+    height: 2rem;
+  }
+`
+const ActionButton = styled(Link)`
+  color: var(--color-grey-font-900);
+`
+
+export default function TransactionList({ transactions, type }) {
   const { t } = useTranslation()
 
   if (!transactions?.length)
     return (
       <Empty
         type={type}
-        resourceName={t("empty.resource_label")}
-        buttonLabel={t("empty.button_label")}
+        message={t("empty.transactions")}
+        buttonLabel={t("empty.add_transaction")}
         path="/transaction/add"
       />
     )
@@ -40,23 +56,21 @@ export default function TransactionList({ transactions, type, userCurrency }) {
   return (
     <StyledTransactions type={type}>
       {type !== "page" && (
-        <Heading as="h2">{t("transaction_list.header_transactions")}</Heading>
+        <Header>
+          <Heading as="h2">{t("transaction_list.header_transactions")}</Heading>
+          <ActionButtonsContainer>
+            <ActionButton to="/transaction/add">
+              <FaPlus />
+            </ActionButton>
+            <ActionButton to="/transactions">
+              <FaArrowRight />
+            </ActionButton>
+          </ActionButtonsContainer>
+        </Header>
       )}
       {transactions?.map((transaction) => (
-        <Transaction
-          key={transaction.id}
-          transaction={transaction}
-          userCurrency={userCurrency}
-        />
+        <Transaction key={transaction.id} transaction={transaction} />
       ))}
-      <Button onClick={() => navigate("/transaction/add")}>
-        {t("transaction_list.add_button")}
-      </Button>
-      {type !== "page" && (
-        <ButtonArrow to="/transactions">
-          {t("transaction_list.all_transactions_button")}
-        </ButtonArrow>
-      )}
     </StyledTransactions>
   )
 }

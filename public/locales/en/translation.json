@@ -19,6 +19,9 @@
     "header_transactions": "Last transactions",
     "all_transactions_button": "All transactions"
   },
+  "account_list": {
+    "header": "Accounts"
+  },
   "filter": {
     "search_placeholder": "Search by description",
     "all_label": "All",
@@ -80,5 +83,14 @@
     "to_label": "To",
     "update_button": "Update",
     "update_toast": "Transaction successfully updated"
+  },
+  "empty": {
+    "transactions": "No transactions could be found.",
+    "accounts": "No accounts could be found.",
+    "add_account": "Add account",
+    "add_transaction": "Add transaction"
+  },
+  "notfound": {
+    "message": "Page not found"
   }
 }
