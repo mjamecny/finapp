@@ -1,33 +1,29 @@
 import { styled } from "styled-components"
-import { Link } from "react-router-dom"
+
+import { useUser } from "../features/authentication/useUser"
 
 import HeaderMenu from "./HeaderMenu"
-import Logo from "./Logo"
-import Locale from "./Locale"
 
 const StyledHeader = styled.header`
-  padding: 1.2rem 0.8rem;
-  font-size: 1.6rem;
-  height: min-content;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 1.2rem;
+  padding: 1.2rem 0rem;
+  font-size: 1.6rem;
 `
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
+const Username = styled.p`
+  color: var(--color-grey-font-900);
 `
 
 export default function Header() {
+  const { user } = useUser()
+
   return (
     <StyledHeader>
-      <StyledLink to="/dashboard">
-        <Logo type="small" />
-      </StyledLink>
+      <Username>{user.user_metadata.username}</Username>
       <HeaderMenu />
-      <Locale />
     </StyledHeader>
   )
 }

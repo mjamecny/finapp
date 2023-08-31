@@ -1,12 +1,12 @@
 import { useState } from "react"
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
 
 import { useLogin } from "./useLogin"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
-import { useTranslation } from "react-i18next"
 import Button from "../../ui/Button"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
@@ -21,7 +21,7 @@ const StyledLogin = styled.div`
 `
 
 export default function Login() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 

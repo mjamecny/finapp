@@ -10,8 +10,8 @@ const StyledFooter = styled.footer`
   font-size: 1.2rem;
 
   & svg {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 2rem;
+    height: 2rem;
     color: var(--color-grey-font-900);
   }
 `

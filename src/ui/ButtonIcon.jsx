@@ -3,7 +3,6 @@ import styled from "styled-components"
 const ButtonIcon = styled.button`
   background: none;
   border: none;
-  padding: 0.6rem;
   cursor: pointer;
   transition: all 0.2s;
 

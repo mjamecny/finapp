@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { AiOutlineArrowLeft } from "react-icons/ai"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-const StyledButtonBack = styled.div`
+const StyledButtonBack = styled(Link)`
   display: flex;
   justify-content: center;
   cursor: pointer;
@@ -15,11 +15,9 @@ const StyledButtonBack = styled.div`
 `
 
 export default function ButtonBack() {
-  const navigate = useNavigate()
-
   return (
-    <StyledButtonBack>
-      <AiOutlineArrowLeft onClick={() => navigate(-1)} />
+    <StyledButtonBack to="/dashboard">
+      <AiOutlineArrowLeft />
     </StyledButtonBack>
   )
 }
