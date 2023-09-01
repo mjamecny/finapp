@@ -103,13 +103,8 @@ const CreatedAt = styled.p`
 export default function Transaction({ transaction }) {
   const { user } = useUser()
   const userCurrency = user?.user_metadata?.currency
-
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
-
   const { type, decrypted_description, amount, id, created_at } = transaction
-
-  console.log(transaction)
-
   const navigate = useNavigate()
 
   return (
