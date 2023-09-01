@@ -45,19 +45,18 @@ export default function UpdateTransaction() {
   const [to, setTo] = useState("")
   const [category, setCategory] = useState("")
 
-
   useEffect(() => {
     transaction?.amount < 0
       ? setTransactionType("withdraw")
       : setTransactionType("deposit")
     setAmount(Math.abs(transaction?.amount))
-    setDescription(transaction?.description)
-    setTo(transaction?.to)
+    setDescription(transaction?.decrypted_description)
+    setTo(transaction?.decrypted_to)
     setCategory(transaction?.category)
   }, [
     transaction?.amount,
-    transaction?.description,
-    transaction?.to,
+    transaction?.decrypted_description,
+    transaction?.decrypted_to,
     transaction?.category,
   ])
 

@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom"
 import { useState } from "react"
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
 
 import { useTransactions } from "../features/transactions/useTransactions"
 
@@ -9,7 +10,6 @@ import ButtonBack from "../ui/ButtonBack"
 import Input from "../ui/Input"
 import SortBy from "../ui/SortBy"
 import Filter from "../ui/Filter"
-import { useTranslation } from "react-i18next"
 
 const StyledTransactions = styled.div`
   display: flex;
@@ -28,7 +28,9 @@ export default function Transactions() {
   // 1) filter by description
 
   const filteredTransactions = transactions?.filter((transaction) =>
-    transaction.description.toLowerCase().includes(query.toLowerCase())
+    transaction.decrypted_description
+      .toLowerCase()
+      .includes(query.toLowerCase())
   )
 
   // 2) filter by transaction type

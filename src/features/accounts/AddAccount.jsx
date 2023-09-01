@@ -2,18 +2,19 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-hot-toast"
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
 
 import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
 import Button from "../../ui/Button"
 import Select from "../../ui/Select"
+import ButtonBack from "../../ui/ButtonBack"
 
 import { useCreateAccount } from "./useCreateAccount"
 import { useAccounts } from "./useAccounts"
 import { useUser } from "../authentication/useUser"
-import ButtonBack from "../../ui/ButtonBack"
-import { useTranslation } from "react-i18next"
+import useAccountCategories from "../../hooks/useAccountCategories"
 
 const StyledAddAccount = styled.div`
   display: flex;
@@ -22,12 +23,6 @@ const StyledAddAccount = styled.div`
   background-color: #212529;
   height: 100vh;
 `
-
-const options = [
-  { value: "Bank", label: "Bank" },
-  { value: "Bitcoin", label: "Bitcoin" },
-  { value: "Cash", label: "Cash" },
-]
 
 export default function AddAccount() {
   const [accountType, setAccountType] = useState("Bank")
@@ -39,6 +34,7 @@ export default function AddAccount() {
 
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const accountCategories = useAccountCategories()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -73,7 +69,7 @@ export default function AddAccount() {
       <Form onSubmit={handleSubmit}>
         <FormRow label={t("add_account.account_label")}>
           <Select
-            options={options}
+            options={accountCategories}
             value={accountType}
             onChange={(e) => setAccountType(e.target.value)}
             disabled={isCreating}

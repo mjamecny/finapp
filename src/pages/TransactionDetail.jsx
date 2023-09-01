@@ -190,7 +190,7 @@ export default function TransactionDetail() {
             </Amount>
           )}
 
-          <Description>{filteredTransaction.description}</Description>
+          <Description>{filteredTransaction.decrypted_description}</Description>
 
           <DetailsItems>
             <div
@@ -237,7 +237,7 @@ export default function TransactionDetail() {
               }}
             >
               <p>{t("transaction_details.to_label")}</p>
-              <p>{filteredTransaction.to}</p>
+              <p>{filteredTransaction.decrypted_to}</p>
             </div>
             <div
               style={{

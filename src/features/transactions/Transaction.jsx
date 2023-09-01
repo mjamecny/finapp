@@ -106,7 +106,9 @@ export default function Transaction({ transaction }) {
 
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
 
-  const { type, description, amount, id, created_at } = transaction
+  const { type, decrypted_description, amount, id, created_at } = transaction
+
+  console.log(transaction)
 
   const navigate = useNavigate()
 
@@ -130,7 +132,9 @@ export default function Transaction({ transaction }) {
             </AccountIcon>
           )}
           <TransactionRowVertical>
-            <StyledLink to={`/transaction/${id}`}>{description}</StyledLink>
+            <StyledLink to={`/transaction/${id}`}>
+              {decrypted_description}
+            </StyledLink>
             <CreatedAt>
               {created_at === new Date()
                 ? "Today"

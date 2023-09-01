@@ -2,8 +2,10 @@ import supabase from "./supabase"
 
 export async function getTransactions(userId) {
   const { data, error } = await supabase
-    .from("transactions")
-    .select("*")
+    .from("decrypted_transactions")
+    .select(
+      "id,created_at,amount,accountId,type,userId,decrypted_to,category,decrypted_description"
+    )
     .eq("userId", userId)
     .order("created_at", { ascending: false })
 
@@ -17,8 +19,10 @@ export async function getTransactions(userId) {
 
 export async function getTransaction(id) {
   const { data, error } = await supabase
-    .from("transactions")
-    .select("*")
+    .from("decrypted_transactions")
+    .select(
+      "id,created_at,amount,accountId,type,userId,decrypted_to,category,decrypted_description"
+    )
     .eq("id", id)
     .single()
 

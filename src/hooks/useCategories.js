@@ -1,34 +1,6 @@
 import { useTranslation } from "react-i18next"
-// import {
-//   FaBook,
-//   FaBus,
-//   FaCar,
-//   FaCat,
-//   FaFish,
-//   FaGift,
-//   FaHome,
-//   FaHotjar,
-//   FaMedkit,
-//   FaMoneyBill,
-//   FaQuestion,
-//   FaRedo,
-//   FaTheaterMasks,
-// } from "react-icons/fa"
 
 const useCategories = () => {
-  // const Home = () => <FaHome />
-  // const Food = () => <FaFish />
-  // const Entertainment = () => <FaTheaterMasks />
-  // const Health = () => <FaMedkit />
-  // const Salary = () => <FaMoneyBill />
-  // const Gift = () => <FaGift />
-  // const Pets = () => <FaCat />
-  // const Car = () => <FaCar />
-  // const Transport = () => <FaBus />
-  // const Study = () => <FaBook />
-  // const Subscription = () => <FaRedo />
-  // const Utilities = () => <FaHotjar />
-  // const Other = () => <FaQuestion />
   const { t } = useTranslation()
 
   const categories = [

@@ -55,6 +55,11 @@
     "utilities": "Účty",
     "other": "Jiné"
   },
+  "accountCategories": {
+    "bank": "Banka",
+    "bitcoin": "Bitcoin",
+    "cash": "Hotovost"
+  },
   "add_account": {
     "account_label": "Účet",
     "initial_label": "Počáteční stav účtu",

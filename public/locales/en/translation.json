@@ -55,6 +55,11 @@
     "utilities": "Utilities",
     "other": "Other"
   },
+  "accountCategories": {
+    "bank": "Bank",
+    "bitcoin": "Bitcoin",
+    "cash": "Cash"
+  },
   "add_account": {
     "account_label": "Account",
     "initial_label": "Initial balance",

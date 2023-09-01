@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import AccountList from "../features/accounts/AccountList"
 import TotalAmount from "../features/accounts/TotalAmount"
 import TransactionList from "../features/transactions/TransactionList"
@@ -7,7 +9,6 @@ import Spinner from "../ui/Spinner"
 
 import { useTransactions } from "../features/transactions/useTransactions"
 import { useAccounts } from "../features/accounts/useAccounts"
-import { useTranslation } from "react-i18next"
 
 export default function Dashboard() {
   const { transactions } = useTransactions()
