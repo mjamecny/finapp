@@ -34,7 +34,7 @@ export default function Signup() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, getValues, formState } = useForm({
     defaultValues: { currency: "usd" },
   })
 

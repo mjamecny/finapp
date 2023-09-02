@@ -20,15 +20,12 @@ const StyledAddAccount = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #212529;
-  height: 100vh;
+  gap: 2.4rem;
 `
 
 export default function AddAccount() {
-  const { register, handleSubmit, reset, getValues, formState } = useForm()
+  const { register, handleSubmit, reset, formState } = useForm()
   const { errors } = formState
-
-  console.log(errors)
 
   const { user } = useUser()
   const { accounts } = useAccounts()

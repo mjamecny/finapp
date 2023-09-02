@@ -33,7 +33,7 @@ export default function AddTransaction() {
   const { isCreating, createTransaction } = useCreateTransaction()
   const { accounts, isLoading } = useAccounts(userId)
 
-  const { register, handleSubmit, reset, formState } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: { category: "home", transactionType: "withdraw" },
   })
   const { errors } = formState
