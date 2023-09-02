@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { toast } from "react-hot-toast"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
+import { useForm } from "react-hook-form"
 
 import { useUpdateTransaction } from "./useUpdateTransaction"
 import { useTransaction } from "./useTransaction"
@@ -14,7 +14,7 @@ import Input from "../../ui/Input"
 import Button from "../../ui/Button"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
-import Select from "../../ui/Select"
+import { Select } from "../../ui/Select"
 import Spinner from "../../ui/Spinner"
 
 const StyledAddTransaction = styled.div`
@@ -39,26 +39,24 @@ export default function UpdateTransaction() {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const [amount, setAmount] = useState("")
-  const [transactionType, setTransactionType] = useState("")
-  const [description, setDescription] = useState("")
-  const [to, setTo] = useState("")
-  const [category, setCategory] = useState("")
+  const { register, handleSubmit, reset, formState } = useForm()
+  const { errors } = formState
 
   useEffect(() => {
-    transaction?.amount < 0
-      ? setTransactionType("withdraw")
-      : setTransactionType("deposit")
-    setAmount(Math.abs(transaction?.amount))
-    setDescription(transaction?.decrypted_description)
-    setTo(transaction?.decrypted_to)
-    setCategory(transaction?.category)
-  }, [
-    transaction?.amount,
-    transaction?.decrypted_description,
-    transaction?.decrypted_to,
-    transaction?.category,
-  ])
+    if (transaction) {
+      const { amount, decrypted_description, decrypted_to, category } =
+        transaction
+
+      const transactionToUpdate = {
+        transactionType: amount < 0 ? "withdraw" : "deposit",
+        amount: Math.abs(amount),
+        description: decrypted_description,
+        to: decrypted_to,
+        category,
+      }
+      reset(transactionToUpdate)
+    }
+  }, [transaction, reset])
 
   if (isLoading)
     return (
@@ -67,23 +65,14 @@ export default function UpdateTransaction() {
       </SpinnerContainer>
     )
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    if (!amount) {
-      toast.error("Please fill amount")
-      return
-    }
-
-    if (!description) {
-      toast.error("Please fill description")
-      return
-    }
+  function onSubmit(data) {
+    const { to, category, description, amount, transactionType } = data
 
     const newTransaction = {
       amount: transactionType === "withdraw" ? -amount : amount,
       description,
       category,
+      to,
     }
 
     updateTransaction({ newTransaction, transactionId })
@@ -92,60 +81,61 @@ export default function UpdateTransaction() {
 
   return (
     <StyledAddTransaction>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormRow label={t("update_transaction.category_label")}>
           <Select
             options={categories}
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            {...register("category")}
             disabled={isUpdating}
           />
         </FormRow>
-        <FormRow label={t("update_transaction.amount_label")}>
+        <FormRow
+          label={t("update_transaction.amount_label")}
+          error={errors?.amount?.message}
+        >
           <Input
             type="number"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            required
+            {...register("amount", { required: t("form.required_field") })}
             disabled={isUpdating}
           />
         </FormRow>
         <FormRow type="horizontal">
           <Input
             type="radio"
-            name="transactionType"
+            id="transactionType"
             value="withdraw"
-            checked={transactionType === "withdraw"}
-            onChange={(e) => setTransactionType(e.target.value)}
+            {...register("transactionType")}
             disabled={isUpdating}
           />
           -
           <Input
             type="radio"
-            name="transactionType"
+            id="transactionType"
             value="deposit"
-            checked={transactionType === "deposit"}
-            onChange={(e) => setTransactionType(e.target.value)}
-            required
+            {...register("transactionType")}
             disabled={isUpdating}
           />
           +
         </FormRow>
-        <FormRow label={t("update_transaction.description_label")}>
+        <FormRow
+          label={t("update_transaction.description_label")}
+          error={errors?.description?.message}
+        >
           <Input
             type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+            id="description"
+            {...register("description", { required: t("form.required_field") })}
             disabled={isUpdating}
           />
         </FormRow>
-        <FormRow label={t("update_transaction.to_label")}>
+        <FormRow
+          label={t("update_transaction.to_label")}
+          error={errors?.to?.message}
+        >
           <Input
             type="text"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-            required
+            id="to"
+            {...register("to", { required: t("form.required_field") })}
             disabled={isUpdating}
           />
         </FormRow>

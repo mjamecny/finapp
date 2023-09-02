@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { toast } from "react-hot-toast"
 import styled from "styled-components"
+import { useForm } from "react-hook-form"
 
 import { useCreateTransaction } from "./useCreateTransaction"
 import { useAccounts } from "../accounts/useAccounts"
@@ -13,10 +12,10 @@ import Form from "../../ui/Form"
 import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
 import Button from "../../ui/Button"
-import SelectAlternative from "../../ui/SelectAlternative"
+import { SelectAlternative } from "../../ui/SelectAlternative"
 import SpinnerMini from "../../ui/SpinnerMini"
 import ButtonBack from "../../ui/ButtonBack"
-import Select from "../../ui/Select"
+import { Select } from "../../ui/Select"
 
 const StyledAddTransaction = styled.div`
   display: flex;
@@ -28,49 +27,32 @@ const StyledAddTransaction = styled.div`
 export default function AddTransaction() {
   const { t } = useTranslation()
   const categories = useCategories()
-  const [accountId, setAccountId] = useState("")
-  const [amount, setAmount] = useState("")
-  const [transactionType, setTransactionType] = useState("withdraw")
-  const [description, setDescription] = useState("")
-  const [to, setTo] = useState("")
-  const [category, setCategory] = useState("home")
 
   const { user } = useUser()
   const userId = user?.id
   const { isCreating, createTransaction } = useCreateTransaction()
   const { accounts, isLoading } = useAccounts(userId)
 
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: { category: "home", transactionType: "withdraw" },
+  })
+  const { errors } = formState
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setAccountId(accounts?.at(0).id)
-  }, [accounts])
 
   if (isLoading) return null
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    if (!amount) {
-      toast.error("Please fill amount")
-      return
-    }
-
-    if (!description) {
-      toast.error("Please fill description")
-      return
-    }
+  function onSubmit(data) {
+    const accountId = Number(data.accountId)
+    const amount = Number(data.amount)
 
     const updatedAccount = accounts.find((account) => account.id === accountId)
 
     const newTransaction = {
-      userId,
+      ...data,
       accountId,
+      userId,
       type: updatedAccount.type,
-      amount: transactionType === "withdraw" ? -amount : amount,
-      description,
-      to,
-      category,
+      amount: data.transactionType === "withdraw" ? -amount : amount,
     }
 
     createTransaction({ newTransaction })
@@ -79,69 +61,72 @@ export default function AddTransaction() {
 
   return (
     <StyledAddTransaction>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <FormRow type="vertical" label={t("add_transaction.account_label")}>
           <SelectAlternative
             accounts={accounts}
-            value={accountId}
-            onChange={(e) => setAccountId(Number(e.target.value))}
             disabled={isCreating}
+            id="accountId"
+            {...register("accountId")}
           />
         </FormRow>
         <FormRow label={t("add_transaction.category_label")}>
           <Select
             options={categories}
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            id="category"
+            {...register("category")}
             disabled={isCreating}
           />
         </FormRow>
-        <FormRow label={t("add_transaction.amount_label")}>
+        <FormRow
+          label={t("add_transaction.amount_label")}
+          error={errors?.amount?.message}
+        >
           <Input
             type="number"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            required
+            id="amount"
             disabled={isCreating}
+            {...register("amount", { required: t("form.required_field") })}
           />
         </FormRow>
         <FormRow type="horizontal">
           <Input
             type="radio"
-            name="transactionType"
+            id="transactionType"
             value="withdraw"
-            checked={transactionType === "withdraw"}
-            onChange={(e) => setTransactionType(e.target.value)}
             disabled={isCreating}
+            {...register("transactionType")}
           />
           -
           <Input
             type="radio"
-            name="transactionType"
+            id="transactionType"
             value="deposit"
-            checked={transactionType === "deposit"}
-            onChange={(e) => setTransactionType(e.target.value)}
-            required
             disabled={isCreating}
+            {...register("transactionType")}
           />
           +
         </FormRow>
-        <FormRow label={t("add_transaction.description_label")}>
+        <FormRow
+          label={t("add_transaction.description_label")}
+          error={errors?.description?.message}
+        >
           <Input
             type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
+            id="description"
             disabled={isCreating}
+            {...register("description", { required: t("form.required_field") })}
           />
         </FormRow>
-        <FormRow label={t("add_transaction.to_label")}>
+        <FormRow
+          label={t("add_transaction.to_label")}
+          error={errors?.to?.message}
+        >
           <Input
             type="text"
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-            required
+            id="to"
             disabled={isCreating}
+            {...register("to", { required: t("form.required_field") })}
           />
         </FormRow>
         <Button>

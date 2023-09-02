@@ -1,3 +1,4 @@
+import React from "react"
 import styled from "styled-components"
 
 const StyledSelect = styled.select`
@@ -12,9 +13,21 @@ const StyledSelect = styled.select`
   }
 `
 
-export default function Select({ options, value, onChange, ...props }) {
-  return (
-    <StyledSelect value={value} onChange={onChange} {...props}>
+// export default function Select({ options, value, onChange, ...props }) {
+//   return (
+//     <StyledSelect value={value} onChange={onChange} {...props}>
+//       {options.map((option) => (
+//         <option key={option.value} value={option.value}>
+//           {option.label}
+//         </option>
+//       ))}
+//     </StyledSelect>
+//   )
+// }
+
+export const Select = React.forwardRef(
+  ({ options, onChange, onBlur, name }, ref) => (
+    <StyledSelect name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -22,4 +35,4 @@ export default function Select({ options, value, onChange, ...props }) {
       ))}
     </StyledSelect>
   )
-}
+)

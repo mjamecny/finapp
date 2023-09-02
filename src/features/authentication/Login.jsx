@@ -1,6 +1,6 @@
-import { useState } from "react"
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
+import { useForm } from "react-hook-form"
 
 import { useLogin } from "./useLogin"
 
@@ -22,21 +22,18 @@ const StyledLogin = styled.div`
 
 export default function Login() {
   const { t } = useTranslation()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
   const { login, isLoading } = useLogin()
+  const { register, handleSubmit, reset, formState } = useForm()
+  const { errors } = formState
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  function onSubmit(data) {
+    const { email, password } = data
 
-    if (!email || !password) return
     login(
       { email, password },
       {
         onSettled: () => {
-          setEmail("")
-          setPassword("")
+          reset()
         },
       }
     )
@@ -44,30 +41,34 @@ export default function Login() {
 
   return (
     <StyledLogin>
-      <Form onSubmit={handleSubmit}>
-        <FormRow label="Email">
+      <Form onSubmit={handleSubmit(onSubmit)} error={errors?.email?.message}>
+        <FormRow label="Email" error={errors?.email?.message}>
           <Input
             id="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            {...register("email", {
+              required: t("form.required_field"),
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: t("form.valid_email"),
+              },
+            })}
           />
         </FormRow>
-        <FormRow label={t("login.label_password")}>
+        <FormRow
+          label={t("login.label_password")}
+          error={errors?.password?.message}
+        >
           <Input
             id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            {...register("password", {
+              required: t("form.required_field"),
+            })}
           />
         </FormRow>
 
-        <Button>
-          {" "}
-          {isLoading ? <SpinnerMini /> : t("login.login_button")}
-        </Button>
+        <Button>{isLoading ? <SpinnerMini /> : t("login.login_button")}</Button>
       </Form>
       <ButtonHome />
     </StyledLogin>

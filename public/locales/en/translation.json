@@ -4,6 +4,12 @@
     "login_button": "Login",
     "sign_up_button": "Sign up"
   },
+  "form": {
+    "required_field": "This field is required",
+    "valid_email": "Please provide a valid email address",
+    "password_length": "Password needs a minimum of 8 characters",
+    "password_match": "Passwords need to match"
+  },
   "login": {
     "login_button": "Login",
     "label_password": "Password"
@@ -11,6 +17,7 @@
   "signup": {
     "label_username": "Username",
     "label_password": "Password",
+    "label_password_confirm": "Confirm password",
     "label_currency": "Currency",
     "sign_up_button": "Sign up"
   },

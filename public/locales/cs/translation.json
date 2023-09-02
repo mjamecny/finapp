@@ -4,6 +4,12 @@
     "login_button": "Přihlásit",
     "sign_up_button": "Registrovat"
   },
+  "form": {
+    "required_field": "Tenhle údaj je povinný",
+    "valid_email": "Poskytnutý email není ve správném formátu",
+    "password_length": "Heslo musí mít minimálně 8 znaků",
+    "password_match": "Hesla se musí shodovat"
+  },
   "login": {
     "login_button": "Přihlásit",
     "label_password": "Heslo"
@@ -11,6 +17,7 @@
   "signup": {
     "label_username": "Přezdívka",
     "label_password": "Heslo",
+    "label_password_confirm": "Potvrzení hesla",
     "label_currency": "Měna",
     "sign_up_button": "Registrovat"
   },

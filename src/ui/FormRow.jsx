@@ -22,13 +22,20 @@ const Label = styled.label`
   text-transform: uppercase;
   font-weight: 500;
 `
+
+const Error = styled.span`
+  font-size: 1.4rem;
+  color: red;
+`
+
 StyledFormRow.defaultProps = { type: "vertical" }
 
-export default function FormRow({ type, label, children }) {
+export default function FormRow({ type, label, error, children }) {
   return (
     <StyledFormRow type={type}>
       {label && <Label htmlFor={children.props.id}>{label}</Label>}
       {children}
+      {error && <Error>{error}</Error>}
     </StyledFormRow>
   )
 }

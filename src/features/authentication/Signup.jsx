@@ -1,5 +1,6 @@
-import { useState } from "react"
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
+import { useForm } from "react-hook-form"
 
 import { useSignup } from "./useSignup"
 
@@ -9,8 +10,8 @@ import FormRow from "../../ui/FormRow"
 import Input from "../../ui/Input"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
-import Select from "../../ui/Select"
-import { useTranslation } from "react-i18next"
+import { Select } from "../../ui/Select"
+import { useNavigate } from "react-router-dom"
 
 const StyledSignup = styled.div`
   display: flex;
@@ -28,61 +29,89 @@ const currencyOptions = [
 ]
 
 export default function Signup() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [username, setUsername] = useState("")
-  const [currency, setCurrency] = useState("usd")
-
   const { signup, isLoading } = useSignup()
 
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  const { register, handleSubmit, reset, getValues, formState } = useForm({
+    defaultValues: { currency: "usd" },
+  })
 
-    if (!email || !password || !username) return
+  const { errors } = formState
+
+  function onSubmit(data) {
+    const { username, email, password, currency } = data
     signup({ username, email, password, currency })
+    navigate("/login")
   }
 
   return (
     <StyledSignup>
-      <Form onSubmit={handleSubmit}>
-        <FormRow label={t("signup.label_username")}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <FormRow
+          label={t("signup.label_username")}
+          error={errors?.username?.message}
+        >
           <Input
             id="username"
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
+            {...register("username", { required: t("form.required_field") })}
             disabled={isLoading}
           />
         </FormRow>
 
-        <FormRow label="Email">
+        <FormRow label="Email" error={errors?.email?.message}>
           <Input
             id="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            {...register("email", {
+              required: t("form.required_field"),
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: t("form.valid_email"),
+              },
+            })}
             disabled={isLoading}
           />
         </FormRow>
-        <FormRow label={t("signup.label_password")}>
+        <FormRow
+          label={t("signup.label_password")}
+          error={errors?.password?.message}
+        >
           <Input
             id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            {...register("password", {
+              required: t("form.required_field"),
+              minLength: {
+                value: 8,
+                message: t("form.password_length"),
+              },
+            })}
+            disabled={isLoading}
+          />
+        </FormRow>
+        <FormRow
+          label={t("signup.label_password_confirm")}
+          error={errors?.passwordConfirm?.message}
+        >
+          <Input
+            id="passwordConfirm"
+            type="password"
+            {...register("passwordConfirm", {
+              required: t("form.required_field"),
+              validate: (value) =>
+                getValues().password === value || t("form.password_match"),
+            })}
             disabled={isLoading}
           />
         </FormRow>
         <FormRow label={t("signup.label_currency")}>
           <Select
             options={currencyOptions}
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
+            id="currency"
+            {...register("currency")}
             disabled={isLoading}
           />
         </FormRow>
