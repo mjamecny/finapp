@@ -84,7 +84,9 @@ export default function AddAccount() {
           />
         </FormRow>
 
-        <Button disabled={isCreating}>{t("add_account.add_button")}</Button>
+        <Button size="small" disabled={isCreating}>
+          {t("add_account.add_button")}
+        </Button>
       </Form>
       <ButtonBack />
     </StyledAddAccount>

@@ -9,8 +9,7 @@ const StyledLogo = styled.div`
   ${(props) =>
     props.type === "medium" &&
     css`
-      justify-content: center;
-      font-size: 5.2rem;
+      font-size: 2.8rem;
     `}
 
   ${(props) =>

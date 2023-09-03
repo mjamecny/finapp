@@ -10,18 +10,41 @@ import Logo from "../ui/Logo"
 import FlexHorizontalCenter from "../ui/FlexHorizontalCenter"
 import Spinner from "../ui/Spinner"
 import Locale from "../ui/Locale"
+import Heading from "../ui/Heading"
 
 const StyledWelcome = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-block: 1.8rem;
   height: 100vh;
-  gap: 8rem;
+  gap: 2rem;
 `
 const Info = styled.p`
-  font-size: 2rem;
-  text-align: center;
-  color: #ced4da;
+  font-size: 1.8rem;
+  color: #868e96;
+`
+
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-inline: 2rem;
+  gap: 1.2rem;
+`
+
+const WelcomeImage = styled.img`
+  width: 60%;
+`
+
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const ActionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-top: auto;
 `
 
 export default function Welcome() {
@@ -40,23 +63,31 @@ export default function Welcome() {
   return (
     <StyledWelcome>
       <Logo type="medium" />
-      <Info>{t("welcome.info")}</Info>
+      <ImageBox>
+        <WelcomeImage src="./welcome_image.svg" alt="Person with graphs" />
+      </ImageBox>
 
-      <FlexHorizontalCenter>
-        {isAuthenticated ? null : (
-          <>
-            <Button onClick={() => navigate("/login")}>
-              {t("welcome.login_button")}
-            </Button>
-            <Button onClick={() => navigate("/signup")}>
-              {t("welcome.sign_up_button")}
-            </Button>
-          </>
-        )}
-      </FlexHorizontalCenter>
-      <FlexHorizontalCenter>
-        <Locale type="welcome" />
-      </FlexHorizontalCenter>
+      <TextBox>
+        <Heading as="h1">{t("welcome.heading")}</Heading>
+        <Info>{t("welcome.info")}</Info>
+      </TextBox>
+      <ActionBox>
+        <FlexHorizontalCenter>
+          <Locale type="welcome" />
+        </FlexHorizontalCenter>
+        <FlexHorizontalCenter>
+          {isAuthenticated ? null : (
+            <>
+              <Button size="medium" onClick={() => navigate("/login")}>
+                {t("welcome.login_button")}
+              </Button>
+              <Button size="medium" onClick={() => navigate("/signup")}>
+                {t("welcome.sign_up_button")}
+              </Button>
+            </>
+          )}
+        </FlexHorizontalCenter>
+      </ActionBox>
     </StyledWelcome>
   )
 }

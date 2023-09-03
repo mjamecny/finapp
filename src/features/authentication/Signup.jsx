@@ -116,7 +116,7 @@ export default function Signup() {
           />
         </FormRow>
 
-        <Button>
+        <Button size="small">
           {isLoading ? <SpinnerMini /> : t("signup.sign_up_button")}
         </Button>
       </Form>

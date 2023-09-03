@@ -68,7 +68,9 @@ export default function Login() {
           />
         </FormRow>
 
-        <Button>{isLoading ? <SpinnerMini /> : t("login.login_button")}</Button>
+        <Button size="small">
+          {isLoading ? <SpinnerMini /> : t("login.login_button")}
+        </Button>
       </Form>
       <ButtonHome />
     </StyledLogin>

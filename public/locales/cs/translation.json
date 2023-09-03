@@ -1,5 +1,6 @@
 {
   "welcome": {
+    "heading": "Jednoduchý způsob správy vašich transakcí",
     "info": "Sledujte své finanční transakce pro tři různé účty.",
     "login_button": "Přihlásit",
     "sign_up_button": "Registrovat"

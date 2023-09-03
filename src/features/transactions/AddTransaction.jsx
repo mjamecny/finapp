@@ -129,7 +129,7 @@ export default function AddTransaction() {
             {...register("to", { required: t("form.required_field") })}
           />
         </FormRow>
-        <Button>
+        <Button size="small">
           {isCreating ? <SpinnerMini /> : t("add_transaction.add_button")}
         </Button>
       </Form>

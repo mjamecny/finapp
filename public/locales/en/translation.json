@@ -1,5 +1,6 @@
 {
   "welcome": {
+    "heading": "Easy way to manage your transactions",
     "info": "Track your financial transactions for three different accounts.",
     "login_button": "Login",
     "sign_up_button": "Sign up"

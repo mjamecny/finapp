@@ -139,7 +139,7 @@ export default function UpdateTransaction() {
             disabled={isUpdating}
           />
         </FormRow>
-        <Button>
+        <Button size="small">
           {isUpdating ? <SpinnerMini /> : t("update_transaction.update_button")}
         </Button>
       </Form>
