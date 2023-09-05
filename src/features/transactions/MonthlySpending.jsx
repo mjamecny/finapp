@@ -47,7 +47,13 @@ export default function MonthlySpending() {
   }, {})
 
   // Convert the result object into an array of monthly statistics
-  const monthlyStatsArray = Object.values(monthlyStats).reverse()
+  const monthlyStatsArray = Object.values(monthlyStats)
+
+  monthlyStatsArray.sort((a, b) => {
+    const dateA = new Date(a.month)
+    const dateB = new Date(b.month)
+    return dateA - dateB
+  })
 
   return (
     <StyledMonthlySpending>

@@ -16,7 +16,7 @@ const StyledNav = styled.div`
   z-index: 1000;
   border-radius: 10px;
   border: 1px solid var(--color-grey-font-900);
-  width: 60%;
+  width: 250px;
   right: 0;
 `
 

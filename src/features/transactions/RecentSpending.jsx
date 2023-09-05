@@ -19,7 +19,7 @@ const SpendingContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.8rem;
   height: 20rem;
-  overflow-y: scroll;
+  overflow-x: scroll;
 `
 
 const EmptyWithdrawals = styled.p`
