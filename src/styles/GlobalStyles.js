@@ -5,12 +5,14 @@ const GlobalStyles = createGlobalStyle`
 :root {
   &, &.light-mode{
     --color-grey-back-900: #F8F9FA;
+    --color-grey-back-800: #e9ecef;
     --color-grey-font-900: #212529;
 }
   
 
   &.dark-mode{
     --color-grey-back-900: #212529;
+    --color-grey-back-800: #343a40;
     --color-grey-font-900: #F8F9FA;
   }
 }

@@ -4,18 +4,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 import GlobalStyles from "./styles/GlobalStyles"
+
 import AddTransaction from "./features/transactions/AddTransaction"
 import AddAccount from "./features/accounts/AddAccount"
-import PageNotFound from "./pages/PageNotFound"
 import Login from "./features/authentication/Login"
 import Signup from "./features/authentication/Signup"
+import UpdateTransaction from "./features/transactions/UpdateTransaction"
+
 import AppLayout from "./ui/AppLayout"
 import ProtectedRoute from "./ui/ProtectedRoute"
+
+import PageNotFound from "./pages/PageNotFound"
+import Stats from "./pages/Stats"
 import Dashboard from "./pages/Dashboard"
 import Welcome from "./pages/Welcome"
 import Transactions from "./pages/Transactions"
 import TransactionDetail from "./pages/TransactionDetail"
-import UpdateTransaction from "./features/transactions/UpdateTransaction"
 
 import { DarkModeProvider } from "./context/DarkModeContext"
 
@@ -56,6 +60,7 @@ function App() {
                 />
 
                 <Route path="account/add" element={<AddAccount />} />
+                <Route path="stats" element={<Stats />} />
               </Route>
 
               <Route index element={<Welcome />} />

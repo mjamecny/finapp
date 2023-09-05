@@ -1,10 +1,11 @@
 import { FaDollarSign } from "react-icons/fa"
+import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 
 const StyledLogo = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
-  color: var(--color-grey-font-900);
+  color: var(--color-grey-font-900); */
 
   ${(props) =>
     props.type === "medium" &&
@@ -24,11 +25,20 @@ const StyledLogo = styled.div`
     `}
 `
 
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  color: var(--color-grey-font-900);
+  text-decoration: none;
+`
+
 export default function Logo({ type }) {
   return (
     <StyledLogo type={type}>
-      <FaDollarSign />
-      <p>finapp</p>
+      <StyledLink to="/dashboard">
+        <FaDollarSign />
+        <p>finapp</p>
+      </StyledLink>
     </StyledLogo>
   )
 }

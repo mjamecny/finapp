@@ -1,3 +1,4 @@
+import { getToday } from "../utils/helpers"
 import supabase from "./supabase"
 
 export async function getTransactions(userId) {
@@ -29,6 +30,40 @@ export async function getTransaction(id) {
   if (error) {
     console.error(error)
     throw new Error("Transaction not found")
+  }
+
+  return data
+}
+
+export async function getTransactionsAfterDate(date, userId) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .lt("amount", 0)
+    .eq("userId", userId)
+    .gte("created_at", date)
+    .lte("created_at", getToday({ end: true }))
+
+  if (error) {
+    console.error(error)
+    throw new Error("Transactions could not get loaded")
+  }
+
+  return data
+}
+
+export async function getTransactionsPerYear(date, userId) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .eq("userId", userId)
+    .lt("amount", 0)
+    .gte("created_at", date)
+    .lte("created_at", getToday({ end: true }))
+
+  if (error) {
+    console.error(error)
+    throw new Error("Transactions could not get loaded")
   }
 
   return data

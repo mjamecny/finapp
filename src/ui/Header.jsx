@@ -1,8 +1,9 @@
 import { styled } from "styled-components"
+import { FaBars, FaX } from "react-icons/fa6"
+import { useState } from "react"
 
-import { useUser } from "../features/authentication/useUser"
-
-import HeaderMenu from "./HeaderMenu"
+import MainNav from "./MainNav"
+import Logo from "./Logo"
 
 const StyledHeader = styled.header`
   display: flex;
@@ -11,19 +12,27 @@ const StyledHeader = styled.header`
   gap: 1.2rem;
   padding: 1.2rem 0rem;
   font-size: 1.6rem;
-`
+  position: relative;
 
-const Username = styled.p`
-  color: var(--color-grey-font-900);
+  & svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
 `
 
 export default function Header() {
-  const { user } = useUser()
+  const [showMenu, setShowMenu] = useState(false)
 
   return (
     <StyledHeader>
-      <Username>{user.user_metadata.username}</Username>
-      <HeaderMenu />
+      <Logo type="medium" />
+
+      {showMenu ? (
+        <FaX onClick={() => setShowMenu((showMenu) => !showMenu)} />
+      ) : (
+        <FaBars onClick={() => setShowMenu((showMenu) => !showMenu)} />
+      )}
+      {showMenu && <MainNav setShowMenu={setShowMenu} />}
     </StyledHeader>
   )
 }

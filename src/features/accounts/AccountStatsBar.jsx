@@ -9,7 +9,7 @@ const StyledAccountStatsBar = styled.div`
   gap: 0.8rem;
   border-radius: 7px;
   bottom: -7px;
-  width: 124px;
+  width: 170px;
   height: 20px;
   background-color: var(--color-grey-back-900);
   color: var(--color-grey-font-900);

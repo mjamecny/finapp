@@ -21,7 +21,7 @@ const StyledAccount = styled.div`
   gap: 1rem;
   height: 12rem;
   background-color: #fdb600;
-  color: #495057;
+  color: #212529;
   border-radius: 2rem;
   position: relative;
 

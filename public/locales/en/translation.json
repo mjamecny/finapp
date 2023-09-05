@@ -5,6 +5,11 @@
     "login_button": "Login",
     "sign_up_button": "Sign up"
   },
+  "main_nav": {
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "stats": "Stats"
+  },
   "form": {
     "required_field": "This field is required",
     "valid_email": "Please provide a valid email address",
@@ -34,7 +39,10 @@
     "search_placeholder": "Search by description",
     "all_label": "All",
     "withdrawals_label": "Withdrawals",
-    "deposits_label": "Deposits"
+    "deposits_label": "Deposits",
+    "last_7_days_label": "Last 7 days",
+    "last_30_days_label": "Last 30 days",
+    "last_90_days_label": "Last 90 days"
   },
   "sort": {
     "sort_option_description_asc": "Search by description (A-Z)",
@@ -96,6 +104,13 @@
     "to_label": "To",
     "update_button": "Update",
     "update_toast": "Transaction successfully updated"
+  },
+  "monthly_spending": {
+    "heading": "Monthly spending"
+  },
+  "recent_spending": {
+    "heading": "Spending per categories",
+    "empty": "No withdrawals in this period"
   },
   "empty": {
     "transactions": "No transactions could be found.",

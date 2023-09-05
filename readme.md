@@ -17,6 +17,7 @@ App for tracking financial transactions of three different accounts.
 - pwa
 - bitcoin balance converted to fiat
 - switch between EN or CZ language
+- stats for recent spending per categories and spending for year
 
 ## Demo
 

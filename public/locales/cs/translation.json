@@ -5,6 +5,11 @@
     "login_button": "Přihlásit",
     "sign_up_button": "Registrovat"
   },
+  "main_nav": {
+    "dashboard": "Domů",
+    "transactions": "Transakce",
+    "stats": "Statistiky"
+  },
   "form": {
     "required_field": "Tenhle údaj je povinný",
     "valid_email": "Poskytnutý email není ve správném formátu",
@@ -34,7 +39,10 @@
     "search_placeholder": "Hledat podle popisu",
     "all_label": "Všechny",
     "withdrawals_label": "Výběry",
-    "deposits_label": "Vklady"
+    "deposits_label": "Vklady",
+    "last_7_days_label": "Posledních 7 dní",
+    "last_30_days_label": "Posledních 30 dní",
+    "last_90_days_label": "Posledních 90 dní"
   },
   "sort": {
     "sort_option_description_asc": "Seřadit podle popisu (A-Z)",
@@ -96,6 +104,13 @@
     "to_label": "Příjemce",
     "update_button": "Uložit",
     "update_toast": "Transakce uložena"
+  },
+  "monthly_spending": {
+    "heading": "Graf výdajů za poslední rok"
+  },
+  "recent_spending": {
+    "heading": "Výdaje napříč kategoriemi",
+    "empty": "Nebyly nenalezeny žádné výdaje"
   },
   "empty": {
     "transactions": "Žádné transakce nenalezeny",

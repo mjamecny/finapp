@@ -95,6 +95,7 @@ export default function UpdateTransaction() {
         >
           <Input
             type="number"
+            step="any"
             {...register("amount", { required: t("form.required_field") })}
             disabled={isUpdating}
           />

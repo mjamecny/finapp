@@ -8,20 +8,21 @@ import Locale from "./Locale"
 const StyledHeaderMenu = styled.ul`
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  justify-content: center;
+  gap: 2.4rem;
   list-style: none;
 `
 
-export default function HeaderMenu() {
+export default function HeaderMenu({ closeMenu }) {
   return (
     <StyledHeaderMenu>
-      <li>
+      <li onClick={() => closeMenu()}>
         <DarkModeToggle />
       </li>
-      <li>
+      <li onClick={() => closeMenu()}>
         <Logout />
       </li>
-      <li>
+      <li onClick={() => closeMenu()}>
         <Locale />
       </li>
     </StyledHeaderMenu>
