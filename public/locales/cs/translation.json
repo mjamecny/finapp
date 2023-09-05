@@ -27,6 +27,21 @@
     "label_currency": "Měna",
     "sign_up_button": "Registrovat"
   },
+  "update_user_data": {
+    "heading": "Upravit účet",
+    "label_username": "Přezdívka",
+    "label_button": "Upravit účet",
+    "avatar": "Profilová fotka",
+    "toast": "Účet byl úspěšně aktulizován"
+  },
+  "update_user_password": {
+    "heading": "Upravit heslo",
+    "label_button": "Upravit heslo",
+
+    "label_new_password": "Nové Heslo",
+    "label_password_confirm": "Potvrzení hesla",
+    "avatar": "Avatar"
+  },
   "transaction_list": {
     "add_button": "Přidat transakci",
     "header_transactions": "Poslední transakce",

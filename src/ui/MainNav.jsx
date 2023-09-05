@@ -2,9 +2,8 @@ import { useTranslation } from "react-i18next"
 import { NavLink } from "react-router-dom"
 import { styled } from "styled-components"
 
-import { useUser } from "../features/authentication/useUser"
-
 import HeaderMenu from "./HeaderMenu"
+import UserAvatar from "../features/authentication/UserAvatar"
 
 const StyledNav = styled.div`
   display: flex;
@@ -41,12 +40,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-const Username = styled.p`
-  color: var(--color-grey-font-900);
-`
-
 export default function MainNav({ setShowMenu }) {
-  const { user } = useUser()
   const { t } = useTranslation()
 
   function closeMenu() {
@@ -54,7 +48,10 @@ export default function MainNav({ setShowMenu }) {
   }
   return (
     <StyledNav>
-      <Username>{user.user_metadata.username}</Username>
+      <StyledNavLink to="/user" onClick={closeMenu}>
+        <UserAvatar />
+      </StyledNavLink>
+
       <NavMenu>
         <NavItem>
           <StyledNavLink to="/dashboard" onClick={closeMenu}>

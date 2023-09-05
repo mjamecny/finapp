@@ -22,6 +22,7 @@ import Transactions from "./pages/Transactions"
 import TransactionDetail from "./pages/TransactionDetail"
 
 import { DarkModeProvider } from "./context/DarkModeContext"
+import UserAccount from "./pages/UserAccount"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,6 +62,7 @@ function App() {
 
                 <Route path="account/add" element={<AddAccount />} />
                 <Route path="stats" element={<Stats />} />
+                <Route path="user" element={<UserAccount />} />
               </Route>
 
               <Route index element={<Welcome />} />

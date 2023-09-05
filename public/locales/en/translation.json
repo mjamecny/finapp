@@ -27,6 +27,20 @@
     "label_currency": "Currency",
     "sign_up_button": "Sign up"
   },
+  "update_user_data": {
+    "heading": "Update User Account",
+    "label_button": "Update Account",
+    "label_username": "Username",
+    "avatar": "Avatar",
+    "toast": "User account successfully updated"
+  },
+  "update_user_password": {
+    "heading": "Update password",
+    "label_button": "Update password",
+    "label_new_password": "New Password",
+    "label_password_confirm": "Confirm password",
+    "avatar": "Avatar"
+  },
   "transaction_list": {
     "add_button": "Add transaction",
     "header_transactions": "Last transactions",
