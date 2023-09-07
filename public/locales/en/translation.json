@@ -120,7 +120,10 @@
     "update_toast": "Transaction successfully updated"
   },
   "monthly_spending": {
-    "heading": "Monthly spending"
+    "heading": "Withdrawals and Deposits",
+    "w_label": "Withdrawals",
+    "d_label": "Deposits",
+    "notfound": "No withdrawals or deposits found"
   },
   "recent_spending": {
     "heading": "Spending per categories",
@@ -134,5 +137,19 @@
   },
   "notfound": {
     "message": "Page not found"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
   }
 }

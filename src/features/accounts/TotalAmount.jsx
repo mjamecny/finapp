@@ -7,6 +7,7 @@ import { useTransactions } from "../transactions/useTransactions"
 import useFetchRate from "../../hooks/useFetchRate"
 import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
 import { useUser } from "../authentication/useUser"
+import { getCurrency } from "../../utils/helpers"
 
 const StyledTotalAmount = styled.p`
   font-size: 3.6rem;
@@ -22,6 +23,8 @@ export default function TotalAmount() {
   const { isLoading: isLoadingTransactions, transactions } = useTransactions()
   const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
   const { rate, isLoading: isLoadingRate } = useFetchRate()
+
+  const currencyLabel = getCurrency(userCurrency)
 
   if (isLoading || isLoadingTransactions) return <SpinnerMini />
 
@@ -47,14 +50,10 @@ export default function TotalAmount() {
 
   return (
     <StyledTotalAmount>
-      {isLoadingRate || isLoadingPrice ? (
+      {isLoadingPrice || isLoadingRate ? (
         <SpinnerMini />
       ) : (
-        `${Math.round(totalAmount).toLocaleString("cs-CZ")} ${
-          (userCurrency === "usd" && "USD") ||
-          (userCurrency === "czech-republic-koruna" && "CZK") ||
-          (userCurrency === "eur" && "EUR")
-        }`
+        `${Math.round(totalAmount).toLocaleString("cs-CZ")} ${currencyLabel}`
       )}
     </StyledTotalAmount>
   )

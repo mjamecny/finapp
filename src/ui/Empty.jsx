@@ -19,7 +19,9 @@ export default function Empty({ type, message, buttonLabel, path }) {
     <StyledEmpty>
       {message}
       {type !== "page" && (
-        <Button onClick={() => navigate(path)}>{buttonLabel}</Button>
+        <Button size="small" onClick={() => navigate(path)}>
+          {buttonLabel}
+        </Button>
       )}
     </StyledEmpty>
   )

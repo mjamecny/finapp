@@ -121,7 +121,10 @@
     "update_toast": "Transakce uložena"
   },
   "monthly_spending": {
-    "heading": "Graf výdajů za poslední rok"
+    "heading": "Příjmy a výdaje",
+    "w_label": "Výdaje",
+    "d_label": "Příjmy",
+    "notfound": "Nebyly nalezeny žádné výdaje ani příjmy"
   },
   "recent_spending": {
     "heading": "Výdaje napříč kategoriemi",
@@ -135,5 +138,19 @@
   },
   "notfound": {
     "message": "Stránka nenalezena"
+  },
+  "months": {
+    "january": "Leden",
+    "february": "Únor",
+    "march": "Březen",
+    "april": "Duben",
+    "may": "Květen",
+    "june": "Červen",
+    "july": "Červenec",
+    "august": "Srpen",
+    "september": "Září",
+    "october": "Říjen",
+    "november": "Listopad",
+    "december": "Prosinec"
   }
 }

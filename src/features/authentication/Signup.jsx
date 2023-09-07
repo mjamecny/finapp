@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 
 import { useSignup } from "./useSignup"
 
@@ -11,7 +12,6 @@ import Input from "../../ui/Input"
 import ButtonHome from "../../ui/ButtonHome"
 import SpinnerMini from "../../ui/SpinnerMini"
 import { Select } from "../../ui/Select"
-import { useNavigate } from "react-router-dom"
 
 const StyledSignup = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ const StyledSignup = styled.div`
 
 const currencyOptions = [
   { value: "czech-republic-koruna", label: "CZK" },
-  { value: "euro", label: "EUR" },
+  { value: "eur", label: "EUR" },
   { value: "usd", label: "USD" },
 ]
 

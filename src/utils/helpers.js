@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 export function convertToDDMMYYYY(timestamp) {
   const dateObj = new Date(timestamp)
 
@@ -49,4 +51,17 @@ export const getToday = function (options = {}) {
     today.setUTCHours(23, 59, 59, 999)
   else today.setUTCHours(0, 0, 0, 0)
   return today.toISOString()
+}
+
+export function getCurrency(currency) {
+  switch (currency) {
+    case "usd":
+      return "USD"
+    case "czech-republic-koruna":
+      return "CZK"
+    case "eur":
+      return "EUR"
+    default:
+      return "USD"
+  }
 }

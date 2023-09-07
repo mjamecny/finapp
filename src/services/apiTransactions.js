@@ -52,12 +52,28 @@ export async function getTransactionsAfterDate(date, userId) {
   return data
 }
 
-export async function getTransactionsPerYear(date, userId) {
+export async function getWithdrawalsPerYear(date, userId) {
   const { data, error } = await supabase
     .from("transactions")
     .select("*")
     .eq("userId", userId)
     .lt("amount", 0)
+    .gte("created_at", date)
+    .lte("created_at", getToday({ end: true }))
+
+  if (error) {
+    console.error(error)
+    throw new Error("Transactions could not get loaded")
+  }
+
+  return data
+}
+export async function getDepositsPerYear(date, userId) {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .eq("userId", userId)
+    .gt("amount", 0)
     .gte("created_at", date)
     .lte("created_at", getToday({ end: true }))
 

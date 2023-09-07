@@ -8,9 +8,11 @@ import { useTransactions } from "../transactions/useTransactions"
 import { useUser } from "../authentication/useUser"
 import useFetchRate from "../../hooks/useFetchRate"
 import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
+import { getCurrency } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
 import AccountStatsBar from "./AccountStatsBar"
+import AccountIcon from "../../ui/AccountIcon"
 
 const StyledAccount = styled.div`
   display: flex;
@@ -53,13 +55,6 @@ const StyledAccount = styled.div`
   }
 `
 
-const AccountIcon = styled.span`
-  & svg {
-    width: 3.7rem;
-    height: 3.7rem;
-  }
-`
-
 const CloseButton = styled.div`
   position: absolute;
   right: 10px;
@@ -72,11 +67,18 @@ const CloseButton = styled.div`
   }
 `
 
-const Amount = styled.p`
+const StyledAmount = styled.p`
   font-size: 2rem;
 `
 
+function getTransactionsSum(transactions, type) {
+  return transactions
+    .filter((transaction) => transaction.type === type)
+    .reduce((acc, cur) => acc + cur.amount, 0)
+}
+
 export default function Account({ account }) {
+  const { type, balance } = account
   const { user } = useUser()
   const userCurrency = user?.user_metadata?.currency
   const { isDeleting, deleteAccount } = useDeleteAccount()
@@ -88,66 +90,33 @@ export default function Account({ account }) {
 
   if (isLoading) return <SpinnerMini />
 
-  let transactionsSum
+  let transactionsSum = getTransactionsSum(transactions, type)
 
-  if (account.type === "Bank") {
-    transactionsSum = transactions
-      .filter((transaction) => transaction.type === "Bank")
-      .reduce((acc, cur) => acc + cur.amount, 0)
-  }
-
-  if (account.type === "Cash") {
-    transactionsSum = transactions
-      .filter((transaction) => transaction.type === "Cash")
-      .reduce((acc, cur) => acc + cur.amount, 0)
-  }
-
-  if (account.type === "Bitcoin") {
-    transactionsSum = transactions
-      .filter((transaction) => transaction.type === "Bitcoin")
-      .reduce((acc, cur) => acc + cur.amount, 0)
-  }
+  let sum = balance + transactionsSum
 
   return (
-    <StyledAccount type={account.type}>
+    <StyledAccount type={type}>
       <CloseButton>
         {isDeleting ? (
           <SpinnerMini />
         ) : (
-          <AiOutlineClose onClick={() => deleteAccount(account.id)} />
+          <AiOutlineClose onClick={() => deleteAccount(id)} />
         )}
       </CloseButton>
-      <AccountIcon>
-        {account.type === "Bitcoin" && <FaBitcoin />}
-        {account.type === "Cash" && <FaMoneyBillWaveAlt />}
-        {account.type === "Bank" && <BsBank2 />}
-      </AccountIcon>
+      <AccountIcon type={type} size="medium" />
 
       {isLoadingPrice || isLoadingRate ? (
         <SpinnerMini />
       ) : (
-        <Amount>
-          {account.type === "Bitcoin"
-            ? `${Math.round(
-                (account.balance + transactionsSum) * btcConverted
-              ).toLocaleString("cs-CZ")} ${
-                (userCurrency === "usd" && "USD") ||
-                (userCurrency === "czech-republic-koruna" && "CZK") ||
-                (userCurrency === "eur" && "EUR")
-              }`
-            : `${Math.round(account.balance + transactionsSum).toLocaleString(
-                "cs-CZ"
-              )} ${
-                (userCurrency === "usd" && "USD") ||
-                (userCurrency === "czech-republic-koruna" && "CZK") ||
-                (userCurrency === "eur" && "EUR")
-              }`}
-        </Amount>
+        <Amount
+          accountType={type}
+          userCurrency={userCurrency}
+          sum={sum}
+          btcConverted={btcConverted}
+        />
       )}
 
-      {account.type === "Bitcoin" && (
-        <p>{(account.balance + transactionsSum).toFixed(5)}</p>
-      )}
+      {type === "Bitcoin" && <p>{(balance + transactionsSum).toFixed(5)}</p>}
 
       <AccountStatsBar
         account={account}
@@ -155,5 +124,25 @@ export default function Account({ account }) {
         userCurrency={userCurrency}
       />
     </StyledAccount>
+  )
+}
+
+function Amount({ sum, accountType, userCurrency, btcConverted }) {
+  const currencyLabel = getCurrency(userCurrency)
+
+  if (accountType === "Bitcoin") {
+    return (
+      <StyledAmount>
+        {`${Math.round(sum * btcConverted).toLocaleString(
+          "cs-CZ"
+        )} ${currencyLabel}`}
+      </StyledAmount>
+    )
+  }
+
+  return (
+    <StyledAmount>
+      {`${Math.round(sum).toLocaleString("cs-CZ")} ${currencyLabel}`}
+    </StyledAmount>
   )
 }

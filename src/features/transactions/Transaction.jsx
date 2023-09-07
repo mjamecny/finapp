@@ -1,15 +1,13 @@
 import styled, { css } from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
-import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
-import { BsBank2 } from "react-icons/bs"
-import { AiOutlineClose } from "react-icons/ai"
-import { FaPen } from "react-icons/fa"
 
 import { useDeleteTransaction } from "./useDeleteTransaction"
-import { convertToDDMMYYYY } from "../../utils/helpers"
+import { convertToDDMMYYYY, getCurrency } from "../../utils/helpers"
+import { useUser } from "../authentication/useUser"
 
 import SpinnerMini from "../../ui/SpinnerMini"
-import { useUser } from "../authentication/useUser"
+import AccountIcon from "../../ui/AccountIcon"
+import ActionButton from "../../ui/ActionButton"
 
 const StyledTransaction = styled.div`
   color: var(--color-grey-font-900);
@@ -17,31 +15,6 @@ const StyledTransaction = styled.div`
   font-size: 1.4rem;
   padding: 0.8rem 0.6rem;
   border-radius: 7px;
-`
-
-const AccountIcon = styled.div`
-  & svg {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  ${(props) =>
-    props.type === "Bitcoin" &&
-    css`
-      color: #fdb600;
-    `}
-
-  ${(props) =>
-    props.type === "Cash" &&
-    css`
-      color: #23c246;
-    `}
-
-  ${(props) =>
-    props.type === "Bank" &&
-    css`
-      color: #f8fd00;
-    `}
 `
 
 const Price = styled.p`
@@ -84,17 +57,6 @@ const ActionButtonContainer = styled.div`
   gap: 0.4rem;
 `
 
-const ActionButton = styled.span`
-  padding: 0.4rem;
-  border-radius: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-grey-font-900);
-  color: var(--color-grey-back-900);
-  cursor: pointer;
-`
-
 const CreatedAt = styled.p`
   font-size: 1rem;
   color: #868e96;
@@ -106,26 +68,13 @@ export default function Transaction({ transaction }) {
   const { isDeleting, deleteTransaction } = useDeleteTransaction()
   const { type, decrypted_description, amount, id, created_at } = transaction
   const navigate = useNavigate()
+  const currencyLabel = getCurrency(userCurrency)
 
   return (
     <StyledTransaction>
       <TransactionRowHorizontal>
         <div style={{ display: "flex", gap: "0.8rem", alignItems: "center" }}>
-          {type === "Bitcoin" && (
-            <AccountIcon type="Bitcoin">
-              <FaBitcoin />
-            </AccountIcon>
-          )}
-          {type === "Cash" && (
-            <AccountIcon type="Cash">
-              <FaMoneyBillWaveAlt />
-            </AccountIcon>
-          )}
-          {type === "Bank" && (
-            <AccountIcon type="Bank">
-              <BsBank2 />
-            </AccountIcon>
-          )}
+          <AccountIcon type={type} size="small" colored={true} />
           <TransactionRowVertical>
             <StyledLink to={`/transaction/${id}`}>
               {decrypted_description}
@@ -148,23 +97,11 @@ export default function Transaction({ transaction }) {
         >
           {amount < 0 ? (
             <Price type="withdraw">
-              {type === "Bitcoin"
-                ? amount
-                : `${amount} ${
-                    (userCurrency === "usd" && "USD") ||
-                    (userCurrency === "czech-republic-koruna" && "CZK") ||
-                    (userCurrency === "eur" && "EUR")
-                  }`}
+              {type === "Bitcoin" ? amount : `${amount} ${currencyLabel}`}
             </Price>
           ) : (
             <Price type="deposit">
-              {type === "Bitcoin"
-                ? amount
-                : `${amount} ${
-                    (userCurrency === "usd" && "USD") ||
-                    (userCurrency === "czech-republic-koruna" && "CZK") ||
-                    (userCurrency === "eur" && "EUR")
-                  }`}
+              {type === "Bitcoin" ? amount : `${amount} ${currencyLabel}`}
             </Price>
           )}
 
@@ -173,13 +110,16 @@ export default function Transaction({ transaction }) {
               <SpinnerMini />
             ) : (
               <>
-                <ActionButton>
-                  <AiOutlineClose onClick={() => deleteTransaction(id)} />
-                </ActionButton>
-
-                <ActionButton>
-                  <FaPen onClick={() => navigate(`/transaction/${id}/edit`)} />
-                </ActionButton>
+                <ActionButton
+                  type="edit"
+                  size="small"
+                  onClick={() => navigate(`/transaction/${id}/edit`)}
+                />
+                <ActionButton
+                  type="delete"
+                  size="small"
+                  onClick={() => deleteTransaction(id)}
+                />
               </>
             )}
           </ActionButtonContainer>

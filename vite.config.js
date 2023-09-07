@@ -6,20 +6,22 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      // add this to cache all the imports
+      workbox: {
+        globPatterns: ["**/*"],
+      },
+      // add this to cache all the
+      // static assets in the public folder
+      includeAssets: ["**/*"],
       registerType: "autoUpdate",
       devOptions: {
         enabled: true,
       },
-      includeAssets: [
-        "favicon.ico",
-        "apple-touch-icon-180x180",
-        "mask-icon.svg",
-      ],
       manifest: {
         name: "finapp",
         short_name: "finapp",
         description: "App for tracking your financial transactions.",
-        theme_color: "#ffffff",
+        theme_color: "#F8F9FA",
         icons: [
           {
             src: "pwa-64x64.png",
@@ -35,6 +37,12 @@ export default defineConfig({
             src: "pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
+          },
+          {
+            src: "maskable-icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any maskable",
           },
         ],
       },

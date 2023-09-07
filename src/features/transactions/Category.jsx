@@ -16,6 +16,9 @@ import {
   FaHotjar,
 } from "react-icons/fa"
 
+import { useUser } from "../authentication/useUser"
+import { getCurrency } from "../../utils/helpers"
+
 const StyledCategory = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,8 +56,11 @@ const capitalizeFirstLetter = (inputString) =>
   `${inputString.charAt(0).toUpperCase()}${inputString.slice(1)}`
 
 export default function Category({ category }) {
+  const { user } = useUser()
   const { label, totalAmount } = category
   const { t } = useTranslation()
+
+  const userCurrency = getCurrency(user?.user_metadata?.currency)
 
   const categories = [
     { value: "home", label: t("category.home"), icon: <FaHome /> },
@@ -104,7 +110,9 @@ export default function Category({ category }) {
           }
         })}
       </IconBox>
-      <TotalAmount>{totalAmount} CZK</TotalAmount>
+      <TotalAmount>
+        {totalAmount} {userCurrency}
+      </TotalAmount>
     </StyledCategory>
   )
 }

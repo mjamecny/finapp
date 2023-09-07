@@ -32,6 +32,7 @@ const locales = {
 
 export default function Locale({ type }) {
   const { i18n } = useTranslation()
+
   return (
     <StyledLocale type={type}>
       {Object.keys(locales).map((locale) => (

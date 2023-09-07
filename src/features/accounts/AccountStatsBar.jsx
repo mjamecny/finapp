@@ -40,43 +40,26 @@ const StatIcon = styled.span`
     `}
 `
 
+function getWithdrawalsSum(transactions, type) {
+  return transactions
+    .filter((transaction) => transaction.type === type)
+    .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
+}
+
+function getDepositsSum(transactions, type) {
+  return transactions
+    .filter((transaction) => transaction.type === type)
+    .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
+}
+
 export default function AccountStatsBar({
   account,
   transactions,
   userCurrency,
 }) {
-  let withdrawalsSum
-  let depositsSum
-
-  if (account.type === "Bank") {
-    withdrawalsSum = transactions
-      .filter((transaction) => transaction.type === "Bank")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
-
-    depositsSum = transactions
-      .filter((transaction) => transaction.type === "Bank")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
-  }
-
-  if (account.type === "Cash") {
-    withdrawalsSum = transactions
-      .filter((transaction) => transaction.type === "Cash")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
-
-    depositsSum = transactions
-      .filter((transaction) => transaction.type === "Cash")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
-  }
-
-  if (account.type === "Bitcoin") {
-    withdrawalsSum = transactions
-      .filter((transaction) => transaction.type === "Bitcoin")
-      .reduce((acc, cur) => (cur.amount < 0 ? acc + cur.amount : acc), 0)
-
-    depositsSum = transactions
-      .filter((transaction) => transaction.type === "Bitcoin")
-      .reduce((acc, cur) => (cur.amount > 0 ? acc + cur.amount : acc), 0)
-  }
+  const { type } = account
+  let withdrawalsSum = getWithdrawalsSum(transactions, type)
+  let depositsSum = getDepositsSum(transactions, type)
 
   return (
     <StyledAccountStatsBar>
@@ -84,32 +67,54 @@ export default function AccountStatsBar({
         <StatIcon type="deposits">
           <FaArrowUp />
         </StatIcon>
-
-        <span>
-          {account.type === "Bitcoin"
-            ? depositsSum
-            : `${Math.round(depositsSum)} ${
-                (userCurrency === "usd" && "USD") ||
-                (userCurrency === "czech-republic-koruna" && "CZK") ||
-                (userCurrency === "eur" && "EUR")
-              }`}
-        </span>
+        <Sum
+          accountType={type}
+          sum={depositsSum}
+          type="depoSum"
+          userCurrency={userCurrency}
+        />
       </AccountStat>
       <AccountStat>
         <StatIcon type="withdrawals">
           <FaArrowDown />
         </StatIcon>
-
-        <span>
-          {account.type === "Bitcoin"
-            ? Math.abs(withdrawalsSum)
-            : `${Math.abs(Math.round(withdrawalsSum))} ${
-                (userCurrency === "usd" && "USD") ||
-                (userCurrency === "czech-republic-koruna" && "CZK") ||
-                (userCurrency === "eur" && "EUR")
-              }`}
-        </span>
+        <Sum
+          accountType={type}
+          sum={withdrawalsSum}
+          type="withSum"
+          userCurrency={userCurrency}
+        />
       </AccountStat>
     </StyledAccountStatsBar>
   )
+}
+
+function Sum({ accountType, type, sum, userCurrency }) {
+  if (accountType === "Bitcoin" && type === "depoSum") {
+    return <span>{sum}</span>
+  }
+
+  if (type === "depoSum") {
+    return (
+      <span>{`${Math.round(sum)} ${
+        (userCurrency === "usd" && "USD") ||
+        (userCurrency === "czech-republic-koruna" && "CZK") ||
+        (userCurrency === "eur" && "EUR")
+      }`}</span>
+    )
+  }
+
+  if (accountType === "Bitcoin" && type === "withSum") {
+    return <span>{Math.abs(sum)}</span>
+  }
+
+  if (type === "withSum") {
+    return (
+      <span>{`${Math.abs(Math.round(sum))} ${
+        (userCurrency === "usd" && "USD") ||
+        (userCurrency === "czech-republic-koruna" && "CZK") ||
+        (userCurrency === "eur" && "EUR")
+      }`}</span>
+    )
+  }
 }

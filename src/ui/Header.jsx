@@ -15,6 +15,7 @@ const StyledHeader = styled.header`
   position: relative;
 
   & svg {
+    cursor: pointer;
     width: 2.2rem;
     height: 2.2rem;
   }
