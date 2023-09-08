@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 
 import RecentSpending from "../features/transactions/RecentSpending"
-import MonthlySpending from "../features/transactions/MonthlySpending"
+import WithDepoGraph from "../features/transactions/WithDepoGraph"
 
 const StyledStats = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const StyledStats = styled.div`
 export default function Stats() {
   return (
     <StyledStats>
-      <MonthlySpending />
+      <WithDepoGraph />
       <RecentSpending />
     </StyledStats>
   )

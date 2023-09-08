@@ -30,7 +30,7 @@ const EmptyWithdrawals = styled.p`
   justify-content: center;
   font-size: 2rem;
 `
-export default function MonthlySpending() {
+export default function WithDepoGraph() {
   const { user } = useUser()
   const { t } = useTranslation()
   const { withdrawals, isLoading } = useWithdrawalsPerYear()

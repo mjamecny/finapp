@@ -132,7 +132,7 @@ export default function TransactionDetail() {
           <DetailContainer>
             <DetailLabel>{t("transaction_details.category_label")}</DetailLabel>
             <DetailInfo>
-              <p style={{ display: "flex", gap: "0.4rem" }}>
+              <span style={{ display: "flex", gap: "0.4rem" }}>
                 <CategoryIcon category={categoryName} />
                 <span>
                   {categories.map((category, i) => {
@@ -141,7 +141,7 @@ export default function TransactionDetail() {
                     }
                   })}
                 </span>
-              </p>
+              </span>
             </DetailInfo>
           </DetailContainer>
           <DetailContainer>
