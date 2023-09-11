@@ -1,5 +1,3 @@
-import { FaBitcoin, FaMoneyBillWaveAlt } from "react-icons/fa"
-import { BsBank2 } from "react-icons/bs"
 import { AiOutlineClose } from "react-icons/ai"
 import styled, { css } from "styled-components"
 
@@ -78,7 +76,7 @@ function getTransactionsSum(transactions, type) {
 }
 
 export default function Account({ account }) {
-  const { type, balance } = account
+  const { type, balance, id } = account
   const { user } = useUser()
   const userCurrency = user?.user_metadata?.currency
   const { isDeleting, deleteAccount } = useDeleteAccount()
