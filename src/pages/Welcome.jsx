@@ -78,10 +78,10 @@ export default function Welcome() {
         <FlexHorizontalCenter>
           {isAuthenticated ? null : (
             <>
-              <Button size="medium" onClick={() => navigate("/login")}>
+              <Button size="medium" to="/login">
                 {t("welcome.login_button")}
               </Button>
-              <Button size="medium" onClick={() => navigate("/signup")}>
+              <Button size="medium" to="/signup">
                 {t("welcome.sign_up_button")}
               </Button>
             </>
