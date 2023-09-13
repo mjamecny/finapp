@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
-import { useForm } from "react-hook-form"
+import { useForm, useWatch } from "react-hook-form"
+import { useEffect } from "react"
 
 import { useCreateTransaction } from "./useCreateTransaction"
 import { useAccounts } from "../accounts/useAccounts"
@@ -30,14 +31,31 @@ export default function AddTransaction() {
 
   const { user } = useUser()
   const userId = user?.id
+  const username = user?.user_metadata?.username
   const { isCreating, createTransaction } = useCreateTransaction()
   const { accounts, isLoading } = useAccounts(userId)
 
-  const { register, handleSubmit, formState } = useForm({
-    defaultValues: { category: "home", transactionType: "withdraw" },
+  const { register, handleSubmit, formState, setValue, control } = useForm({
+    defaultValues: {
+      category: "home",
+      transactionType: "withdraw",
+    },
   })
   const { errors } = formState
+  const transactionType = useWatch({
+    name: "transactionType",
+    control,
+  })
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (transactionType === "deposit") {
+      setValue("to", username || "")
+    } else {
+      setValue("to", "")
+    }
+  }, [setValue, transactionType, username])
 
   if (isLoading) return null
 
