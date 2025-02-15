@@ -3,9 +3,8 @@ import styled, { css } from "styled-components"
 
 import { useDeleteAccount } from "./useDeleteAccount"
 import { useTransactions } from "../transactions/useTransactions"
+import useFetchRates from "../../hooks/useFetchRates"
 import { useUser } from "../authentication/useUser"
-import useFetchRate from "../../hooks/useFetchRate"
-import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
 import { getCurrency } from "../../utils/helpers"
 
 import SpinnerMini from "../../ui/SpinnerMini"
@@ -81,10 +80,7 @@ export default function Account({ account }) {
   const userCurrency = user?.user_metadata?.currency
   const { isDeleting, deleteAccount } = useDeleteAccount()
   const { isLoading, transactions } = useTransactions()
-  const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
-  const { rate, isLoading: isLoadingRate } = useFetchRate()
-
-  const btcConverted = btcPrice / rate
+  const { bitcoinPrice, isLoading: isLoadingRates } = useFetchRates()
 
   if (isLoading) return <SpinnerMini />
 
@@ -103,14 +99,14 @@ export default function Account({ account }) {
       </CloseButton>
       <AccountIcon type={type} size="medium" />
 
-      {isLoadingPrice || isLoadingRate ? (
+      {isLoadingRates ? (
         <SpinnerMini />
       ) : (
         <Amount
           accountType={type}
           userCurrency={userCurrency}
           sum={sum}
-          btcConverted={btcConverted}
+          bitcoinPrice={bitcoinPrice}
         />
       )}
 
@@ -125,13 +121,13 @@ export default function Account({ account }) {
   )
 }
 
-function Amount({ sum, accountType, userCurrency, btcConverted }) {
+function Amount({ sum, accountType, userCurrency, bitcoinPrice }) {
   const currencyLabel = getCurrency(userCurrency)
 
   if (accountType === "Bitcoin") {
     return (
       <StyledAmount>
-        {`${Math.round(sum * btcConverted).toLocaleString(
+        {`${Math.round(sum * bitcoinPrice).toLocaleString(
           "cs-CZ"
         )} ${currencyLabel}`}
       </StyledAmount>

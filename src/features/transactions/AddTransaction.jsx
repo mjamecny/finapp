@@ -101,7 +101,7 @@ export default function AddTransaction() {
           error={errors?.amount?.message}
         >
           <Input
-            type="number"
+            type="decimal"
             id="amount"
             disabled={isCreating}
             {...register("amount", { required: t("form.required_field") })}

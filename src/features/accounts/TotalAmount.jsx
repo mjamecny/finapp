@@ -4,8 +4,7 @@ import SpinnerMini from "../../ui/SpinnerMini"
 
 import { useAccounts } from "./useAccounts"
 import { useTransactions } from "../transactions/useTransactions"
-import useFetchRate from "../../hooks/useFetchRate"
-import useFetchBtcPrice from "../../hooks/useFetchBtcPrice"
+import useFetchRates from "../../hooks/useFetchRates"
 import { useUser } from "../authentication/useUser"
 import { getCurrency } from "../../utils/helpers"
 
@@ -21,19 +20,16 @@ export default function TotalAmount() {
   const userCurrency = user?.user_metadata?.currency
   const { isLoading, accounts } = useAccounts()
   const { isLoading: isLoadingTransactions, transactions } = useTransactions()
-  const { btcPrice, isLoading: isLoadingPrice } = useFetchBtcPrice()
-  const { rate, isLoading: isLoadingRate } = useFetchRate()
+  const { bitcoinPrice, isLoading: isLoadingRates } = useFetchRates()
 
   const currencyLabel = getCurrency(userCurrency)
 
   if (isLoading || isLoadingTransactions) return <SpinnerMini />
 
-  const btcConverted = btcPrice / rate
-
   const balancesSum = accounts?.reduce(
     (sum, account) =>
       account.type === "Bitcoin"
-        ? sum + account.balance * btcConverted
+        ? sum + account.balance * bitcoinPrice
         : sum + account.balance,
     0
   )
@@ -41,7 +37,7 @@ export default function TotalAmount() {
   const transactionsSum = transactions.reduce(
     (sum, transaction) =>
       transaction.type === "Bitcoin"
-        ? sum + transaction.amount * btcConverted
+        ? sum + transaction.amount * bitcoinPrice
         : sum + transaction.amount,
     0
   )
@@ -50,7 +46,7 @@ export default function TotalAmount() {
 
   return (
     <StyledTotalAmount>
-      {isLoadingPrice || isLoadingRate ? (
+      {isLoadingRates ? (
         <SpinnerMini />
       ) : (
         `${Math.round(totalAmount).toLocaleString("cs-CZ")} ${currencyLabel}`
