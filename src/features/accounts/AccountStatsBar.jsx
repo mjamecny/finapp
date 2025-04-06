@@ -97,9 +97,9 @@ function Sum({ accountType, type, sum, userCurrency }) {
   if (type === "depoSum") {
     return (
       <span>{`${Math.round(sum)} ${
-        (userCurrency === "usd" && "USD") ||
+        (userCurrency === "united-states-dollar" && "USD") ||
         (userCurrency === "czech-republic-koruna" && "CZK") ||
-        (userCurrency === "eur" && "EUR")
+        (userCurrency === "euro" && "EUR")
       }`}</span>
     )
   }
@@ -111,9 +111,9 @@ function Sum({ accountType, type, sum, userCurrency }) {
   if (type === "withSum") {
     return (
       <span>{`${Math.abs(Math.round(sum))} ${
-        (userCurrency === "usd" && "USD") ||
+        (userCurrency === "united-states-dollar" && "USD") ||
         (userCurrency === "czech-republic-koruna" && "CZK") ||
-        (userCurrency === "eur" && "EUR")
+        (userCurrency === "euro" && "EUR")
       }`}</span>
     )
   }
