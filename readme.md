@@ -21,4 +21,4 @@ App for tracking financial transactions of three different accounts.
 
 ## Demo
 
-![finapp Demo](https://i.imgur.com/fYlxXg4.gif)
+![finapp Demo](https://i.imgur.com/ls828mH.gif)
