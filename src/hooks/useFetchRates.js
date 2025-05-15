@@ -11,19 +11,13 @@ const useFetchRates = () => {
   useEffect(() => {
     async function fetchRates() {
       setIsLoading(true)
-      const res = await fetch(
-        `https://rest.coincap.io/v3/rates?apiKey=${
-          import.meta.env.VITE_COINCAP_KEY
-        }`
-      )
+      const res = await fetch("https://api.coingecko.com/api/v3/exchange_rates")
       const data = await res.json()
-      const filterRate = data.data.filter((rate) => rate.id === currency)[0]
-        .rateUsd
-      const filterBtcPrice = data.data.filter(
-        (rate) => rate.id === "bitcoin"
-      )[0].rateUsd
-
-      setBitcoinPrice(filterBtcPrice / filterRate)
+      Object.keys(data?.rates).forEach((key) => {
+        if (key === currency) {
+          setBitcoinPrice(data?.rates[key].value)
+        }
+      })
       setIsLoading(false)
     }
 

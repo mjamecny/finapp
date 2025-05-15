@@ -23,9 +23,9 @@ const StyledSignup = styled.div`
 `
 
 const currencyOptions = [
-  { value: "czech-republic-koruna", label: "CZK" },
-  { value: "euro", label: "EUR" },
-  { value: "united-states-dollar", label: "USD" },
+  { value: "czk", label: "CZK" },
+  { value: "eur", label: "EUR" },
+  { value: "usd", label: "USD" },
 ]
 
 export default function Signup() {
