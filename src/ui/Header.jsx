@@ -21,6 +21,17 @@ const StyledHeader = styled.header`
   }
 `
 
+const IconWrapper = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline-offset: 6px;
+
+  & svg {
+    color: var(--color-grey-font-900);
+  }
+`
+
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false)
 
@@ -29,9 +40,13 @@ export default function Header() {
       <Logo type="medium" />
 
       {showMenu ? (
-        <FaX onClick={() => setShowMenu((showMenu) => !showMenu)} />
+        <IconWrapper>
+          <FaX onClick={() => setShowMenu((showMenu) => !showMenu)} />
+        </IconWrapper>
       ) : (
-        <FaBars onClick={() => setShowMenu((showMenu) => !showMenu)} />
+        <IconWrapper>
+          <FaBars onClick={() => setShowMenu((showMenu) => !showMenu)} />
+        </IconWrapper>
       )}
       {showMenu && <MainNav setShowMenu={setShowMenu} />}
     </StyledHeader>

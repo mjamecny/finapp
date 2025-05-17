@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   align-self: center;
+  outline-offset: 6px;
 
   ${(props) =>
     props.size === "medium" &&
@@ -35,6 +36,7 @@ const StyledLink = styled(Link)`
   font-weight: 600;
   cursor: pointer;
   align-self: center;
+  outline-offset: 6px;
 
   ${(props) =>
     props.size === "medium" &&

@@ -52,7 +52,10 @@ const StyledAccount = styled.div`
   }
 `
 
-const CloseButton = styled.div`
+const CloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+  outline-offset: 2px;
   position: absolute;
   right: 10px;
   top: 7px;

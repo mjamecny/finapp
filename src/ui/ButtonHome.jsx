@@ -3,9 +3,9 @@ import { FaHome } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 const StyledButtonHome = styled(Link)`
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
   cursor: pointer;
+  outline-offset: 6px;
 
   & svg {
     width: 25px;

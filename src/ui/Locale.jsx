@@ -15,8 +15,13 @@ const StyledLocale = styled.div`
     `}
 `
 
-const LocaleItem = styled.p`
+const LocaleItem = styled.button`
+  background-color: transparent;
+  border: none;
+  color: var(--color-grey-font-900);
+  outline-offset: 3px;
   cursor: pointer;
+  font-size: 1.6rem;
   font-weight: normal;
   ${(props) =>
     props.active &&

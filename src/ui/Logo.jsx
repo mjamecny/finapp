@@ -3,16 +3,11 @@ import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 
 const StyledLogo = styled.div`
-  /* display: flex;
-  align-items: center;
-  color: var(--color-grey-font-900); */
-
   ${(props) =>
     props.type === "medium" &&
     css`
       font-size: 2.8rem;
     `}
-
   ${(props) =>
     props.type === "small" &&
     css`
@@ -22,12 +17,14 @@ const StyledLogo = styled.div`
         width: 3.6rem;
         height: 3.6rem;
       }
-    `}
+    `};
 `
 
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
+  width: fit-content;
+  outline-offset: 3px;
   color: var(--color-grey-font-900);
   text-decoration: none;
 `

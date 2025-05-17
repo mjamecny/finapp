@@ -5,6 +5,7 @@ const ButtonIcon = styled.button`
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  outline-offset: 6px;
 
   & svg {
     width: 2.2rem;
