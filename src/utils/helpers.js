@@ -55,11 +55,11 @@ export const getToday = function (options = {}) {
 
 export function getCurrency(currency) {
   switch (currency) {
-    case "united-states-dollar":
+    case "usd":
       return "USD"
-    case "czech-republic-koruna":
+    case "czk":
       return "CZK"
-    case "euro":
+    case "eur":
       return "EUR"
     default:
       return "USD"
