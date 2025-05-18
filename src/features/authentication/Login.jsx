@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { useTranslation } from "react-i18next"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
 
 import { useLogin } from "./useLogin"
 
@@ -19,17 +18,6 @@ const StyledLogin = styled.div`
   gap: 2.4rem;
   background-color: var(--color-grey-back-900);
   height: 100vh;
-`
-
-const StyledLink = styled(Link)`
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  outline-offset: 3px;
-  margin: 0 auto;
-  text-decoration: none;
-  font-size: 1.2rem;
-  color: var(--color-grey-font-900);
 `
 
 export default function Login() {
@@ -83,9 +71,6 @@ export default function Login() {
         <Button size="small">
           {isLoading ? <SpinnerMini /> : t("login.login_button")}
         </Button>
-        <StyledLink to="/forgotPassword">
-          {t("login.link_forgot_password")}
-        </StyledLink>
       </Form>
       <ButtonHome />
     </StyledLogin>
