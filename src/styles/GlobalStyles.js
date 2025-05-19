@@ -41,7 +41,7 @@ body {
   padding-left: 1.2rem;
   padding-right: 1.2rem;
   margin: 0 auto;
-  max-width: 72rem;
+  max-width: 54rem;
   transition: color 0.3s, background-color 0.3s;
 }
 `
