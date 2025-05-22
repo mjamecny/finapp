@@ -103,6 +103,7 @@ export default function EnrollMFA() {
   const generateQr = async () => {
     const { data, error } = await supabase.auth.mfa.enroll({
       factorType: "totp",
+      friendlyName: `${Date.now()}mfa`,
     })
 
     if (error) {
