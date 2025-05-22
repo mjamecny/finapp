@@ -18,7 +18,8 @@
   },
   "login": {
     "login_button": "Login",
-    "label_password": "Password"
+    "label_password": "Password",
+    "link_forgot_password": "Forgot password?"
   },
   "signup": {
     "label_username": "Username",
@@ -26,6 +27,9 @@
     "label_password_confirm": "Confirm password",
     "label_currency": "Currency",
     "sign_up_button": "Sign up"
+  },
+  "forgot_password": {
+    "send_reset_link": "Send reset link"
   },
   "update_user_data": {
     "heading": "Update User Account",
@@ -40,6 +44,24 @@
     "label_new_password": "New Password",
     "label_password_confirm": "Confirm password",
     "avatar": "Avatar"
+  },
+  "enable_mfa": {
+    "heading_enable": "Enable MFA",
+    "heading_disable": "Disable MFA",
+    "toast_qr_success": "QR code successfully generated",
+    "toast_qr_error": "QR code generation failed",
+    "toast_enable_success": "MFA successfully enabled",
+    "toast_disable_success": "MFA successfully disabled",
+    "generate_qr_button": "Generate QR code",
+    "enable_button": "Enable",
+    "disable_button": "Disable",
+    "label": "TOTP code",
+    "toast_error": "Something went wrong"
+  },
+  "auth_mfa": {
+    "label": "TOTP code",
+    "button": "Verify",
+    "toast_error": "Verification failed"
   },
   "transaction_list": {
     "add_button": "Add transaction",

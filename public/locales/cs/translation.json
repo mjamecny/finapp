@@ -18,7 +18,8 @@
   },
   "login": {
     "login_button": "Přihlásit",
-    "label_password": "Heslo"
+    "label_password": "Heslo",
+    "link_forgot_password": "Zapomenuté heslo?"
   },
   "signup": {
     "label_username": "Přezdívka",
@@ -26,6 +27,9 @@
     "label_password_confirm": "Potvrzení hesla",
     "label_currency": "Měna",
     "sign_up_button": "Registrovat"
+  },
+  "forgot_password": {
+    "send_reset_link": "Pošli resetovací link"
   },
   "update_user_data": {
     "heading": "Upravit účet",
@@ -41,6 +45,24 @@
     "label_new_password": "Nové Heslo",
     "label_password_confirm": "Potvrzení hesla",
     "avatar": "Avatar"
+  },
+  "enable_mfa": {
+    "heading_enable": "Povolit MFA",
+    "heading_disable": "Zakázat MFA",
+    "toast_qr_success": "QR kod úspěsně vygenerováno",
+    "toast_qr_error": "QR kod generation failed",
+    "toast_enable_success": "MFA povoleno",
+    "toast_disable_success": "MFA zakázáno",
+    "generate_qr_button": "Generovat QR kod",
+    "enable_button": "Povolit",
+    "disable_button": "Zakázat",
+    "label": "TOTP kód",
+    "toast_error": "Něco se pokazilo"
+  },
+  "auth_mfa": {
+    "label": "TOTP kód",
+    "button": "Ověřit",
+    "toast_error": "Ověření se nezdařilo"
   },
   "transaction_list": {
     "add_button": "Přidat transakci",

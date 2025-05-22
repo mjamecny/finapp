@@ -10,6 +10,7 @@ import AddAccount from "./features/accounts/AddAccount"
 import Login from "./features/authentication/Login"
 import Signup from "./features/authentication/Signup"
 import UpdateTransaction from "./features/transactions/UpdateTransaction"
+import AuthMFA from "./features/authentication/AuthMFA"
 
 import AppLayout from "./ui/AppLayout"
 import ProtectedRoute from "./ui/ProtectedRoute"
@@ -20,9 +21,9 @@ import Dashboard from "./pages/Dashboard"
 import Welcome from "./pages/Welcome"
 import Transactions from "./pages/Transactions"
 import TransactionDetail from "./pages/TransactionDetail"
+import UserAccount from "./pages/UserAccount"
 
 import { DarkModeProvider } from "./context/DarkModeContext"
-import UserAccount from "./pages/UserAccount"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +49,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
+                <Route path="mfa" element={<AuthMFA />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="transactions" element={<Transactions />} />
                 <Route path="transaction/add" element={<AddTransaction />} />
