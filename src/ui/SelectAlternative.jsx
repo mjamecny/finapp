@@ -25,16 +25,3 @@ export const SelectAlternative = React.forwardRef(
     </StyledSelect>
   )
 )
-
-// export default function Select({ accounts, value, onChange, ...props }) {
-//   console.log(props)
-//   return (
-//     <StyledSelect value={value} onChange={onChange} {...props}>
-//       {accounts.map((account) => (
-//         <option key={account.id} value={account.id}>
-//           {account.type}
-//         </option>
-//       ))}
-//     </StyledSelect>
-//   )
-// }
