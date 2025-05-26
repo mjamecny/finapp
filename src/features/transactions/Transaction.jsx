@@ -13,7 +13,7 @@ const StyledTransaction = styled.div`
   color: var(--color-grey-font-900);
   border: 1px solid var(--color-grey-font-900);
   font-size: 1.4rem;
-  padding: 0.8rem 0.6rem;
+  padding: 0.8rem 1.8rem;
   border-radius: 7px;
 `
 
